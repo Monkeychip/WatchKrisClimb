@@ -6,13 +6,18 @@
     "react-scripts": "0.9.4"
   },
   "dependencies": {
+    "axios": "^0.17.1",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "redux-promise": "^0.5.3"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build-and-deploy": "npm run build && s3cmd sync build/* s3://watchkrisclimb && echo '🚀  Deployed!'"
   }
 }

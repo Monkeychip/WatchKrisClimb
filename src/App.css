@@ -5,12 +5,27 @@
     height: 100vh;
     width: 100%;
 }
+.color-overlay {
+    background-size: cover !important;
+    background-attachment: fixed;
+    background-position: center;
+    height: 100vh;
+    width: 100%;
+    background-color: #3e3a36;
+    opacity: .5;
+}
 
 #hero-title {
   text-transform: uppercase;
   font-weight: bold;
   color: white;
   text-shadow: 1px 1px 1px black;
-  margin-top: 60vh;
-  font-size: 8em;
+  font-size: 7em;
+}
+
+#text-counter {
+  color: white;
+  text-shadow: 1px 1px 1px black;
+  margin-top: 40vh;
+  font-size: 4em;
 }

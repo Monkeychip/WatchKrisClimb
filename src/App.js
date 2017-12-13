@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import waterHero from '../public/assets/images/that-water-tho.jpg';
+import waterHero from '../public/assets/images/rock-image-1.jpg'; //landing background
+import meterGraphic from '../public/assets/images/meter-placeholder-1.jpeg'; //still need to work with..?
 import plantHero from '../public/assets/images/them-plants.jpg';
 import mtnHero from '../public/assets/images/those-mtns.jpg';
+//test
+import Activities from './containers/activities';
+import Elevation from './containers/elevation';
 
 const IMAGES = [
   {
@@ -25,7 +29,7 @@ import HiddenImages from './HiddenImages';
 class App extends Component {
   state = {
     imageIdx: 0,
-    header: 'Love water again.',
+    header: 'Watch Kris Climb',
   };
   handleSubmit = ({ imageIdx, header }) => {
     this.setState({
@@ -46,7 +50,7 @@ class App extends Component {
   render() {
     const imageUrl = IMAGES[this.state.imageIdx].url;
     const heroImageStyle = {
-      backgroundImage: `url('${imageUrl}')`,
+      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('${imageUrl}')`, //adding darkness over image
     };
     const imageButtons = IMAGES.map((i, idx) => {
       const klass = `ui ${idx === this.state.imageIdx ? 'active' : null} button`
@@ -65,6 +69,8 @@ class App extends Component {
         <div className="row">
           <div className="hero-image" style={heroImageStyle}>
             <div className="eight wide column">
+              <h3 id="text-counter" className="ui center aligned header"><Elevation /> ft</h3>
+              <h3><Activities /></h3>
               <h2 id="hero-title" className="ui center aligned header">
                 {this.state.header}
               </h2>
@@ -103,3 +109,12 @@ class App extends Component {
 }
 
 export default App;
+/*export default class App extends Component {
+  render(){
+    return(
+      <div>
+        <Activities />
+      </div>
+      );
+  }
+}*/
