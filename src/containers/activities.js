@@ -21,9 +21,13 @@ class Activities extends Component {
 				<div>Loading Activities ...</div>
 			);
 		}
-		let totalActivites = this.props.actvities
-		return (
-            <div id="activities_test">{JSON.stringify(totalActivites)}</div>
+		let allActivities = this.props.activities; //array	
+		let addActivities = (a,b) => a + b 
+		let arrayElevationGain = [];
+		allActivities.forEach(activity => arrayElevationGain.push(activity.total_elevation_gain))
+        let sumActivities = parseInt(arrayElevationGain.reduce(addActivities)/.3048,10); //convert to ft.
+		return (	
+            <div id="activities_test">{sumActivities}</div>
         )
        
     }
