@@ -1,8 +1,7 @@
-//I made the container folder and this file
 import React, {Component} from 'react';
-import {connect} from 'react-redux'; //imported but some warnings
+import {connect} from 'react-redux'; 
 import {bindActionCreators} from 'redux';
-import {fetchActivities} from '../actions/index'; // created this folder under src
+import {fetchActivities} from '../actions/index'; 
 
 class Activities extends Component {
 	constructor(props) { 
@@ -27,7 +26,7 @@ class Activities extends Component {
 		allActivities.forEach(activity => arrayElevationGain.push(activity.total_elevation_gain))
         let sumActivities = parseInt(arrayElevationGain.reduce(addActivities)/.3048,10); //convert to ft.
 		return (	
-            <div id="activities_test">{sumActivities}</div>
+            <div id="activities_test">{`${sumActivities.toLocaleString()} ft`}</div>
         )
        
     }

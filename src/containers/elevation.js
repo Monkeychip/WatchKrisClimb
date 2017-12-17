@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {fetchElevation} from '../actions/index'; 
 
-class Elevation extends Component {
+/*class Elevation extends Component {
 	constructor(props) { 
 		super(props) 
 		this.state = {term: 'hey'};
@@ -38,3 +38,4 @@ function mapStateToProps({elevation}) {
 function mapDispatchToProps(dispatch){ return bindActionCreators({fetchElevation}, dispatch); }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Elevation); 
+*/

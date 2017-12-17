@@ -1,13 +1,11 @@
 //created this file
 import { combineReducers } from 'redux';
-import ReducerProfile from './reducer_profile';
 import ReducerActivites from './reducer_activities';
-import ReducerElevation from './reducer_elevation';
+//import ReducerJan from './reducer_jan';
 
 const rootReducer = combineReducers({
-	//profile: ReducerProfile,
-	activities: ReducerActivites,
-	elevation: ReducerElevation
+	activities: ReducerActivites
+	//would add here, with comma after Reducer Actvities
 });
 
 export default rootReducer;
