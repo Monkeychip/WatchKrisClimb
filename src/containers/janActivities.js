@@ -1,7 +1,7 @@
 /*import React, {Component} from 'react';
 import {connect} from 'react-redux'; 
 import {bindActionCreators} from 'redux';
-import { fetchActivitiesJan } from '../actions/index';
+import { fetchActivities } from '../actions/index';
 
 class ActivitiesJan extends Component {
 	constructor(props){
@@ -39,4 +39,9 @@ function mapStateToProps({activities}) {
 function mapDispatchToProps(dispatch){ return bindActionCreators({fetchActivitiesJan}, dispatch); }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ActivitiesJan); 
+
 */
+//return activities data
+//if activities data is < start_date_local 2017-02-01T00:00:00Z than accumulate
+//maybe use filter for that line.
+

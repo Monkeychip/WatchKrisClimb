@@ -1,21 +1,32 @@
 body {
   background-color: #29303A;
+  color: #E7E3E3;
 }
 
 #component_holder{
   height:100vh;
 }
-#hero-title {
-  color: #e7e3e3;
-  font-size: 2em;
-}
-
 #text-counter {
   color: #e7e3e3;
-  margin-top: 10vh;
+  margin-top: 5vh;
   font-size: 4em;
 }
 
 #activitiesChart {
- 
+	margin-top:10vh;
+}
+
+#website_text{
+  color: #e7e3e3;
+  font-size: 2em;
+}
+
+#elevation_total{color: #FE6627;}
+
+#pieChart > div > svg > g:nth-child(1) > text > tspan{
+	color: #E7E3E3 !important;
+}
+
+.recharts-legend-item-text {
+	color: #888590;
 }

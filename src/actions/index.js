@@ -9,7 +9,7 @@ let date = new Date();
 export function fetchActivities(){
 	const activities = axios.get(activitiesUrl, { params: {
     after: 1483228800,
-    per_page: 175
+    per_page: 200
   } } )
 	return{
 		type: 'FETCH_ACTIVITIES',
@@ -17,15 +17,3 @@ export function fetchActivities(){
 	}
 };
 
-/*export function fetchActivitiesJan(){
-	const activitiesJan = axios.get(activitiesUrl, { params: {
-    //after: date.setFullYear(2017,2,1), //feb 1 2017 should return
-    after: 1485907200,
-    per_page: 200
-  } } )
-	return{
-		type: 'FETCH_JAN',
-		payload: activitiesJan
-	}
-};
-*/
