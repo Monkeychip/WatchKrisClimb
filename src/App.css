@@ -4,29 +4,46 @@ body {
 }
 
 #component_holder{
-  height:100vh;
+ padding: 10px 5px;
+ height:100vh;
 }
+
+#page_title {
+ color: #E7E3E3;
+}
+
 #text-counter {
   color: #e7e3e3;
-  margin-top: 5vh;
   font-size: 4em;
 }
 
 #activitiesChart {
-	margin-top:10vh;
+/*	margin-top:10vh;*/
 }
 
-#website_text{
+#website_text{ /*watckrisrun.com*/
   color: #e7e3e3;
   font-size: 2em;
 }
 
-#elevation_total{color: #FE6627;}
+#activities_header{ /*text in front of elevation count*/
+  color: #e7e3e3;
+  font-size: 1em;
+}
+
+#elevation_total{color: #FE6627;} /*elevation count*/
 
 #pieChart > div > svg > g:nth-child(1) > text > tspan{
 	color: #E7E3E3 !important;
 }
+#pieChart_row{
+  min-height:300px;
+}
 
 .recharts-legend-item-text {
 	color: #888590;
+}
+.min-height-col{
+  min-height: 200px;
+  max-height: 300px;
 }

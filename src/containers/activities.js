@@ -30,7 +30,7 @@ class Activities extends Component {
 			);
 		}
 		return (	
-            <div id="activities_test">{`Total Climbed to Date: `}<span id="elevation_total">{`${sumElevation(this.props.activities)} ft`}</span></div>
+            <div id="activities_header">{`Total Climbed to Date: `}<span id="elevation_total">{`${sumElevation(this.props.activities)} ft`}</span></div>
         )
        
     }
