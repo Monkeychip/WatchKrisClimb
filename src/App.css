@@ -43,7 +43,19 @@ body {
 .recharts-legend-item-text {
 	color: #888590;
 }
-.min-height-col{
-  min-height: 200px;
-  max-height: 300px;
+
+.recharts-wrapper{
+  margin:auto;
 }
+
+@media screen and (max-width: 990px){
+  .max-height-col{
+     height: 200px;
+  }
+  #activities_header{
+    font-size: 30px;
+    padding-top: 40px;
+  }
+
+}
+

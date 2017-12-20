@@ -49,9 +49,9 @@ class ActivitiesPieChart extends Component{
     const RADIAN = Math.PI / 180;                    
 //sixteen wide mobile eight wide tablet four wide computer column
     return (
-        <div id="pieChart" className="five column wide row stackable">
-          <div className="column min-height-col">
-            <PieChart onMouseEnter={this.onPieEnter} width={800} height={400}>
+        <div id="pieChart" className="three column wide centered row stackable">
+          <div className="column max-height-col">
+            <PieChart onMouseEnter={this.onPieEnter} width={300} height={300}>
               <Pie
                 data={dataType} 
                 innerRadius={60}
@@ -68,9 +68,9 @@ class ActivitiesPieChart extends Component{
             </PieChart>
           </div>    
 
-          <div className="column min-height-col">
+          <div className="column max-height-col">
 
-            <PieChart onMouseEnter={this.onPieEnter} width={800} height={400} >
+            <PieChart onMouseEnter={this.onPieEnter} width={300} height={300} >
               <Pie
                 data={percentLeft} 
                 innerRadius={60}
@@ -87,9 +87,9 @@ class ActivitiesPieChart extends Component{
             </PieChart>
 
           </div>
-         <div className="column min-height-col">
+         <div className="column max-height-col">
 
-          <PieChart onMouseEnter={this.onPieEnter} width={800} height={400}>
+          <PieChart onMouseEnter={this.onPieEnter} width={300} height={300}>
             <Pie
               data={totalRaised} 
               innerRadius={60}

@@ -9,7 +9,7 @@ let date = new Date();
 export function fetchActivities(){
 	const activities = axios.get(activitiesUrl, { params: {
     after: 1483228800,
-    per_page: 50
+    per_page: 150
   } } )
 	return{
 		type: 'FETCH_ACTIVITIES',
