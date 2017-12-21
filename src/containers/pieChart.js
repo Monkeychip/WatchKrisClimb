@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux'; //imported but some warnings
+import {connect} from 'react-redux'; 
 import {bindActionCreators} from 'redux';
 import { fetchActivities } from '../actions/index';
-import { PieChart, Pie, Sector, Cell, Label, Tooltip, ResponsiveContainer } from 'recharts';
+import Chart from 'chart.js'; 
+import ReactDOM from 'react-dom';
+import { Doughnut } from 'react-chartjs-2';
+
 
 //TO DO: import from activities Chart
 function sumElevation(allActivities) {
@@ -36,77 +39,193 @@ class ActivitiesPieChart extends Component{
         <div>Loading Pie Charts ...</div>
       );
     }
+    /*Data Varialbes for Pie Charts*/
     let totalElevation = sumElevation(this.props.activities);
-    let otherElevation = totalElevation - ( elevationType(this.props.activities,"Run") + elevationType(this.props.activities,"BackcountrySki") ); 
-    let remainingElevation = 500000 - totalElevation;
-    const dataType = [{name: 'Elevation Skied', value: elevationType(this.props.activities,"BackcountrySki")}, {name: 'Elevation Run', value: elevationType(this.props.activities,"Run")},  {name: 'Elevation Other', value: otherElevation} ];
-    const percentLeft = [{name: 'Elevation Total', value: totalElevation}, {name: 'Elevation Left', value: remainingElevation}];
-    const totalRaised = [{name: 'Amount Raised', value: 200}, {name: 'Fundraising Goal', value: 1000}];
-    const colorsType = ['#029AE6', '#FE6627', '#FFBB28']; //blue, orange, yellow
-    const colorsLeft = ['#FE6627', '#029AE6']; //orange, blue
-    const colorsRaised = ['#FFBB28', '#029AE6']; //yellow, blue
+    let elevationRemaining = Number(500000 - totalElevation);
+    let elevationSkied = Number(elevationType(this.props.activities,"BackcountrySki"));
+    let elevationRun = Number(elevationType(this.props.activities,"Run")); 
+    let elevationOther = totalElevation - (elevationSkied + elevationRun);
+    Chart.defaults.global.responsive = true;
 
-    const RADIAN = Math.PI / 180;                    
-//sixteen wide mobile eight wide tablet four wide computer column
+         const dataType = {
+            labels: [
+                "Elevation Skied",
+                "Elevation Run",
+                "Elevation Other"
+            ],
+            datasets: [  /*ataType.map((entry, index)*/
+                {
+                    data: [elevationSkied, elevationRun, elevationOther],
+                    backgroundColor: [
+                        "#029AE6",
+                        "#FE6627",
+                        "#FFBB28"
+                    ],
+                    hoverBackgroundColor: [ //To Do: make these a shade darker
+                        "#029AE6",
+                        "#FE6627",
+                        "#FFBB28"
+                    ]
+                }]
+        };
+
+        const dataProgress = {
+            labels: [
+                "Elevation Climbed",
+                "Elevation Remaining"
+            ],
+            datasets: [  /*ataType.map((entry, index)*/
+                {
+                    data: [totalElevation, elevationRemaining],
+                    backgroundColor: [
+                        "#029AE6",
+                        "#FE6627"
+                    ],
+                    hoverBackgroundColor: [ //To Do: make these a shade darker
+                        "#029AE6",
+                        "#FE6627"
+                    ]
+                }]
+        };
+
+        const dataRaised = {
+            labels: [
+                "Money Raised",
+                "Money To Raise"
+            ],
+            datasets: [  /*ataType.map((entry, index)*/
+                {
+                    data: [20, 80],
+                    backgroundColor: [
+                        "#029AE6",
+                        "#FFBB28"
+                    ],
+                    hoverBackgroundColor: [ //To Do: make these a shade darker
+                        "#029AE6",
+                        "#FFBB28"
+                    ]
+                }]
+        };
+
+        const optionsType = {
+            animation: {
+                animateScale: true
+            },
+            legend: {
+                display: false
+            },
+            tooltips: {
+                enabled: true
+            },
+            elements: {
+               center: {
+                  text: 'Ft. By Type',
+                  color: '#e7e3e3', // Default is #000000
+                  fontStyle: 'Roboto Condensed', // Default is Arial
+                  sidePadding: 20 // Defualt is 20 (as a percentage)
+                }
+            }
+        };
+        const optionsTypeRemaining = {
+            animation: {
+                animateScale: true
+            },
+            legend: {
+                display: false
+            },
+            tooltips: {
+                enabled: true
+            },
+            elements: {
+               center: {
+                  text: 'Ft. Remaining',
+                  color: '#e7e3e3', // Default is #000000
+                  fontStyle: 'Roboto Condensed', // Default is Arial
+                  sidePadding: 20 // Defualt is 20 (as a percentage)
+                }
+            }
+        };
+        const optionsTypeMoney = {
+            animation: {
+                animateScale: true
+            },
+            legend: {
+                display: false
+            },
+            tooltips: {
+                enabled: true
+            },
+            elements: {
+               center: {
+                  text: '$ Raised',
+                  color: '#e7e3e3', // Default is #000000
+                  fontStyle: 'Roboto Condensed', // Default is Arial
+                  sidePadding: 20 // Defualt is 20 (as a percentage)
+                }
+            }
+        };
+/*Adding label inside fo the doughnuts*/
+  Chart.pluginService.register({
+    beforeDraw: function (chart) {
+      if (chart.config.options.elements.center) {
+        //Get ctx from string
+        var ctx = chart.chart.ctx;
+        
+        //Get options from the center object in options
+        var centerConfig = chart.config.options.elements.center;
+        var fontStyle = centerConfig.fontStyle || 'Arial';
+        var txt = centerConfig.text;
+        var color = centerConfig.color || '#000';
+        var sidePadding = centerConfig.sidePadding || 20;
+        var sidePaddingCalculated = (sidePadding/100) * (chart.innerRadius * 2)
+        //Start with a base font of 30px
+        ctx.font = "30px " + fontStyle;
+        
+        //Get the width of the string and also the width of the element minus 10 to give it 5px side padding
+        var stringWidth = ctx.measureText(txt).width;
+        var elementWidth = (chart.innerRadius * 2) - sidePaddingCalculated;
+
+        // Find out how much the font can grow in width.
+        var widthRatio = elementWidth / stringWidth;
+        var newFontSize = Math.floor(30 * widthRatio);
+        var elementHeight = (chart.innerRadius * 2);
+
+        // Pick a new font size so it will not be larger than the height of label.
+        var fontSizeToUse = Math.min(newFontSize, elementHeight);
+
+        //Set font settings to draw it correctly.
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        var centerX = ((chart.chartArea.left + chart.chartArea.right) / 2);
+        var centerY = ((chart.chartArea.top + chart.chartArea.bottom) / 2);
+        ctx.font = fontSizeToUse+"px " + fontStyle;
+        ctx.fillStyle = color;
+        
+        //Draw text in center
+        ctx.fillText(txt, centerX, centerY);
+      }
+    }
+  });
+
     return (
-        <div id="pieChart" className="three column wide centered row stackable">
-          <div className="column max-height-col">
-            <PieChart onMouseEnter={this.onPieEnter} width={300} height={300}>
-              <Pie
-                data={dataType} 
-                innerRadius={60}
-                outerRadius={80} 
-                fill="#e7e3e3"
-                paddingAngle={5}
-              >
-                {
-                  dataType.map((entry, index) => <Cell fill={colorsType[index % colorsType.length]}/>)
-                }
-                <Label value="Elevation by Type" position="center" fill="#e7e3e3"/>
-              </Pie>
-              <Tooltip />
-            </PieChart>
-          </div>    
+      <div id="pieChart" className="three column wide centered row stackable">
 
-          <div className="column max-height-col">
+        <div className="column max-height-col">
+          <Doughnut data={dataType} options={optionsType} width="250" height="250"/>
+        </div>
 
-            <PieChart onMouseEnter={this.onPieEnter} width={300} height={300} >
-              <Pie
-                data={percentLeft} 
-                innerRadius={60}
-                outerRadius={80} 
-                fill="#e7e3e3"
-                paddingAngle={5}
-              >
-                {
-                  percentLeft.map((entry, index) => <Cell fill={colorsLeft[index % colorsLeft.length]}/>)
-                }
-                <Label value="Elev. Climbed / Goal" position="center" fill="#e7e3e3"/>
-              </Pie>
-              <Tooltip />
-            </PieChart>
+        <div className="column max-height-col">
+          <Doughnut data={dataProgress} options={optionsTypeRemaining} width="250" height="250"/>
+        </div>
 
-          </div>
-         <div className="column max-height-col">
 
-          <PieChart onMouseEnter={this.onPieEnter} width={300} height={300}>
-            <Pie
-              data={totalRaised} 
-              innerRadius={60}
-              outerRadius={80} 
-              fill="#e7e3e3"
-              paddingAngle={5}
-            >
-              {
-                totalRaised.map((entry, index) => <Cell fill={colorsRaised[index % colorsRaised.length]}/>)
-              }
-              <Label position="center" value="Amount Raised" fill="#e7e3e3" />
-            </Pie>
-            <Tooltip />
-          </PieChart>
+        <div className="column max-height-col">
+          <Doughnut data={dataRaised} options={optionsTypeMoney} width="250" height="250"/>
+        </div>
 
-          </div>
-     </div>
+
+      </div>
+        
      );
   }
 }
@@ -120,4 +239,5 @@ function mapDispatchToProps(dispatch){
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ActivitiesPieChart);
+
 

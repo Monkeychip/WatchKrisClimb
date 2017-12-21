@@ -21,7 +21,7 @@ class App extends Component {
              <AGPieChart />
          </div>
         <div className="row">
-          <div className="ten wide column">
+          <div className="sixteen wide column">
            <h3 id="text-counter" className="ui middle aligned center aligned grid"><Activities /></h3>
           </div>
         </div>

@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux'; 
 import {bindActionCreators} from 'redux';
 import { fetchActivities } from '../actions/index'; //importing activities axios data
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+//import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import Chart from 'chart.js'; 
+import {Line} from 'react-chartjs-2';
 
 //SumElevation outsid eof the component
 function sumElevation(allActivities) {
@@ -40,7 +42,7 @@ class ActivitiesChart extends Component {
         <div>Loading Activities ...</div>
       );
     }
-    let goalPerMonth = 42000; //to average 500,000 
+   /* let goalPerMonth = 42000; //to average 500,000 
     let dateYR = '17';
     let dateMonth = 1;
     const data = [
@@ -56,20 +58,39 @@ class ActivitiesChart extends Component {
           {name: `${dateMonth++}-01-${dateYR}`, goal: goalPerMonth*10, climbed: monthElevation(this.props.activities,1509494400000), amt: 2100},
           {name: `${dateMonth++}-01-${dateYR}`, goal: goalPerMonth*11, climbed: monthElevation(this.props.activities,1512086400000), amt: 2100},
           {name: `${dateMonth++}-01-${dateYR}`, goal: goalPerMonth*12, climbed: monthElevation(this.props.activities,1514767458000), amt: 2100},
-    ];
+    ];*/
+    const data = {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'Decemeber'],
+        datasets: [
+          {
+            label: 'Elevation Climbed',
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: 'rgba(75,192,192,0.4)',
+            borderColor: 'rgba(75,192,192,1)',
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: 'rgba(75,192,192,1)',
+            pointBackgroundColor: '#fff',
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+            pointHoverBorderColor: 'rgba(220,220,220,1)',
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: [65, 59, 80, 81, 56, 55, 40]
+          }
+        ]
+    };
+
+
+    Chart.defaults.global.responsive = true;
 
     return (  
-        <ResponsiveContainer aspect={3.5/1}>
-            <LineChart data={data}
-                margin={{top: 5, right: 30, left: 20, bottom: 5}}>
-           <XAxis dataKey="name"/>
-           <YAxis/>
-           <Tooltip/>
-           <Legend />
-           <Line type="monotone" dataKey="climbed" stroke="#fe6627" activeDot={{r: 8}}/> 
-           <Line type="monotone" dataKey="goal" stroke="#029Ae6" />
-          </LineChart>
-        </ResponsiveContainer>
+       <Line data={data} width="1000" height="400"/>
       )
        
     }
@@ -84,3 +105,15 @@ function mapDispatchToProps(dispatch){
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ActivitiesChart);
+
+     /*   <ResponsiveContainer aspect={3.5/1}>
+            <LineChart data={data}
+                margin={{top: 5, right: 30, left: 20, bottom: 5}}>
+           <XAxis dataKey="name"/>
+           <YAxis/>
+           <Tooltip/>
+           <Legend />
+           <Line type="monotone" dataKey="climbed" stroke="#fe6627" activeDot={{r: 8}}/> 
+           <Line type="monotone" dataKey="goal" stroke="#029Ae6" />
+          </LineChart>
+        </ResponsiveContainer>*/

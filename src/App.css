@@ -48,9 +48,13 @@ body {
   margin:auto;
 }
 
+.max-height-col{
+  padding: 4vw !important;
+}
+
 @media screen and (max-width: 990px){
   .max-height-col{
-     height: 200px;
+    max-width: 80% !important;
   }
   #activities_header{
     font-size: 30px;
