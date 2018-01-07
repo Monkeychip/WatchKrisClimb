@@ -1,4 +1,5 @@
 import axios from 'axios'; 
+import { browserHistory } from 'react-router'; //communicate information about URL, can also use to make changes to URL
 
 const access_token ='5a75c79d19d9994c0c98bbb843225dbcfecacf5f' //kris
 const athlete_id ='7153' //kris
@@ -21,13 +22,16 @@ export function fetchActivities(){
 
 const ROOT_URL = 'https://www.strava.com/oauth/authorize?client_id=21992&response_type=code&state=hideMe&approvalPrompt=force&redirect_uri=http://watchkrisclimb.s3-website.us-east-2.amazonaws.com&state=mystate';
 
-export function signinUser(){
-  return function(dispatch){
-      axios.get(`${ROOT_URL}`)
-    //just hit the Redirect URL
-
-
-  }
+export function authenticationRedirect(){
+      return dispatch => {
+        axios.post(ROOT_URL)
+        .then(response => {
+            console.log(response.data);
+        })
+        .catch(err => {
+            console.error(err);
+        })
+    }
   //Sumbit email and password to server - don't need this 
   //if good ...
       //update state to indicate user is auhtenticate = mystate

@@ -1,8 +1,13 @@
-import React, { Component } from 'react';
-import { reduxForm } from 'redux-form'
-//import { Link } from 'react-router';
+import React, { Component, PropTypes } from 'react';
+import { reduxForm } from 'redux-form';
+import { routerActions } from 'react-router-redux';
+import { connect } from 'react-redux'
 import * as actions from '../actions';
-//import ReactModal from 'react-modal';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import thunk from 'redux-thunk';
+import { routerReducer } from 'react-router-redux';
+
+
 const buttonStyle ={
     background: '#FE6627',
     width: '200px',
@@ -11,30 +16,34 @@ const buttonStyle ={
     borderRadius: '90px' ,
     color: 'white'
 };
-//authentication URL with my client ID
-// To do: add variables into this URLx
-//const url = 'https://www.strava.com/oauth/authorize?client_id=21992&response_type=code&state=hideMe&approvalPrompt=force&redirect_uri=http://watchkrisclimb.s3-website.us-east-2.amazonaws.com&state=mystate';
- 
-class LoginButton extends Component {
-	handleFormSubmit(){
-		console.log("I was submitted");
-	}
- render () {
 
-    return (
-    	<form >
-    		<button action="submit" className="ui huge button" style={buttonStyle}>Authorize</button>
- 		</form> 	
-    );
+const url = 'https://www.strava.com/oauth/authorize?client_id=21992&response_type=code&state=hideMe&approvalPrompt=force&redirect_uri=http://watchkrisclimb.s3-website.us-east-2.amazonaws.com&state=mystate';
+
+const redirectToYammerAuth = () => {
+	console.log("I was hit");
+  //const windowIfDefined = typeof window === 'undefined' ? null : window as any;
+  
+   window.location.href = url;
+  
+};
+
+
+class LoginButton extends Component {
+
+ render () {
+ 	return (
+    	<button onClick={redirectToYammerAuth} className="ui huge button" style={buttonStyle}>Authorize</button>
+ 	);
   }
 }
 
-export default reduxForm({
+export default LoginButton;
+/*export default reduxForm({
 	form: 'loginbutton'
 },null,actions)(LoginButton);
+*/
 
-
-//export default LoginButton;
+//
 
 
 
