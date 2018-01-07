@@ -45,19 +45,6 @@ class ActivitiesChart extends Component {
    /* let goalPerMonth = 42000; //to average 500,000 
     let dateYR = '17';
     let dateMonth = 1;
-    const data = [
-          {name: `${dateMonth++}-01-${dateYR}`, goal: goalPerMonth, climbed: 10, amt: 2400},
-          {name: `${dateMonth++}-01-${dateYR}`, goal: goalPerMonth*2, climbed: monthElevation(this.props.activities,1485907200000), amt: 2210},
-          {name: `${dateMonth++}-01-${dateYR}`, goal: goalPerMonth*3, climbed: monthElevation(this.props.activities,1488326400000), amt: 2290},
-          {name: `${dateMonth++}-01-${dateYR}`, goal: goalPerMonth*4, climbed: monthElevation(this.props.activities,1491004800000), amt: 2000},
-          {name: `${dateMonth++}-01-${dateYR}`, goal: goalPerMonth*5, climbed: monthElevation(this.props.activities,1493596800000), amt: 2181},
-          {name: `${dateMonth++}-01-${dateYR}`, goal: goalPerMonth*6, climbed: monthElevation(this.props.activities,1496275200000), amt: 2500},
-          {name: `${dateMonth++}-01-${dateYR}`, goal: goalPerMonth*7, climbed: monthElevation(this.props.activities,1501545600000), amt: 2100},
-          {name: `${dateMonth++}-01-${dateYR}`, goal: goalPerMonth*8, climbed: monthElevation(this.props.activities,1504224000000), amt: 2100},
-          {name: `${dateMonth++}-01-${dateYR}`, goal: goalPerMonth*9, climbed: monthElevation(this.props.activities,1506816000000), amt: 2100},
-          {name: `${dateMonth++}-01-${dateYR}`, goal: goalPerMonth*10, climbed: monthElevation(this.props.activities,1509494400000), amt: 2100},
-          {name: `${dateMonth++}-01-${dateYR}`, goal: goalPerMonth*11, climbed: monthElevation(this.props.activities,1512086400000), amt: 2100},
-          {name: `${dateMonth++}-01-${dateYR}`, goal: goalPerMonth*12, climbed: monthElevation(this.props.activities,1514767458000), amt: 2100},
     ];*/
     const data = {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'Decemeber'],
@@ -66,28 +53,42 @@ class ActivitiesChart extends Component {
             label: 'Elevation Climbed',
             fill: false,
             lineTension: 0.1,
-            backgroundColor: 'rgba(75,192,192,0.4)',
-            borderColor: 'rgba(75,192,192,1)',
+            backgroundColor: '#f36627',
+            borderColor: '#f36627',
             borderCapStyle: 'butt',
             borderDash: [],
             borderDashOffset: 0.0,
             borderJoinStyle: 'miter',
-            pointBorderColor: 'rgba(75,192,192,1)',
-            pointBackgroundColor: '#fff',
+            pointBorderColor: '#e7e3e3', //dots on the line graph
+            pointBackgroundColor: '#fE6627',
             pointBorderWidth: 1,
             pointHoverRadius: 5,
-            pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-            pointHoverBorderColor: 'rgba(220,220,220,1)',
+            pointHoverBackgroundColor: '#e7e3e3',
+            pointHoverBorderColor: '#e7e3e3',
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
-            data: [65, 59, 80, 81, 56, 55, 40]
+            data: [
+              0, 
+              monthElevation(this.props.activities,1485907200000),
+              monthElevation(this.props.activities,1488326400000),
+              monthElevation(this.props.activities,1491004800000),
+              monthElevation(this.props.activities,1493596800000),
+              monthElevation(this.props.activities,1496275200000),
+              monthElevation(this.props.activities,1501545600000),
+              monthElevation(this.props.activities,1504224000000),
+              monthElevation(this.props.activities,1506816000000),
+              monthElevation(this.props.activities,1509494400000),
+              monthElevation(this.props.activities,1512086400000),
+              monthElevation(this.props.activities,1514767458000)
+              ]
           }
         ]
     };
 
 
     Chart.defaults.global.responsive = true;
+    Chart.defaults.global.maintainAspectRatio = true;
 
     return (  
        <Line data={data} width="1000" height="400"/>
