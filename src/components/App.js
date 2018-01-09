@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import '../App.css';
-
 import Activities from '../containers/activities';
 import ActivitiesChart from '../containers/activitiesChart';
 import AGPieChart from '../containers/pieChart';

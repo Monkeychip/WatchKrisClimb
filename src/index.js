@@ -6,13 +6,11 @@ import reduxPromise from 'redux-promise';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'; 
 
 import App from './components/App'; 
-import Modal from './components/modal'; 
-import reducers from './reducers'; 
-import './index.css';
 import reduxThunk from 'redux-thunk';
+import reducers from './reducers';
 
 
-
+//store is where you story your Application state, by passing in reducers, which handle change that comes in from actions
 const createStoreWithMiddleware = applyMiddleware(reduxPromise, reduxThunk)(createStore); 
 
 ReactDOM.render(

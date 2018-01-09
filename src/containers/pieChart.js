@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'; 
 import {bindActionCreators} from 'redux';
-import { fetchActivities } from '../actions/index';
+import { fetchActivities } from '../actions/actions_index';
 import Chart from 'chart.js'; 
 import ReactDOM from 'react-dom';
 import { Doughnut } from 'react-chartjs-2';

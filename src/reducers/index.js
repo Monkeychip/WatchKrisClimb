@@ -4,7 +4,6 @@
 
 import { combineReducers } from 'redux';
 import ActivitiesReducer from './reducer_activities';
-//import ReducerJan from './reducer_jan';
 
 const rootReducer = combineReducers({
 	activities: ActivitiesReducer

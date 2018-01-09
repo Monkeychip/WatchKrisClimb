@@ -21,17 +21,11 @@ export function fetchActivities(){
 
 
 const ROOT_URL = 'https://www.strava.com/oauth/authorize?client_id=21992&response_type=code&state=hideMe&approvalPrompt=force&redirect_uri=http://watchkrisclimb.s3-website.us-east-2.amazonaws.com&state=mystate';
-
+//action creator, when something happens, do something.
 export function authenticationRedirect(){
       return dispatch => {
-        axios.post(ROOT_URL)
-        .then(response => {
-            console.log(response.data);
-        })
-        .catch(err => {
-            console.error(err);
-        })
-    }
+       
+  }
   //Sumbit email and password to server - don't need this 
   //if good ...
       //update state to indicate user is auhtenticate = mystate

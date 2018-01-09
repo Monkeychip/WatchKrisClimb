@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'; 
 import {bindActionCreators} from 'redux';
-import { fetchActivities } from '../actions/index'; //importing activities axios data
+import { fetchActivities } from '../actions/actions_index'; //importing activities axios data
 //import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import Chart from 'chart.js'; 
 import {Line} from 'react-chartjs-2';

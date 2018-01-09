@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'; 
 import {bindActionCreators} from 'redux';
-import {fetchActivities} from '../actions/index'; 
+import {fetchActivities} from '../actions/actions_index'; 
 
 //SumElevation outsid eof the component
 function sumElevation(allActivities) {
