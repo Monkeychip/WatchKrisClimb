@@ -1,5 +1,6 @@
 import axios from 'axios'; 
 import { browserHistory } from 'react-router'; //communicate information about URL, can also use to make changes to URL
+import { CHANGE_AUTH } from './types'; // impoting types  
 
 const access_token ='5a75c79d19d9994c0c98bbb843225dbcfecacf5f' //kris
 const athlete_id ='7153' //kris
@@ -19,59 +20,24 @@ export function fetchActivities(){
 	}
 };
 
+//passing boolean.  For authentication then goes to reducer
+export function authenticate(isLoggedIn){
+  return {
+    type: CHANGE_AUTH,
+    payload: isLoggedIn
+  };
+}
 
-const ROOT_URL = 'https://www.strava.com/oauth/authorize?client_id=21992&response_type=code&state=hideMe&approvalPrompt=force&redirect_uri=http://watchkrisclimb.s3-website.us-east-2.amazonaws.com&state=mystate';
-//action creator, when something happens, do something.
-export function authenticationRedirect(){
-      return dispatch => {
-       
+const ROOT_URL ='http://localhost:3002/auth/strava'; //this is the url of the API server that you made
+//having 302 issues
+export function fetchMessage(){ 
+  return function(dispatch){ 
+    axios.get(`${ROOT_URL}`) //trys to return a promise, 
+      .then(response => {
+          console.log(response);
+      });
   }
-  //Sumbit email and password to server - don't need this 
-  //if good ...
-      //update state to indicate user is auhtenticate = mystate
-      // save JWT token (code?)
-      // send to fetchAcitivites action
-
-  //if return error=access_denied
 }
 
 
 
-
-/*
-https://www.strava.com/oauth/authorize?
-  client_id=21992
-  &response_type=code
-  &redirect_uri=http://testapp.com/token_exchange
-  &scope=write
-  &state=mystate
-  &approval_prompt=force
-
-
-client_secret = 22664cc703cd3adbff5dea59fda7d2439d33393
-
-
-*/
-
-/*
-1. Redirect to https://www.strava.com/oauth/authorize
-2. User says yes
-3. Get sent code to my app
-4. take this code along with my client id and secret and retreive the authorization token
-		The application must now exchange the temporary authorization code for an access token, using its client ID and client secret. 
-		The endpoint is https://www.strava.com/oauth/token.
-5. proceed with axios request.
-
-// client_id: 21992
-// redirect_uri: watchkrisclimb.s3-website.us-east-2.amazonaws.com
-// response_type: `string`
-// approval_prompt: `force` or `auto`
-// scope: `view_private` The requested scopes of the eventual token
-
-`public`: default, private activities are not returned, privacy zones are respected in stream requests.
-`write`: modify activities, upload on the user’s behalf.
-`view_private`: view private activities and data within privacy zones.
-`view_private,write`:both ‘view_private’ and ‘write’ access.
-state 
-string, in query	Returned to your application in the redirect URI. Useful if the authentication is done from various points in an app.
-*/

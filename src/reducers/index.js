@@ -4,11 +4,11 @@
 
 import { combineReducers } from 'redux';
 import ActivitiesReducer from './reducer_activities';
+import authenticationReducer from './authentication';
 
 const rootReducer = combineReducers({
-	activities: ActivitiesReducer
-	//would add here, with comma after Reducer Actvities
-	//activities is used in the container after mapstateprops passed in
+	activities: ActivitiesReducer,
+	authenticated: authenticationReducer
 });
 
 export default rootReducer;

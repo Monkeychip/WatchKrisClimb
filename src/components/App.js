@@ -4,8 +4,7 @@ import Activities from '../containers/activities';
 import ActivitiesChart from '../containers/activitiesChart';
 import AGPieChart from '../containers/pieChart';
 import {connect} from 'react-redux';
-import LoginButton from './modal'; //importing the default, which is why you don't use {} :/
-
+import Header from './header';
 
 //sixteen wide mobile eight wide tablet four wide computer column
 class App extends Component {
@@ -15,8 +14,9 @@ class App extends Component {
           <div className="sixteen wide column">
             <div id="page_title" className="ui center aligned huge header">watchkrisclimb.com</div>
           </div>
-          <div id="authenticationButton" className="sixteen wide column">
-            <LoginButton />
+          <div className="sixteen wide column">
+            <Header />
+            {this.props.children}
          </div>
          <div id="activitiesChart" className="sixteen wide column">
               <ActivitiesChart />
@@ -35,8 +35,3 @@ class App extends Component {
 }
 
 export default App;
-/*
-Redirect to this URL:
-https://www.strava.com/oauth/authorize?client_id=21992&response_type=code&state=hideMe&approvalPrompt=force&redirect_uri=http://watchkrisclimb.s3-website.us-east-2.amazonaws.com
-https://www.strava.com/oauth/authorize?client_id=1529&response_type=code&state=hideMe&approvalPrompt=force&redirect_uri=http://sniktau.joshuawyse.com/login
-*/
