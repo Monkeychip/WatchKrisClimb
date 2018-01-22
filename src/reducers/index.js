@@ -4,11 +4,9 @@
 
 import { combineReducers } from 'redux';
 import ActivitiesReducer from './reducer_activities';
-import authenticationReducer from './authentication';
 
 const rootReducer = combineReducers({
-	activities: ActivitiesReducer,
-	authenticated: authenticationReducer
+	activities: ActivitiesReducer
 });
 
 export default rootReducer;

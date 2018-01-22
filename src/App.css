@@ -40,6 +40,15 @@ body {
   min-height:300px;
 }
 
+#authenticate-button {
+  width: 150px;
+  height: 42px;
+  font-size: 18px;
+  background-color: #029ae6;
+  border-radius: 90px;
+  border: 0px;
+}
+
 .recharts-legend-item-text {
 	color: #888590;
 }

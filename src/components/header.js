@@ -3,27 +3,33 @@ import { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions_index'; 
-
+import { browserHistory } from 'react-router';
 
 class Header extends Component {
-	authButton(){
-		return <button onClick={()=> this.props.fetchMessage()}>Authenticate with Strava</button>; //signinUser comes from the action creator
-	}	
+	componentDidMount() {
+
 	
+    let code = new URL(window.location.href).searchParams.get('code')
+    if(!code){
+    	this.props.fetchActivities();
+    }else{
+    	this.props.fetchActivitiesWithCode();
+    };
+    	
+
+    }
 	render() {
-		return(
-			<div class="ui three item menu">
-			  <a class="item">{this.authButton()}</a>
-			</div>
-		);
-	}
+    	return <button id="authenticate-button" className="ui-button" onClick={this.handleClick.bind(this)}>Try it out</button>
+  	}
+  	handleClick() {
+    	window.location.href = 'https://www.strava.com/oauth/authorize?client_id=21992&response_type=code&redirect_uri=http://watchkrisclimb.s3-website.us-east-2.amazonaws.com/&approval_prompt=force';
+    }
 
 }
 
 function mapStateToProps(state){ 
-	return { authenticated: state.authenticated };
+	return {  };
 }
 
-export default connect(mapStateToProps, actions)(Header);
-
+export default connect(null,actions)(Header);
 

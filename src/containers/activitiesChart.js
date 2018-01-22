@@ -1,18 +1,19 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'; 
 import {bindActionCreators} from 'redux';
-import { fetchActivities } from '../actions/actions_index'; //importing activities axios data
+import { fetchActivities, fetchActivitiesWithCode } from '../actions/actions_index'; //importing activities axios data
 //import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import Chart from 'chart.js'; 
 import {Line} from 'react-chartjs-2';
 
-//SumElevation outsid eof the component
+//SumElevation outside of the component
 function sumElevation(allActivities) {
   let addActivities = (a,b) => a + b 
   let arrayElevationGain = [];
   allActivities.forEach(activity => arrayElevationGain.push(activity.total_elevation_gain))
-      let sumActivities = parseInt(arrayElevationGain.reduce(addActivities)/.3048,10); //convert to ft.
-      return Number(sumActivities);
+  let sumActivities = 0;
+  if(arrayElevationGain.length > 0){ sumActivities = parseInt(arrayElevationGain.reduce(addActivities)/.3048,10)}  
+  return Number(sumActivities);
 }
 
 function monthElevation(allActivities,timestamp) {
@@ -32,7 +33,13 @@ class ActivitiesChart extends Component {
     this.getData = this.getData.bind(this);
   }
   getData(){
-    this.props.fetchActivities();
+    //this.props.fetchActivities();
+      let code = new URL(window.location.href).searchParams.get('code')
+      if(!code){
+        this.props.fetchActivities();
+      }else{
+        this.props.fetchActivitiesWithCode();
+      };
   }
  
   componentDidMount() {this.getData(); }
@@ -102,7 +109,7 @@ function mapStateToProps({activities}){
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({fetchActivities}, dispatch);
+  return bindActionCreators({fetchActivities, fetchActivitiesWithCode}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ActivitiesChart);

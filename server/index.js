@@ -20,8 +20,8 @@ app.use(bodyParser.json({ type: '*/*' }));
 // set the view engine to ejs
 app.set('view engine', 'ejs');
 var path = require('path');
-app.use('/public', express.static(path.join(__dirname + '/public')));
-//app.set('views', __dirname + 'views'); from example
+app.use('/views', express.static(path.join(__dirname + '/views')));
+//app.set('views', __dirname + 'views'); 
 
 router(app);
 

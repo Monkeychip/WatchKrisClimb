@@ -26,12 +26,11 @@ passport.deserializeUser(function(obj, done) {
 const stravaLogin = new StravaStrategy({
     clientID: STRAVA_CLIENT_ID,
     clientSecret: STRAVA_CLIENT_SECRET,
-    callbackURL: "http://127.0.0.1:3000"
+    callbackURL: "http://localhost:3000"
   },
   function(accessToken, refreshToken, profile, done) {
-    // asynchronous verification, for effect...
+        // asynchronous verification, for effect...
     process.nextTick(function () {
-  
       // To keep the example simple, the user's Strava profile is returned to
       // represent the logged-in user.  In a typical application, you would want
       // to associate the Strava account with a user record in your database,
@@ -40,7 +39,6 @@ const stravaLogin = new StravaStrategy({
     });
   }
 );
-
 
 
 //TELL PASSPORT TO USE STRATEGY
