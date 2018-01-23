@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import { fetchActivities, fetchActivitiesWithCode } from '../actions/actions_index';
 import Chart from 'chart.js'; 
-import ReactDOM from 'react-dom';
 import { Doughnut } from 'react-chartjs-2';
 
 
@@ -18,7 +17,7 @@ function sumElevation(allActivities) {
 }
 
 function elevationType(allActivities,type) {
-  let elevationType = allActivities.filter((value) => value.type == type);
+  let elevationType = allActivities.filter((value) => value.type === type);
   return sumElevation(elevationType)
 }
 

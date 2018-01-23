@@ -1,19 +1,13 @@
 import axios from 'axios'; 
-import { browserHistory } from 'react-router'; //communicate information about URL, can also use to make changes to URL
 import {
  CHANGE_AUTH, 
- UNAUTH_USER,
- CHANGE_CODE,
  FETCH_ACTIVITIES,
- ATHLETE_ID,
  ACCESS_TOKEN,
  CLIENT_SECRET,
  CLIENT_ID
  } from './types'; 
  
 const activitiesUrl = `https://www.strava.com/api/v3/athlete/activities?access_token=${ACCESS_TOKEN}`;
-const elevationUrl = `https://www.strava.com/api/v3/athletes/${ATHLETE_ID}/stats?access_token=${ACCESS_TOKEN}`;
-
 
 //passing boolean.  For authentication then goes to reducer
 export function authenticate(isLoggedIn){
@@ -24,7 +18,6 @@ export function authenticate(isLoggedIn){
 }
 
 const SERVER_URL ='http://localhost:3002/auth/strava'; //this is the url of the API server that you made
-const STRAVAS_URL = 'https://www.strava.com/oauth/authorize?client_id=21992&response_type=code&redirect_uri=http://watchkrisclimb.s3-website.us-east-2.amazonaws.com/&approval_prompt=force'
 
 export function fetchMessage(){ 
   return function(dispatch){
@@ -37,7 +30,8 @@ export function fetchMessage(){
 export function fetchActivities(){
   
   let activities = axios.get(activitiesUrl, { params: {
-    after: 1483228800,
+    after: 1514790000,
+    //after: 1483228800, 01/01/2017
     per_page: 150
   } } )
   return{
@@ -71,7 +65,8 @@ export function fetchActivitiesWithCode(){
     const activitiesUrlUpdated = `https://www.strava.com/api/v3/athlete/activities?access_token=${response.data.access_token}`;
     console.log(response.data, "response data, should be Kris?")
     return axios.get(activitiesUrlUpdated, { params: {
-            after: 1483228800,
+            after: 1514790000,
+            //after: 1483228800,
             per_page: 150
           }})
   })

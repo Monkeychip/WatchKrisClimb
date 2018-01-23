@@ -3,7 +3,6 @@ import '../App.css';
 import Activities from '../containers/activities';
 import ActivitiesChart from '../containers/activitiesChart';
 import AGPieChart from '../containers/pieChart';
-import {connect} from 'react-redux';
 import Header from './header';
 
 //sixteen wide mobile eight wide tablet four wide computer column

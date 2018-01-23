@@ -49,12 +49,11 @@ class ActivitiesChart extends Component {
         <div>Loading Activities ...</div>
       );
     }
-   /* let goalPerMonth = 42000; //to average 500,000 
-    let dateYR = '17';
-    let dateMonth = 1;
-    ];*/
+    let todayEpochTime = (new Date).getTime();
+    const calendarEpochTime = [new Date('2018-01-01').getTime(),new Date('2018-02-01').getTime(),new Date('2018-03-01').getTime(),new Date('2018-04-01').getTime(),new Date('2018-05-01').getTime(),new Date('2018-06-01').getTime(),new Date('2018-07-01').getTime(),new Date('2018-08-01').getTime(),new Date('2018-09-01').getTime(),new Date('2018-10-01').getTime(),new Date('2018-11-01').getTime(),new Date('2018-12-01').getTime() ];
     const data = {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'Decemeber'],
+
         datasets: [
           {
             label: 'Elevation Climbed',
@@ -77,28 +76,47 @@ class ActivitiesChart extends Component {
             pointHitRadius: 10,
             data: [
               0, 
-              monthElevation(this.props.activities,1485907200000),
-              monthElevation(this.props.activities,1488326400000),
-              monthElevation(this.props.activities,1491004800000),
-              monthElevation(this.props.activities,1493596800000),
-              monthElevation(this.props.activities,1496275200000),
-              monthElevation(this.props.activities,1501545600000),
-              monthElevation(this.props.activities,1504224000000),
-              monthElevation(this.props.activities,1506816000000),
-              monthElevation(this.props.activities,1509494400000),
-              monthElevation(this.props.activities,1512086400000),
-              monthElevation(this.props.activities,1514767458000)
+              monthElevation(this.props.activities,1517468400000),
+              ()=> {if(todayEpochTime > calendarEpochTime[1]){monthElevation(this.props.activities,calendarEpochTime[1])}else{0}},
+              ()=> {if(todayEpochTime > calendarEpochTime[2]){monthElevation(this.props.activities,calendarEpochTime[2])}else{0}},
+              ()=> {if(todayEpochTime > calendarEpochTime[3]){monthElevation(this.props.activities,calendarEpochTime[3])}else{0}},
+              ()=> {if(todayEpochTime > calendarEpochTime[4]){monthElevation(this.props.activities,calendarEpochTime[4])}else{0}},
+              ()=> {if(todayEpochTime > calendarEpochTime[5]){monthElevation(this.props.activities,calendarEpochTime[5])}else{0}},
+              ()=> {if(todayEpochTime > calendarEpochTime[6]){monthElevation(this.props.activities,calendarEpochTime[6])}else{0}},
+              ()=> {if(todayEpochTime > calendarEpochTime[7]){monthElevation(this.props.activities,calendarEpochTime[7])}else{0}},
+              ()=> {if(todayEpochTime > calendarEpochTime[8]){monthElevation(this.props.activities,calendarEpochTime[8])}else{0}},
+              ()=> {if(todayEpochTime > calendarEpochTime[9]){monthElevation(this.props.activities,calendarEpochTime[9])}else{0}},
+              ()=> {if(todayEpochTime > calendarEpochTime[10]){monthElevation(this.props.activities,calendarEpochTime[10])}else{0}}
               ]
           }
         ]
     };
+    var chartOptions = {
+            title: {
+                display: true,
+                text: 'Accumlated Elevation Climbed by Month'
+            },
 
+            legend: {
+                display: false,
+            },
+
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero:true,
+                  min: 0,
+                  max: monthElevation(this.props.activities,1543647600000) * 3
+                }
+              }]
+            }
+        }
 
     Chart.defaults.global.responsive = true;
     Chart.defaults.global.maintainAspectRatio = true;
 
     return (  
-       <Line data={data} width="1000" height="400"/>
+       <Line data={data} options={chartOptions} width="1000" height="400"/>
       )
        
     }

@@ -1,9 +1,7 @@
 import React from 'react';
 import { Component } from 'react';
-import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions_index'; 
-import { browserHistory } from 'react-router';
 
 class Header extends Component {
 	componentDidMount() {
@@ -25,10 +23,6 @@ class Header extends Component {
     	window.location.href = 'https://www.strava.com/oauth/authorize?client_id=21992&response_type=code&redirect_uri=http://watchkrisclimb.s3-website.us-east-2.amazonaws.com/&approval_prompt=force';
     }
 
-}
-
-function mapStateToProps(state){ 
-	return {  };
 }
 
 export default connect(null,actions)(Header);
