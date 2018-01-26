@@ -10,10 +10,22 @@ function sumElevation(allActivities) {
 		let arrayElevationGain = [];
 		allActivities.forEach(activity => arrayElevationGain.push(activity.total_elevation_gain))
 		let sumActivities = 0;
-		
-        if(arrayElevationGain.length > 0){ sumActivities = parseInt(arrayElevationGain.reduce(addActivities)/.3048,10)}
-        return sumActivities.toLocaleString();
+		if(arrayElevationGain.length > 0){ sumActivities = parseInt(arrayElevationGain.reduce(addActivities)/.3048,10) }
+        return sumActivities;
 }
+
+function monthElevation(monthData,timestamp) {
+    
+     let monthActivity = monthData.filter( //added data to widdle down
+     function(value){
+      let epochDate = new Date(String(value.start_date_local)).getTime();
+      return (epochDate <  timestamp);  //today < 2017
+    }
+  )
+    
+  return sumElevation(monthActivity); // now with correct array run through the Sum Elevation and return that value  
+}
+
 
 class Activities extends Component {
 	constructor(props) { 
@@ -29,7 +41,7 @@ class Activities extends Component {
       }else{
         this.props.fetchActivitiesWithCode();
       };
-  	}
+  	};
 	
 	componentDidMount() {this.getData(); }
 	render() {
@@ -38,8 +50,13 @@ class Activities extends Component {
 				<div>Loading Activities ...</div>
 			);
 		}
+		let year = (new Date()).getFullYear();
+    	let month = 0; //january
+    	let totalElevation = sumElevation(this.props.activities);
+    	let lastYearsElevation = monthElevation(this.props.activities, new Date(year, month, -1).getTime())
+    	
 		return (	
-            <div id="activities_header">{`Total Climbed to Date: `}<span id="elevation_total">{`${sumElevation(this.props.activities)} ft`}</span></div>
+            <div id="activities_header">{`Total Climbed this Year: `}<span id="elevation_total">{`${(totalElevation - lastYearsElevation).toLocaleString()} ft`}</span></div>
         )
        
     }

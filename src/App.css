@@ -65,6 +65,7 @@ body {
     height: 50vh;
     width: 100vh;
 }
+#intro-header{color: #e7e3e3;}
 
 @media screen and (max-width: 990px){
   .max-height-col{

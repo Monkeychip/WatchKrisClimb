@@ -11,7 +11,12 @@ class App extends Component {
     return (
       <div id="component_holder" className="ui centered grid container"> 
           <div className="sixteen wide column">
-            <div id="page_title" className="ui center aligned huge header">watchkrisclimb.com</div>
+            
+            <h2 className="ui header" id="intro-header">Strava data tailored to your winter needs</h2>
+              <p>We all love Strava, but it was not built for backcountry skiers.  Why would it be?
+                <br /> Strava is headquartered in the windy, snowless city of San Francisco.
+                <br /> I can't give you everything, but I can give you a bit more than Strava does. 
+            </p>
           </div>
           <div className="sixteen wide column">
             <Header />

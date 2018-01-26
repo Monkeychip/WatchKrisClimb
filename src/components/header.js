@@ -2,6 +2,7 @@ import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions_index'; 
+import { CALLBACK_URI } from '../actions/types'; 
 
 class Header extends Component {
 	componentDidMount() {
@@ -20,7 +21,7 @@ class Header extends Component {
     	return <button id="authenticate-button" className="ui-button" onClick={this.handleClick.bind(this)}>Try it out</button>
   	}
   	handleClick() {
-    	window.location.href = 'https://www.strava.com/oauth/authorize?client_id=21992&response_type=code&redirect_uri=http://watchkrisclimb.s3-website.us-east-2.amazonaws.com/&approval_prompt=force';
+    	window.location.href = `https://www.strava.com/oauth/authorize?client_id=21992&response_type=code&redirect_uri=http://${CALLBACK_URI}`;
     }
 
 }
