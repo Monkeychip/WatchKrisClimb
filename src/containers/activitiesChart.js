@@ -27,6 +27,7 @@ function monthElevation(monthData,timestamp) {
   return sumElevation(monthActivity); // now with correct array run through the Sum Elevation and return that value  
 }
 
+console.log("testing again");
 
 class ActivitiesChart extends Component {
   constructor(props) { 
