@@ -129,8 +129,27 @@ class ActivitiesPieChart extends Component{
                   fontStyle: 'Roboto Condensed', // Default is Arial
                   sidePadding: 20 // Defualt is 20 (as a percentage)
                 }
+            },
+            tooltips: {
+              callbacks: {
+                  title: function(tooltipItem, data) {
+                    return data['labels'][tooltipItem[0]['index']];
+                  },
+                  label: function(tooltipItem, data) {
+                    return `  ${(data['datasets'][0]['data'][tooltipItem['index']]).toLocaleString()}  ft`;
+                    //return data['datasets'][0]['data'][tooltipItem['index']] ;
+                  }
+                  //calculate % underneath if I ever want to later, need to replace the base of the % function.
+                  /*afterLabel: function(tooltipItem, data) {
+                    let dataset = data['datasets'][0];
+                    let percent = Math.round((dataset['data'][tooltipItem['index']] / dataset["_meta"][0]['total']) * 100)
+                    return '%';
+                  }*/
+                }
             }
         };
+
+
         const optionsTypeRemaining = {
             animation: {
                 animateScale: true
@@ -147,6 +166,23 @@ class ActivitiesPieChart extends Component{
                   color: '#e7e3e3', // Default is #000000
                   fontStyle: 'Roboto Condensed', // Default is Arial
                   sidePadding: 20 // Defualt is 20 (as a percentage)
+                }
+            },
+            tooltips: {
+              callbacks: {
+                  title: function(tooltipItem, data) {
+                    return data['labels'][tooltipItem[0]['index']];
+                  },
+                  label: function(tooltipItem, data) {
+                    return `  ${(data['datasets'][0]['data'][tooltipItem['index']]).toLocaleString()}  ft`;
+                    //return data['datasets'][0]['data'][tooltipItem['index']] ;
+                  }
+                  //calculate % underneath if I ever want to later, need to replace the base of the % function.
+                  /*afterLabel: function(tooltipItem, data) {
+                    let dataset = data['datasets'][0];
+                    let percent = Math.round((dataset['data'][tooltipItem['index']] / dataset["_meta"][0]['total']) * 100)
+                    return '%';
+                  }*/
                 }
             }
         };
@@ -166,6 +202,23 @@ class ActivitiesPieChart extends Component{
                   color: '#e7e3e3', // Default is #000000
                   fontStyle: 'Roboto Condensed', // Default is Arial
                   sidePadding: 20 // Defualt is 20 (as a percentage)
+                }
+            },
+            tooltips: {
+              callbacks: {
+                  title: function(tooltipItem, data) {
+                    return data['labels'][tooltipItem[0]['index']];
+                  },
+                  label: function(tooltipItem, data) {
+                    return `  ${(data['datasets'][0]['data'][tooltipItem['index']]).toLocaleString()}  ft`;
+                    //return data['datasets'][0]['data'][tooltipItem['index']] ;
+                  }
+                  //calculate % underneath if I ever want to later, need to replace the base of the % function.
+                  /*afterLabel: function(tooltipItem, data) {
+                    let dataset = data['datasets'][0];
+                    let percent = Math.round((dataset['data'][tooltipItem['index']] / dataset["_meta"][0]['total']) * 100)
+                    return '%';
+                  }*/
                 }
             }
         };

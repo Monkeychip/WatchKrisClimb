@@ -12,11 +12,8 @@ class App extends Component {
       <div id="component_holder" className="ui centered grid container"> 
           <div className="sixteen wide column">
             
-            <h2 className="ui header" id="intro-header">Strava data tailored to your winter needs</h2>
-              <p>We all love Strava, but it was not built for backcountry skiers.  Why would it be?
-                <br /> Strava is headquartered in the windy, snowless city of San Francisco.
-                <br /> I can't give you everything, but I can give you a bit more than Strava does. 
-            </p>
+            <h2 className="ui dividing header" id="intro-header">Strava data tailored to your winter needs</h2>
+              <p>Strava data re-adjusted to better reflect the ups, ups, and downs of backcountry winter activities.  Try it out and the graphs will re-populate with your Strava data</p>
           </div>
           <div className="sixteen wide column">
             <Header />

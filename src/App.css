@@ -1,9 +1,9 @@
 body {
   background-color: #29303A;
   color: #E7E3E3;
-    margin: 0;
+  margin: 0;
   padding: 0;
-  font-family: 'Roboto Condensed', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 #component_holder{
@@ -13,6 +13,16 @@ body {
 
 #page_title {
  color: #E7E3E3;
+}
+
+#intro-header{
+  color: #e7e3e3;
+  padding:20px;
+  text-transform: uppercase;
+}
+
+.ui.dividing.header{ 
+  border-bottom: 1px solid #FE6627;
 }
 
 #text-counter {
@@ -29,6 +39,10 @@ body {
 #activities_header{ /*text in front of elevation count*/
   color: #e7e3e3;
   font-size: 1em;
+}
+
+#activitesChart{
+  height: 400px; /*height can only be set here because of responsive setting*/
 }
 
 #elevation_total{color: #FE6627;} /*elevation count*/
@@ -65,7 +79,7 @@ body {
     height: 50vh;
     width: 100vh;
 }
-#intro-header{color: #e7e3e3;}
+
 
 @media screen and (max-width: 990px){
   .max-height-col{
@@ -74,6 +88,9 @@ body {
   #activities_header{
     font-size: 30px;
     padding-top: 40px;
+  }
+  #activitesChart{
+    height: 50px; /*height can only be set here because of responsive setting*/
   }
   #pieChart {
     padding:7vw;

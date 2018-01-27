@@ -5,7 +5,6 @@
 import { combineReducers } from 'redux';
 import ActivitiesReducer from './reducer_activities';
 
-
 const rootReducer = combineReducers({
 	activities: ActivitiesReducer
 });

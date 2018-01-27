@@ -1,6 +1,4 @@
 export const FETCH_ACTIVITIES = 'fetch_activities';
-export const FETCH_LAST_YEARS_ACTIVITIES = 'fetch_last_years_activities';
-export const CHANGE_AUTH = 'change_auth';
 export const CALLBACK_URI = 'winteredition.io';
 
 //Eventually put in .env file and serve from server
