@@ -54,38 +54,46 @@ class ActivitiesChart extends Component {
     //Time and Calendar Variables
     let monthData = this.props.activities; //activities data
     let now = new Date();
-    let year = (new Date()).getFullYear();
     let todayEpochTime = (new Date(now.getFullYear(), now.getMonth() + 1, 1)).getTime();
-    let lastDayOfLastYear = (new Date(year,0,0)).getTime();
-    let month = 1; //january
-    let calendarEpochTime = [new Date(year, month,0).getTime(),new Date(year, month+1,0).getTime(),new Date(year, month+2,0).getTime(),new Date(year, month+3,0).getTime(),new Date(year, month+4,0).getTime(),new Date(year, month+5,0).getTime(),new Date(year, month+6,0).getTime(),new Date(year, month+7,0).getTime(),new Date(year, month+8,0).getTime(),new Date(year, month+9,0).getTime(),new Date(year, month+10,0).getTime(),new Date(year, month+11,0).getTime() ];
-    let calendarEpochTimeLastYear = [new Date(year-1, month,0).getTime(),new Date(year-1, month+1,0).getTime(),new Date(year-1, month+2,0).getTime(),new Date(year-1, month+3,0).getTime(),new Date(year-1, month+4,0).getTime(),new Date(year-1, month+5,0).getTime(),new Date(year-1, month+6,0).getTime(),new Date(year-1, month+7,0).getTime(),new Date(year-1, month+8,0).getTime(),new Date(year-1, month+9,0).getTime(),new Date(year-1, month+10,0).getTime(),new Date(year-1, month+11,0).getTime() ];
-    let lastYearsElevation = monthElevation(this.props.activities, new Date(year, 0, -1).getTime());
     
-    //Calculate this years data per month in function 
+    //create calendar Arrays
+    let calendarEpochTime = [];
+    let calendarEpochTimeLastYear = [];
+    let year = (new Date()).getFullYear();
     let dataArray = [];
-    calendarEpochTime.forEach(function (time){
-      if(todayEpochTime > time){
-        let data = new Number(monthElevation(monthData,time) - lastYearsElevation);
+    let dataArrayLastYear = [];
+    let lastYearsElevation = monthElevation(this.props.activities, new Date(year, 0, -1).getTime());
+
+    //Data Array maker this year
+    for(var i = 1; i <= 12; i++){
+      let thisYearDate = new Date(year,i,0).getTime(); //2018     
+      if (todayEpochTime >= thisYearDate){
+        let data = new Number(monthElevation(monthData,thisYearDate) - lastYearsElevation);
         let dataAsNumber = data.toLocaleString();
         dataArray.push(data);
+      }else{
+
       }
-    });
-    //Calculate last years data per month in function
-    let dataArrayLastYear = [];
-    calendarEpochTimeLastYear.forEach(function (time){
-      if(lastDayOfLastYear > time){  //1485932400000 > 1488265200000
-        dataArrayLastYear.push(monthElevation(monthData,time));
-      }else{dataArrayLastYear.push(10)}
-    });
+    } 
+
+    //Data Array maker last year
+    for(var i = 1; i <=12; i++){
+      let lastDayOfLastYear = (new Date(year,0,0)).getTime(); //15147036...
+      let lastYearDate = new Date(year-1,i,0).getTime(); //if i =1 14858460
+      console.log(lastDayOfLastYear,"lastDayOfLastYear vs", lastYearDate,"lastYearDate");
+      if(lastDayOfLastYear >= lastYearDate){
+        dataArrayLastYear.push(monthElevation(monthData,lastYearDate));
+      }else{dataArrayLastYear.push(0)}
+    }
+    
       
     //find max for y axis
     function yAxisMax(){
-      let totalElevationLastYear = sumElevation(monthData);
-      if(dataArrayLastYear[10] > totalElevationLastYear ){
-        return dataArrayLastYear[10]
-      }else if(dataArrayLastYear[10] <= totalElevationLastYear ){
-        return totalElevationLastYear
+      let totalElevationLastYear = monthElevation(monthData, new Date(year-1,12,0).getTime());
+      if(dataArrayLastYear[11] > totalElevationLastYear ){
+        return dataArrayLastYear[11]
+      }else if(dataArrayLastYear[11] <= totalElevationLastYear ){
+        return totalElevationLastYear + 100;
       }else{
         return 100000;
       }
@@ -94,7 +102,7 @@ class ActivitiesChart extends Component {
     yAxisMax();
 
     const data = {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'Decemeber'],
+        labels: ['','January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'Decemeber'],
         datasets: [
           {
             label: 'This Year',
@@ -127,7 +135,8 @@ class ActivitiesChart extends Component {
               dataArray[7],
               dataArray[8],
               dataArray[9],
-              dataArray[10]
+              dataArray[10],
+              dataArray[11]
               ],
           },
           {
@@ -161,7 +170,8 @@ class ActivitiesChart extends Component {
               dataArrayLastYear[7],
               dataArrayLastYear[8],
               dataArrayLastYear[9],
-              dataArrayLastYear[10]
+              dataArrayLastYear[10],
+              dataArrayLastYear[11]
               ],
           }
         ]
@@ -186,6 +196,8 @@ class ActivitiesChart extends Component {
               yAxes: [{
                 ticks: {
                   beginAtZero:true,
+                  offset: true,
+                  tickMarkLength: true,
                   min: 0,
                   max: yAxisMax(),
                   callback: value => `${value.toLocaleString()} ft`
@@ -218,12 +230,6 @@ class ActivitiesChart extends Component {
                 title: function(tooltipItem, data) {
                    return tooltipItem[0].xLabel;
                 },
-                /*labelColor: function(tooltipItem, chart) {
-                    return { //TODO replace based off of line hovering over //
-                        borderColor: '#f36627',
-                        backgroundColor: '#f36627'
-                    }
-                },*/
                 labelTextColor:function(tooltipItem, chart){
                     return '#888590';
                 },
