@@ -212,7 +212,8 @@ class ActivitiesPieChart extends Component{
                   label: function(tooltipItem, data) {
                     return `  ${(data['datasets'][0]['data'][tooltipItem['index']]).toLocaleString()}  ft`;
                     //return data['datasets'][0]['data'][tooltipItem['index']] ;
-                  }
+                  },
+                  
                   //calculate % underneath if I ever want to later, need to replace the base of the % function.
                   /*afterLabel: function(tooltipItem, data) {
                     let dataset = data['datasets'][0];

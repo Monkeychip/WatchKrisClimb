@@ -78,9 +78,8 @@ class ActivitiesChart extends Component {
 
     //Data Array maker last year
     for(var i = 1; i <=12; i++){
-      let lastDayOfLastYear = (new Date(year,0,0)).getTime(); //15147036...
-      let lastYearDate = new Date(year-1,i,0).getTime(); //if i =1 14858460
-      console.log(lastDayOfLastYear,"lastDayOfLastYear vs", lastYearDate,"lastYearDate");
+      let lastDayOfLastYear = (new Date(year,0,0)).getTime(); 
+      let lastYearDate = new Date(year-1,i,0).getTime(); 
       if(lastDayOfLastYear >= lastYearDate){
         dataArrayLastYear.push(monthElevation(monthData,lastYearDate));
       }else{dataArrayLastYear.push(0)}
@@ -93,7 +92,7 @@ class ActivitiesChart extends Component {
       if(dataArrayLastYear[11] > totalElevationLastYear ){
         return dataArrayLastYear[11]
       }else if(dataArrayLastYear[11] <= totalElevationLastYear ){
-        return totalElevationLastYear + 100;
+        return totalElevationLastYear * 1.05; //return 5 higher in height%
       }else{
         return 100000;
       }
@@ -194,8 +193,15 @@ class ActivitiesChart extends Component {
 
             scales: {
               yAxes: [{
+                afterTickToLabelConversion: function(scaleInstance){
+                  //set the last tick to null so it does not display
+                  //tick[0] is the last tick
+                  scaleInstance.ticks[0] = null;
+                  scaleInstance.ticksAsNumbers[0] = null;
+                },
                 ticks: {
                   beginAtZero:true,
+                  autoSkip:true,
                   offset: true,
                   tickMarkLength: true,
                   min: 0,

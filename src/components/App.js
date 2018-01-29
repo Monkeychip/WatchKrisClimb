@@ -4,6 +4,7 @@ import Activities from '../containers/activities';
 import ActivitiesChart from '../containers/activitiesChart';
 import AGPieChart from '../containers/pieChart';
 import Header from './header';
+import Table from './table';
 
 //sixteen wide mobile eight wide tablet four wide computer column
 class App extends Component {
@@ -21,6 +22,10 @@ class App extends Component {
          </div>
          <div id="activitiesChart" className="sixteen wide column">
               <ActivitiesChart />
+         </div>
+         <div id="metrics_table" className="ui centered grid container">
+              <p>Using you Backcountry labeled activities only, here's a break down of your data.</p>
+             <Table />
          </div>
          <div className="ui centered grid container">
              <AGPieChart />
