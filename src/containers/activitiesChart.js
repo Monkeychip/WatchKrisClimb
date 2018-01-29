@@ -28,8 +28,6 @@ function monthElevation(monthData,timestamp) {
   return sumElevation(monthActivity); // now with correct array run through the Sum Elevation and return that value  
 }
 
-console.log("testing again");
-
 class ActivitiesChart extends Component {
   constructor(props) { 
     super(props) 
@@ -81,6 +79,20 @@ class ActivitiesChart extends Component {
       }else{dataArrayLastYear.push(10)}
     });
       
+    //find max for y axis
+    function yAxisMax(){
+      let totalElevationLastYear = sumElevation(monthData);
+      if(dataArrayLastYear[10] > totalElevationLastYear ){
+        return dataArrayLastYear[10]
+      }else if(dataArrayLastYear[10] <= totalElevationLastYear ){
+        return totalElevationLastYear
+      }else{
+        return 100000;
+      }
+    }
+
+    yAxisMax();
+
     const data = {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'Decemeber'],
         datasets: [
@@ -94,12 +106,12 @@ class ActivitiesChart extends Component {
             borderDash: [],
             borderDashOffset: 0.0,
             borderJoinStyle: 'miter',
-            pointBorderColor: '#e7e3e3', //dots on the line graph
+            pointBorderColor: '#e7e3e3', //dots on lines and within tooltip
             pointBackgroundColor: '#fE6627',
             pointBorderWidth: 1,
             pointHoverRadius: 5,
-            pointHoverBackgroundColor: '#e7e3e3',
-            pointHoverBorderColor: '#e7e3e3',
+            pointHoverBackgroundColor: '#fE6627',
+            pointHoverBorderColor: '#fE6627',
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
@@ -129,10 +141,10 @@ class ActivitiesChart extends Component {
             borderDashOffset: 0.0,
             borderJoinStyle: 'miter',
             pointBorderColor: '#e7e3e3', //dots on the line graph
-            pointBackgroundColor: '#fE6627',
+            pointBackgroundColor: '#029Ae6',
             pointBorderWidth: 1,
             pointHoverRadius: 5,
-            pointHoverBackgroundColor: '#e7e3e3',
+            pointHoverBackgroundColor: '#029Ae6',
             pointHoverBorderColor: '#e7e3e3',
             pointHoverBorderWidth: 2,
             pointRadius: 1,
@@ -175,7 +187,8 @@ class ActivitiesChart extends Component {
                 ticks: {
                   beginAtZero:true,
                   min: 0,
-                  max: 300000
+                  max: yAxisMax(),
+                  callback: value => `${value.toLocaleString()} ft`
                 }
               }]
             },
@@ -196,7 +209,7 @@ class ActivitiesChart extends Component {
 
                   label: function (t, d) {
                     if (t.datasetIndex === 0) {
-                        return `${t.yLabel.toLocaleString()} ft  `;
+                      return `${t.yLabel.toLocaleString()} ft  `;
                     } else { 
                       return `${t.yLabel.toLocaleString()} ft  `;
                     }
@@ -205,12 +218,12 @@ class ActivitiesChart extends Component {
                 title: function(tooltipItem, data) {
                    return tooltipItem[0].xLabel;
                 },
-                labelColor: function(tooltipItem, chart) {
-                    return { //TODO replace based off of line hovering over
+                /*labelColor: function(tooltipItem, chart) {
+                    return { //TODO replace based off of line hovering over //
                         borderColor: '#f36627',
                         backgroundColor: '#f36627'
                     }
-                },
+                },*/
                 labelTextColor:function(tooltipItem, chart){
                     return '#888590';
                 },
