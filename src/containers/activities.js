@@ -54,7 +54,6 @@ class Activities extends Component {
     	let month = 0; //january
     	let totalElevation = sumElevation(this.props.activities);
     	let lastYearsElevation = monthElevation(this.props.activities, new Date(year, month, -1).getTime())
-    	
 		return (	
             <div id="activities_header">{`Total Climbed this Year: `}<span id="elevation_total">{`${(totalElevation - lastYearsElevation).toLocaleString()} ft`}</span></div>
         )

@@ -17,8 +17,27 @@ function sumElevation(allActivities) {
 }
 
 function elevationType(allActivities,type) {
-  let elevationType = allActivities.filter((value) => value.type === type);
+  let year = (new Date()).getFullYear();
+  let monthActivity = allActivities.filter(
+    function(value){
+      let epochDate = new Date(String(value.start_date_local)).getTime();
+      return (epochDate > (new Date(year,0,0).getTime()))  //greater than last year at 12/31/2017
+    })
+  let elevationType = monthActivity.filter((value) => value.type === type); //now return based on value on month Activities
   return sumElevation(elevationType)
+}
+
+
+function monthElevation(monthData,timestamp) {
+      
+     let monthActivity = monthData.filter( //added data to widdle down
+     function(value){
+      let epochDate = new Date(String(value.start_date_local)).getTime();
+      return (epochDate <  timestamp);  //today < 2017
+    }
+  )
+    
+  return sumElevation(monthActivity); // now with correct array run through the Sum Elevation and return that value  
 }
 
 
@@ -44,12 +63,20 @@ class ActivitiesPieChart extends Component{
         <div>Loading Pie Charts ...</div>
       );
     }
+    /*Getting just this year's elevation gain*/
+    let year = (new Date()).getFullYear();
+    let month = 0; //january
+    let lastYearsElevation = monthElevation(this.props.activities, new Date(year, month, -1).getTime())
     /*Data Varialbes for Pie Charts*/
     let totalElevation = sumElevation(this.props.activities);
-    let elevationRemaining = Number(500000 - totalElevation);
+    let thisYearsElevation = totalElevation - lastYearsElevation;
+    let elevationRemaining = Number(500000 - thisYearsElevation);
     let elevationSkied = Number(elevationType(this.props.activities,"BackcountrySki"));
     let elevationRun = Number(elevationType(this.props.activities,"Run")); 
-    let elevationOther = totalElevation - (elevationSkied + elevationRun);
+    let elevationOther = thisYearsElevation - (elevationSkied + elevationRun);
+
+
+
     Chart.defaults.global.responsive = true;
 
          const dataType = {
