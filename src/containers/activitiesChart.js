@@ -50,7 +50,7 @@ class ActivitiesChart extends Component {
         <div>Loading Activities ...</div>
       );
     }
-    
+ console.log(this.props.activities)   
     //Time and Calendar Variables
     let monthData = this.props.activities; //activities data
     let now = new Date();

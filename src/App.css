@@ -33,19 +33,26 @@ h4.ui.header{
   margin-top:-2px !important;
 }
 /*Emoji*/
-#avg-speed-uphill:after {
-    content: "\026A1";
+#time-climbing:after {
+    content: "\01F3BF"; /*skiboots*/
+    padding-left:3px;
+}
+#elevation-from-skiing:after{
+   content: "\01F4AA";
+   padding-left:3px;
+}
+#avg-rise-run:after {
+    content: "\01F525"; /*fire*/  
     padding-left:3px;
  }
-#longest-climb:after {
-  content: "\01F525";
-  padding-left:3px;
-}
-#most-vertical:after {
-    content: "\01F680";
+#feet-per-second:after {
+    content: "\026A1"; /*lightening*/
     padding-left:3px;
 }
-
+#most-vertical:after{
+  content: "\01F680"; /*rocket*/
+  padding-left:3px;
+}
 
 #component_holder{
  padding: 10px 5px;

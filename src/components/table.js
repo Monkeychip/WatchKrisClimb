@@ -17,28 +17,44 @@ class Table extends Component {
                     </tr>
                   </thead>
                   <tbody>
-                   <tr>
+
+                  <tr>
                     <td>
-                      <h4 className="ui header" id="avg-speed-uphill">Avg. Speed Uphill</h4>
-                         <p className="ag-below-header">Ex: 1 mile / 1hr = 1 mph </p>
+                      <h4 className="ui header" id="time-climbing"> How much time have you spent skiing?</h4>
+                         <p className="ag-below-header">In hours and minutes</p>
                     </td>
-                    <td className="center aligned"> 3.2 mph</td>
-                    <td className="center aligned"> 2.2 mph</td>
-                    <td className="center aligned"> 2.6 mph</td>
+                    <td className="center aligned"> 4 hrs 30 min </td>
+                    <td className="center aligned"> 22 hrs 42 min</td>
+                    <td className="center aligned"> 90 hrs 12 min</td>
                    </tr>
                    <tr>
-                      <td>
-                      <h4 className="ui header" id="longest-climb">Longest Climb</h4>
-                         <p className="ag-below-header">Must be consecutive, no downs, just one solid up effort</p>
+                    <td>
+                      <h4 className="ui header" id="elevation-from-skiing"> Elevation gained from skiing</h4>
+                         <p className="ag-below-header">In feet</p>
                     </td>
-                    <td className="center aligned"> Jan 17, 2018. <br/>
-                         3,131 ft
+                    <td className="center aligned"> 10,000 ft </td>
+                    <td className="center aligned"> 22,000 ft</td>
+                    <td className="center aligned"> 31,000 ft</td>
+                   </tr>
+                   <tr>
+                    <td>
+                      <h4 className="ui header" id="avg-rise-run"> On Avg, how steep was it?</h4>
+                         <p className="ag-below-header">Avg. Rise / Run e.g Elevation Gain/Distance</p>
                     </td>
-                    <td className="center aligned"> Feb 28, 2018. <br/>
-                         3,211 ft
+                    <td className="center aligned"> 2.2 % </td>
+                    <td className="center aligned"> 3.2 % </td>
+                    <td className="center aligned"> 4.6 %</td>
+                   </tr>
+                   <tr>
+                    <td>
+                      <h4 className="ui header" id="feet-per-second">On Avg, what percent of your skiing time is going up hill?</h4>
+                         <p className="ag-below-header">Avg. number of feet per second spent going up-hill, based on moving time</p>
                     </td>
-                    <td className="center aligned"> Feb 28, 2018. <br/>
-                         3,211 ft
+                    <td className="center aligned" > 66 %
+                    </td>
+                    <td className="center aligned"> 58 %
+                    </td>
+                    <td className="center aligned"> 49 %
                     </td>
                    </tr>
                    <tr>
