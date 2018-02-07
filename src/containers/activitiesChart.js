@@ -4,6 +4,8 @@ import {bindActionCreators} from 'redux';
 import { fetchActivities, fetchActivitiesWithCode } from '../actions/actions_index'; //importing activities axios data
 import Chart from 'chart.js'; 
 import {Line} from 'react-chartjs-2';
+import Moment from 'moment';
+
 
 //Sums Elevations via a reduce and forEach method.  Takes in data object from Month Elevation.
 function sumElevation(allActivities) {
@@ -50,7 +52,7 @@ class ActivitiesChart extends Component {
         <div>Loading Activities ...</div>
       );
     }
- console.log(this.props.activities)   
+ 
     //Time and Calendar Variables
     let monthData = this.props.activities; //activities data
     let now = new Date();
@@ -75,6 +77,7 @@ class ActivitiesChart extends Component {
 
       }
     } 
+    
 
     //Data Array maker last year
     for(var i = 1; i <=12; i++){
@@ -101,7 +104,7 @@ class ActivitiesChart extends Component {
     yAxisMax();
 
     const data = {
-        labels: ['','January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'Decemeber'],
+        labels: [new Date(2018,0,0),new Date(2018,1,0), new Date(2018,2,0), new Date(2018,3,0),new Date(2018,4,0),new Date(2018,5,0),new Date(2018,6,0),new Date(2018,7,0),new Date(2018,8,0),new Date(2018,9,0),new Date(2018,10,0),new Date(2018,11,0),new Date(2018,12,0)],
         datasets: [
           {
             label: 'This Year',
@@ -123,20 +126,20 @@ class ActivitiesChart extends Component {
             pointRadius: 1,
             pointHitRadius: 10,
             data: [
-              0,
-              dataArray[0],
-              dataArray[1],
-              dataArray[2],
-              dataArray[3],
-              dataArray[4],
-              dataArray[5],
-              dataArray[6],
-              dataArray[7],
-              dataArray[8],
-              dataArray[9],
-              dataArray[10],
-              dataArray[11]
-              ],
+              {x: new Date(2018,0,0,) , y: 0},
+              {x: new Date(2018,1,0), y: dataArray[0]},
+              {x: new Date(), y: dataArray[1]},
+              {x: new Date(2018,3,0), y:dataArray[2]},
+              {x: new Date(2018,4,0), y:dataArray[3]},
+              {x: new Date(2018,5,0), y:dataArray[4]},
+              {x: new Date(2018,6,0), y:dataArray[5]},
+              {x: new Date(2018,7,0), y:dataArray[6]},
+              {x: new Date(2018,8,0), y:dataArray[7]},
+              {x: new Date(2018,9,0), y:dataArray[8]},
+              {x: new Date(2018,10,0), y:dataArray[9]},
+              {x: new Date(2018,11,0), y:dataArray[10]},
+              {x: new Date(2018,12,0), y:dataArray[11]}
+            ],
           },
           {
             label: 'Last Year',
@@ -194,8 +197,6 @@ class ActivitiesChart extends Component {
             scales: {
               yAxes: [{
                 afterTickToLabelConversion: function(scaleInstance){
-                  //set the last tick to null so it does not display
-                  //tick[0] is the last tick
                   scaleInstance.ticks[0] = null;
                   scaleInstance.ticksAsNumbers[0] = null;
                 },
@@ -208,7 +209,15 @@ class ActivitiesChart extends Component {
                   max: yAxisMax(),
                   callback: value => `${value.toLocaleString()} ft`
                 }
-              }]
+              }],
+              xAxes: [{
+                    type: "time",
+                    display: true,
+                    scaleLabel: {
+                      display:true,
+                      labelString: 'Date'
+                    }
+                }]  
             },
 
             tooltips: {
@@ -222,9 +231,6 @@ class ActivitiesChart extends Component {
               titleFontColor: '#888590',
 
               callbacks: {
-                //label: function(tooltipItem, data) {
-                 // return `  ${tooltipItem.yLabel.toLocaleString()} ft  `;
-
                   label: function (t, d) {
                     if (t.datasetIndex === 0) {
                       return `${t.yLabel.toLocaleString()} ft  `;
@@ -234,7 +240,7 @@ class ActivitiesChart extends Component {
                   
                 },
                 title: function(tooltipItem, data) {
-                   return tooltipItem[0].xLabel;
+                   return `${Moment(tooltipItem[0].xLabel).format('MMM')}`;
                 },
                 labelTextColor:function(tooltipItem, chart){
                     return '#888590';

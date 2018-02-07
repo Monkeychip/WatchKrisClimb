@@ -23,7 +23,7 @@ export function fetchActivities(){
   let activities = 
     axios.get(activitiesUrl, { params: {
       after: 1483228800,
-      per_page: 150
+      per_page: 200
     } } );
   
   return {
@@ -56,7 +56,7 @@ export function fetchActivitiesWithCode(){
     const activitiesUrlUpdated = `https://www.strava.com/api/v3/athlete/activities?access_token=${response.data.access_token}`;
     return axios.get(activitiesUrlUpdated, { params: {
             after: 1483228800, //TODO: THESE NEED TO BE VARIABLES 
-            per_page: 150 //TODO: THIS NEEDS TO BE LARGER
+            per_page: 200 //TODO: THIS NEEDS TO BE LARGER
           }})
   })
   .then(response => {
