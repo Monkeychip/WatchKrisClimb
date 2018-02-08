@@ -6,6 +6,33 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+/*MENU*/
+.ui.menu {
+  background-color: #29303A !important;
+  color: rgba(231,277,277,.8) !important;
+}
+.ui.menu .active.item{
+  color: rgba(231,277,277,1) !important; 
+}
+.ui.menu .item{
+  color: rgba(231,277,277,.7) !important;
+}
+.ui.button {
+  background-color: #029Ae6 ;
+  color: rgba(231,277,277,1) !important; 
+}
+#home-logo{
+  padding-left:5vw !important;
+}
+/*FORM*/
+#goal-input{
+  padding: 2vw;
+}
+#goal-input > form > div > label {
+  color: #e7e3e3;
+}
+/*CHART*/
+#activitiesChart{padding:14px 0px;}
 /*Table*/
 #metrics_table{
   padding-top:5vw;
@@ -55,13 +82,12 @@ h4.ui.header{
 }
 
 #component_holder{
- padding: 10px 5px;
+ padding: 10px 1px;
  height:100vh;
 }
 
 #intro-header{
   color: #e7e3e3;
-  padding:20px;
   text-transform: uppercase;
 }
 
@@ -71,7 +97,7 @@ h4.ui.header{
 
 #text-counter {
   color: #e7e3e3;
-  font-size: 4em;
+
 }
 
 
@@ -130,8 +156,7 @@ h4.ui.header{
     max-width: 80% !important;
   }
   #activities_header{
-    font-size: 30px;
-    padding-top: 40px;
+    padding-top: 10px;
   }
   #activitesChart{
     height: 50px; /*height can only be set here because of responsive setting*/
