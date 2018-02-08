@@ -55,7 +55,7 @@ class Menu extends Component {
 		}
 		
 		return(
-			<div className="ui three item menu">
+			<div className="ui menu">
 			    <div className="item" id="home-logo"> 
     				<img src={logo_124_124}></img> {/*Make click on home using router and change potentially*/}
 			   

@@ -22,7 +22,7 @@ body {
   color: rgba(231,277,277,1) !important; 
 }
 #home-logo{
-  padding-left:5vw !important;
+  margin-left:-3vw !important;
 }
 /*FORM*/
 #goal-input{
