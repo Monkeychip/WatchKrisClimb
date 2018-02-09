@@ -11,9 +11,14 @@ import Moment from 'moment';
 function sumElevation(allActivities) {
   let addActivities = (a,b) => a + b 
   let arrayElevationGain = [];
-  allActivities.forEach(activity => arrayElevationGain.push(activity.total_elevation_gain))
   let sumActivities = 0;
-  if(arrayElevationGain.length > 0){ sumActivities = parseInt(arrayElevationGain.reduce(addActivities)/.3048,10)}  
+
+  allActivities.forEach(activity => arrayElevationGain.push(activity.total_elevation_gain))
+  
+  if(arrayElevationGain.length > 0){
+     sumActivities = parseInt(arrayElevationGain.reduce(addActivities)/.3048,10)
+   }  //TODO: should add an else here for error handling
+  
   return Number(sumActivities);
 }
 
@@ -59,19 +64,18 @@ class ActivitiesChart extends Component {
     let todayEpochTime = (new Date(now.getFullYear(), now.getMonth() + 1, 1)).getTime();
     
     //create calendar Arrays
-    let calendarEpochTime = [];
-    let calendarEpochTimeLastYear = [];
     let year = (new Date()).getFullYear();
     let dataArray = [];
     let dataArrayLastYear = [];
+    let xaxisLabels = [];
     let lastYearsElevation = monthElevation(this.props.activities, new Date(year, 0, -1).getTime());
 
     //Data Array maker this year
-    for(var i = 1; i <= 12; i++){
-      let thisYearDate = new Date(year,i,0).getTime(); //2018     
+    let ind ; 
+    for(ind = 1; ind <= 12; ind++){
+      let thisYearDate = new Date(year,ind,0).getTime(); //2018     
       if (todayEpochTime >= thisYearDate){
         let data = new Number(monthElevation(monthData,thisYearDate) - lastYearsElevation);
-        let dataAsNumber = data.toLocaleString();
         dataArray.push(data);
       }else{
 
@@ -80,7 +84,8 @@ class ActivitiesChart extends Component {
     
 
     //Data Array maker last year
-    for(var i = 1; i <=12; i++){
+    let i ;
+    for(i = 1; i <=12; i++){
       let lastDayOfLastYear = (new Date(year,0,0)).getTime(); 
       let lastYearDate = new Date(year-1,i,0).getTime(); 
       if(lastDayOfLastYear >= lastYearDate){
@@ -88,8 +93,12 @@ class ActivitiesChart extends Component {
       }else{dataArrayLastYear.push(0)}
     }
     
+    //xaxis label array maker
+
+
       
     //find max for y axis
+    //TODO: situation where last year is greater than this year - confirm this works.
     function yAxisMax(){
       let totalElevationLastYear = monthElevation(monthData, new Date(year-1,12,0).getTime());
       if(dataArrayLastYear[11] > totalElevationLastYear ){
@@ -103,8 +112,24 @@ class ActivitiesChart extends Component {
 
     yAxisMax();
 
+    //xaxis label array maker
+    let z;
+    let today = new Date();
+    for (z =0; z<=12; z++){
+      
+      //locate today's date between two months
+      if( today > new Date(year,z,0) && today < new Date(year,z+1,0)){
+        xaxisLabels.push(new Date(year,z,0),today); //need to push both so that it doesn't fall out of order TODO see if works for March
+      }else{
+      xaxisLabels.push(new Date(year,z,0));
+      }
+    }
+    console.log(xaxisLabels);
+    
+
+
     const data = {
-        labels: [new Date(2018,0,0),new Date(2018,1,0), new Date(2018,2,0), new Date(2018,3,0),new Date(2018,4,0),new Date(2018,5,0),new Date(2018,6,0),new Date(2018,7,0),new Date(2018,8,0),new Date(2018,9,0),new Date(2018,10,0),new Date(2018,11,0),new Date(2018,12,0)],
+        labels: [new Date(year,0,0),new Date(year,1,0), new Date(year,2,0), new Date(year,3,0),new Date(year,4,0),new Date(year,5,0),new Date(year,6,0),new Date(year,7,0),new Date(year,8,0),new Date(year,9,0),new Date(year,10,0),new Date(year,11,0),new Date(year,12,0)],
         datasets: [
           {
             label: 'This Year',
@@ -126,19 +151,19 @@ class ActivitiesChart extends Component {
             pointRadius: 1,
             pointHitRadius: 10,
             data: [
-              {x: new Date(2018,0,0,) , y: 0},
-              {x: new Date(2018,1,0), y: dataArray[0]},
-              {x: new Date(), y: dataArray[1]},
-              {x: new Date(2018,3,0), y:dataArray[2]},
-              {x: new Date(2018,4,0), y:dataArray[3]},
-              {x: new Date(2018,5,0), y:dataArray[4]},
-              {x: new Date(2018,6,0), y:dataArray[5]},
-              {x: new Date(2018,7,0), y:dataArray[6]},
-              {x: new Date(2018,8,0), y:dataArray[7]},
-              {x: new Date(2018,9,0), y:dataArray[8]},
-              {x: new Date(2018,10,0), y:dataArray[9]},
-              {x: new Date(2018,11,0), y:dataArray[10]},
-              {x: new Date(2018,12,0), y:dataArray[11]}
+              {x: xaxisLabels[0], y: 0}, //dec 31
+              {x: xaxisLabels[1], y: dataArray[0]}, // 
+              {x: xaxisLabels[2], y: dataArray[1]}, //pushing today
+              {x: xaxisLabels[3], y:dataArray[2]},
+              {x: xaxisLabels[4], y:dataArray[3]},
+              {x: xaxisLabels[5], y:dataArray[4]},
+              {x: xaxisLabels[6], y:dataArray[5]},
+              {x: xaxisLabels[7], y:dataArray[6]},
+              {x: xaxisLabels[8], y:dataArray[7]},
+              {x: xaxisLabels[9], y:dataArray[8]},
+              {x: xaxisLabels[10], y:dataArray[9]},
+              {x: xaxisLabels[11], y:dataArray[10]},
+              {x: xaxisLabels[12], y:dataArray[11]}
             ],
           },
           {

@@ -22,7 +22,10 @@ body {
   color: rgba(231,277,277,1) !important; 
 }
 #home-logo{
-  margin-left:-3vw !important;
+  margin-left:-8vw !important;
+}
+#buttonLogOut{
+  background-color: rgba(41, 48, 58, 1);
 }
 /*FORM*/
 #goal-input{

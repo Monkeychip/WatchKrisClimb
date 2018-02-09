@@ -28,8 +28,6 @@ class Menu extends Component {
 	}
 	handleClick(){
 		window.location.href = `https://www.strava.com/oauth/authorize?client_id=21992&response_type=code&redirect_uri=http://${CALLBACK_URI}`
-		this.refs.buttonText.style.backgroundColor = '#888590';
-		
 	}
 	handleLogOut(){
 	    window.location.href = `http://www.winteredition.io`;	
@@ -43,13 +41,13 @@ class Menu extends Component {
 		if(isLoggedIn){
 			button = <div
 			  	 className="ui button" 
-			  	 ref='buttonText'
+			  	 id="buttonLogOut"
 			  	 onClick={this.handleLogOut}>Log-out
 			  	</div>
 		} else {
 			button = <div
 			  	 className="ui button" 
-			  	 ref='buttonText'
+			  	 ref='buttonTextLogIn'
 			  	 onClick={this.handleClick}>Log-in
 			  	</div>
 		}
@@ -57,7 +55,7 @@ class Menu extends Component {
 		return(
 			<div className="ui menu">
 			    <div className="item" id="home-logo"> 
-    				<img src={logo_124_124}></img> {/*Make click on home using router and change potentially*/}
+    				<img src={logo_124_124} alt=""></img> {/*Make click on home using router and change potentially*/}
 			   
   				</div>
 			  <a className="item">How to use</a> 
