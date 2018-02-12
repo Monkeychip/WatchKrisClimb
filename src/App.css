@@ -5,6 +5,11 @@ body {
   padding: 0;
   font-family: 'Roboto', sans-serif;
 }
+#fix-ft-label{
+  border:0px !Important;
+  border-radius: 0rem !Important;
+  background-color: #D3D3D3 !Important;
+}
 
 /*MENU*/
 .ui.menu {

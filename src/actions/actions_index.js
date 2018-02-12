@@ -5,7 +5,7 @@ import {
  CLIENT_SECRET,
  CLIENT_ID
  } from './types'; 
- 
+  
 const activitiesUrl = `https://www.strava.com/api/v3/athlete/activities?access_token=${ACCESS_TOKEN}`;
 
 const SERVER_URL ='http://localhost:3002/auth/strava'; //this is the url of the API server that you made
@@ -17,13 +17,23 @@ export function fetchMessage(){
   }
 }
 
+/*Handling submission action, though react-redux might already come*/
+export function fetchGoal(goal){ //always pass in the goal 
+  return function(dispatch){
+    console.log("i'm in the action creator",goal);
+    //next step call and return inside the AcitivitesChart - see similar fetchActivities, etc.
+    
+  }
+
+}
+
 //only call on initial load
 export function fetchActivities(){
   
   let activities = 
     axios.get(activitiesUrl, { params: {
       after: 1483228800,
-      per_page: 200
+      per_page: 180
     } } );
   
   return {
@@ -56,7 +66,7 @@ export function fetchActivitiesWithCode(){
     const activitiesUrlUpdated = `https://www.strava.com/api/v3/athlete/activities?access_token=${response.data.access_token}`;
     return axios.get(activitiesUrlUpdated, { params: {
             after: 1483228800, //TODO: THESE NEED TO BE VARIABLES 
-            per_page: 200 //TODO: THIS NEEDS TO BE LARGER
+            per_page: 180 //TODO: THIS NEEDS TO BE LARGER
           }})
   })
   .then(response => {

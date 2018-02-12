@@ -61,7 +61,7 @@ class Menu extends Component {
 			  <a className="item">How to use</a> 
 			  <a className="item">More Stats</a>
 			  <div className="item">
-			   <div isLoggedIn={isLoggedIn}>{button}</div>
+			   <div isLoggedIn={isLoggedIn}>{button}</div> {/*getting error here on the isLoggedInProperty on the div tag*/}
 			  </div>
 			  
 			</div>

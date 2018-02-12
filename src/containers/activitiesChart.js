@@ -3,9 +3,8 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import { fetchActivities, fetchActivitiesWithCode } from '../actions/actions_index'; //importing activities axios data
 import Chart from 'chart.js'; 
-import {Line} from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 import Moment from 'moment';
-
 
 //Sums Elevations via a reduce and forEach method.  Takes in data object from Month Elevation.
 function sumElevation(allActivities) {
@@ -37,10 +36,10 @@ function monthElevation(monthData,timestamp) {
 
 class ActivitiesChart extends Component {
   constructor(props) { 
-    super(props) 
-    this.state = {term: 'heys'};
+    super(props); //parent method on Component 
     this.getData = this.getData.bind(this);
   }
+
   getData(){
     let code = new URL(window.location.href).searchParams.get('code')
       if(!code){
@@ -49,8 +48,11 @@ class ActivitiesChart extends Component {
         this.props.fetchActivitiesWithCode();
       };
   }
- 
-  componentDidMount() {this.getData(); }
+
+  componentDidMount() {
+    this.getData(); 
+  }
+  
   render() {
     if(!this.props.activities) {
       return(
@@ -82,7 +84,6 @@ class ActivitiesChart extends Component {
       }
     } 
     
-
     //Data Array maker last year
     let i ;
     for(i = 1; i <=12; i++){
@@ -123,9 +124,7 @@ class ActivitiesChart extends Component {
       }else{
       xaxisLabels.push(new Date(year,z,0));
       }
-    }
-    console.log(xaxisLabels);
-    
+    }   
 
 
     const data = {
@@ -289,7 +288,6 @@ class ActivitiesChart extends Component {
 function mapStateToProps({activities}){
   return {activities};
 }
-
 
 function mapDispatchToProps(dispatch){
   return bindActionCreators({fetchActivities, fetchActivitiesWithCode}, dispatch);
