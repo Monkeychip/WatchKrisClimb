@@ -17,15 +17,6 @@ export function fetchMessage(){
   }
 }
 
-/*Handling submission action, though react-redux might already come*/
-export function fetchGoal(goal){ //always pass in the goal 
-  return function(dispatch){
-    console.log("i'm in the action creator",goal);
-    //next step call and return inside the AcitivitesChart - see similar fetchActivities, etc.
-    
-  }
-
-}
 
 //only call on initial load
 export function fetchActivities(){

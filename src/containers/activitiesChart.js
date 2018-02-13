@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'; 
 import {bindActionCreators} from 'redux';
-import { fetchActivities, fetchActivitiesWithCode } from '../actions/actions_index'; //importing activities axios data
+import { fetchActivities, fetchActivitiesWithCode} from '../actions/actions_index'; //importing activities axios data
 import Chart from 'chart.js'; 
 import { Line } from 'react-chartjs-2';
 import Moment from 'moment';
+import Goal from './goal';
+
 
 //Sums Elevations via a reduce and forEach method.  Takes in data object from Month Elevation.
 function sumElevation(allActivities) {
@@ -38,6 +40,21 @@ class ActivitiesChart extends Component {
   constructor(props) { 
     super(props); //parent method on Component 
     this.getData = this.getData.bind(this);
+    this.submit = this.submit.bind(this); 
+    this.state = {
+      goal : 0
+    }
+  }
+/*Getting the submit data*/
+  submit(values){
+    if(!values){
+      return
+    }else{
+      //I'm sure there is a better way, but I'm updating state.
+      this.setState({
+        goal: values.number
+      });
+    }
   }
 
   getData(){
@@ -59,7 +76,18 @@ class ActivitiesChart extends Component {
         <div>Loading Activities ...</div>
       );
     }
- 
+    //Goal Projection
+    let goal = [];
+    let g;
+    if(this.state.goal > 0 ){
+      let monthGoal = this.state.goal / 12; 
+      for(g = 1; g < 13; g++){
+       goal.push(monthGoal * g)
+      }
+    }else{
+      //
+    }
+
     //Time and Calendar Variables
     let monthData = this.props.activities; //activities data
     let now = new Date();
@@ -94,11 +122,7 @@ class ActivitiesChart extends Component {
       }else{dataArrayLastYear.push(0)}
     }
     
-    //xaxis label array maker
-
-
-      
-    //find max for y axis
+   
     //TODO: situation where last year is greater than this year - confirm this works.
     function yAxisMax(){
       let totalElevationLastYear = monthElevation(monthData, new Date(year-1,12,0).getTime());
@@ -199,6 +223,41 @@ class ActivitiesChart extends Component {
               dataArrayLastYear[10],
               dataArrayLastYear[11]
               ],
+          },
+          {
+            label: 'Goal',
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: 'rgba(255,187,40,.3)',
+            borderColor: 'rgba(255,187,40,.3)',
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: '#e7e3e3', //dots on the line graph
+            pointBackgroundColor: 'rgba(255,187,40,.3)',
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: 'rgba(255,187,40,.3)',
+            pointHoverBorderColor: '#e7e3e3',
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: [
+              0,
+              goal[0], 
+              goal[1],
+              goal[2],
+              goal[3],
+              goal[4],
+              goal[5],
+              goal[6],
+              goal[7],
+              goal[8],
+              goal[9],
+              goal[10],
+              goal[11]
+              ],
           }
         ]
     };
@@ -279,14 +338,17 @@ class ActivitiesChart extends Component {
    
 
     return (  
+       <div id="dumb">
        <Line data={data} options={chartOptions} width="1000" height="300"/>
+       <Goal onSubmit={this.submit} />
+       </div>
       )
        
     }
 }
 
-function mapStateToProps({activities}){
-  return {activities};
+function mapStateToProps({activities, form}){
+  return {activities, form}; //adding form here connects the form props to this components state
 }
 
 function mapDispatchToProps(dispatch){

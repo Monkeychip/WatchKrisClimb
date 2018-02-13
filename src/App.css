@@ -11,6 +11,15 @@ body {
   background-color: #D3D3D3 !Important;
 }
 
+#dumb{
+  height:50vh;
+}
+#elevation-label{
+  padding: 20px 0px;
+}
+#submit-button{
+  margin-top:2vh;
+}
 /*MENU*/
 .ui.menu {
   background-color: #29303A !important;
@@ -40,7 +49,10 @@ body {
   color: #e7e3e3;
 }
 /*CHART*/
-#activitiesChart{padding:14px 0px;}
+#activitiesChart{
+  padding:14px 0px;
+  height:100%;
+}
 /*Table*/
 #metrics_table{
   padding-top:5vw;

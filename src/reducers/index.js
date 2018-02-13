@@ -9,7 +9,6 @@ import ActivitiesReducer from './reducer_activities';
 
 const rootReducer = combineReducers({
 	activities: ActivitiesReducer,
-	//need to pass formReducer under 'form' kety,
 	form: formReducer
 });
 
