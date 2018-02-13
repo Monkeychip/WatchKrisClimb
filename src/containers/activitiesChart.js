@@ -77,15 +77,19 @@ class ActivitiesChart extends Component {
       );
     }
     //Goal Projection
-    let goal = [];
-    let g;
+    let goalArray = [],
+        g,
+        monthGoal,
+        goal
+
     if(this.state.goal > 0 ){
-      let monthGoal = this.state.goal / 12; 
-      for(g = 1; g < 13; g++){
-       goal.push(monthGoal * g)
-      }
+      goal = this.state.goal
+      monthGoal = goal / 12; 
+        for(g = 1; g < 13; g++){
+         goalArray.push(monthGoal * g)
+        }
     }else{
-      //
+      goal = 0 ; 
     }
 
     //Time and Calendar Variables
@@ -98,7 +102,7 @@ class ActivitiesChart extends Component {
     let dataArray = [];
     let dataArrayLastYear = [];
     let xaxisLabels = [];
-    let lastYearsElevation = monthElevation(this.props.activities, new Date(year, 0, -1).getTime());
+    let lastYearsElevation = monthElevation(monthData, new Date(year-1,12,0).getTime()); //dec 31 2017
 
     //Data Array maker this year
     let ind ; 
@@ -121,17 +125,15 @@ class ActivitiesChart extends Component {
         dataArrayLastYear.push(monthElevation(monthData,lastYearDate));
       }else{dataArrayLastYear.push(0)}
     }
-    
-   
-    //TODO: situation where last year is greater than this year - confirm this works.
+ 
     function yAxisMax(){
-      let totalElevationLastYear = monthElevation(monthData, new Date(year-1,12,0).getTime());
-      if(dataArrayLastYear[11] > totalElevationLastYear ){
-        return dataArrayLastYear[11]
-      }else if(dataArrayLastYear[11] <= totalElevationLastYear ){
-        return totalElevationLastYear * 1.05; //return 5 higher in height%
+      let thisYearsMaxElevation = Math.max(...dataArray); 
+      //make array of possibilities and return max.
+      let yAxisOptionsArray = [thisYearsMaxElevation, lastYearsElevation, goal ];
+      if( Math.max(...yAxisOptionsArray) > 0){
+        return Math.max(...yAxisOptionsArray) * 1.05; 
       }else{
-        return 100000;
+        return 10000;
       }
     }
 
@@ -245,18 +247,18 @@ class ActivitiesChart extends Component {
             pointHitRadius: 10,
             data: [
               0,
-              goal[0], 
-              goal[1],
-              goal[2],
-              goal[3],
-              goal[4],
-              goal[5],
-              goal[6],
-              goal[7],
-              goal[8],
-              goal[9],
-              goal[10],
-              goal[11]
+              goalArray[0], 
+              goalArray[1],
+              goalArray[2],
+              goalArray[3],
+              goalArray[4],
+              goalArray[5],
+              goalArray[6],
+              goalArray[7],
+              goalArray[8],
+              goalArray[9],
+              goalArray[10],
+              goalArray[11]
               ],
           }
         ]
