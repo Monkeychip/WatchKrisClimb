@@ -125,11 +125,18 @@ class ActivitiesChart extends Component {
         dataArrayLastYear.push(monthElevation(monthData,lastYearDate));
       }else{dataArrayLastYear.push(0)}
     }
- 
+
+  /*HEIGHT OF YAXIS
+  Determine the height of the yAxis based on the highest of the 3:
+    1. last year's elevation total,
+    2. this year's elevation total,
+    3. goal you set
+    Handle error by returning 10000 in case.
+    */
     function yAxisMax(){
-      let thisYearsMaxElevation = Math.max(...dataArray); 
-      //make array of possibilities and return max.
-      let yAxisOptionsArray = [thisYearsMaxElevation, lastYearsElevation, goal ];
+      let thisYearsMaxElevation = Math.max(...dataArray),
+          yAxisOptionsArray = [ thisYearsMaxElevation, lastYearsElevation, goal ]
+
       if( Math.max(...yAxisOptionsArray) > 0){
         return Math.max(...yAxisOptionsArray) * 1.05; 
       }else{

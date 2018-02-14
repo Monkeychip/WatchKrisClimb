@@ -6,6 +6,8 @@ import reduxPromise from 'redux-promise';
 import { Router, Route, browserHistory } from 'react-router';
 
 import App from './components/App'; 
+import About from './components/about';
+import Menu from './components/menu';
 import reduxThunk from 'redux-thunk';
 import reducers from './reducers';
 
@@ -17,9 +19,8 @@ const createStoreWithMiddleware = applyMiddleware(reduxPromise, reduxThunk)(crea
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
   	<Router history={browserHistory}>
-  	  <Route path="/" component={ App }> 
-  	  		<Route path="signin"></Route>
-  	  </Route>
+  	  <Route path="/" component={ App }> </Route>
+  	  <Route path="/about" components= { About }></Route>
   	 </Router>
   </Provider>
   , document.querySelector('.container'));

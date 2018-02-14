@@ -20,10 +20,24 @@ body {
 #submit-button{
   margin-top:2vh;
 }
+/*How to use*/
+#how-to-use-title{
+  color: rgba(231,277,277,.8) !important;
+}
+#how-to-use-title:after{
+  content: "\01F914"; /*thinking face*/
+  padding-left:5px;
+}
+
+#how-to-use-p{
+    line-height: 1.5em;
+    font-size: 1.2em;
+}
 /*MENU*/
 .ui.menu {
   background-color: #29303A !important;
   color: rgba(231,277,277,.8) !important;
+  align-self: flex-start !important;
 }
 .ui.menu .active.item{
   color: rgba(231,277,277,1) !important; 

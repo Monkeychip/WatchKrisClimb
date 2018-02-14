@@ -28,7 +28,7 @@ let Goal = props => {
                 </div>
           </div>
           <button type="submit" id="submit-button" className="ui inverted blue button ">
-            Submit
+            Save Goal
           </button>
     </form>
   )

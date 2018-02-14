@@ -14,7 +14,9 @@ class App extends Component {
 
   render() {
     return (
+
       <div id="component_holder" className="ui centered grid container"> 
+      {this.props.children}
           <Menu />
           
           <div className="row">

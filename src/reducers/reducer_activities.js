@@ -5,3 +5,4 @@ export default function(state = null, action){
 	}
 	return state;
 };
+/*Reducer is called all the time*/

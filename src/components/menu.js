@@ -35,9 +35,9 @@ class Menu extends Component {
 	}
 
 	render(){
-		let button = null;
-		let isLoggedIn = this.state.isLoggedIn;
-		
+		let button = null,
+		    isLoggedIn = this.state.isLoggedIn;
+
 		if(isLoggedIn){
 			button = <div
 			  	 className="ui button" 

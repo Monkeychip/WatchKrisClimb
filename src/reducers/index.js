@@ -9,7 +9,7 @@ import ActivitiesReducer from './reducer_activities';
 
 const rootReducer = combineReducers({
 	activities: ActivitiesReducer,
-	form: formReducer
+	form: formReducer //reducer is apart of the package
 });
 
 export default rootReducer;
