@@ -7,7 +7,7 @@ class About extends Component {
 
 	render(){
 		return(
-		  <div className="ui centered grid container"> 
+		  <div id="about-holder" className="ui centered grid container "> 
           	<Menu />
           	 <div className="row">
              	<h2 id="how-to-use-title">How To Use</h2>

@@ -49,9 +49,7 @@ body {
   background-color: #029Ae6 ;
   color: rgba(231,277,277,1) !important; 
 }
-#home-logo{
-  margin-left:-8vw !important;
-}
+
 #buttonLogOut{
   background-color: rgba(41, 48, 58, 1);
 }
@@ -119,7 +117,9 @@ h4.ui.header{
  padding: 10px 1px;
  height:100vh;
 }
-
+#about-holder{
+  padding: 10px 1px;
+}
 #intro-header{
   color: #e7e3e3;
   text-transform: uppercase;
@@ -186,6 +186,12 @@ h4.ui.header{
 
 
 @media screen and (max-width: 990px){
+  #home-logo{
+    margin-left:-8vw !important;
+  }
+  .ag-flex-start{
+    justify-content: flex-start !important;
+  }
   .max-height-col{
     max-width: 80% !important;
   }

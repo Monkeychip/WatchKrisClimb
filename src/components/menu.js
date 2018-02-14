@@ -3,7 +3,8 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions_index'; 
 import { CALLBACK_URI } from '../actions/types';
-import logo_124_124 from '../../build/assets/images/logo_124_124.png'
+import logo_124_124 from '../../build/assets/images/logo_124_124.png';
+import { Link } from 'react-router'
 
 
 class Menu extends Component {
@@ -53,13 +54,13 @@ class Menu extends Component {
 		}
 		
 		return(
-			<div className="ui menu">
+			<div className="ui four item menu">
 			    <div className="item" id="home-logo"> 
-    				<img src={logo_124_124} alt=""></img> {/*Make click on home using router and change potentially*/}
+    				<Link to="/" className="item"><img src={logo_124_124} alt=""></img> </Link>
 			   
   				</div>
-			  <a className="item">How to use</a> 
-			  <a className="item">More Stats</a>
+			  <Link className="item ag-flex-start" to="/about">How to use</Link> 
+			  <a className="item ag-flex-start">More Stats</a>
 			  <div className="item">
 			   <div isLoggedIn={isLoggedIn}>{button}</div> {/*getting error here on the isLoggedInProperty on the div tag*/}
 			  </div>

@@ -15,10 +15,9 @@ class App extends Component {
   render() {
     return (
 
-      <div id="component_holder" className="ui centered grid container"> 
-      {this.props.children}
+      <div id="component_holder" className="ui centered grid container "> 
           <Menu />
-          
+          {this.props.children}    
           <div className="row">
              <h2 id="text-counter" className="ui middle aligned center aligned grid"><Activities /></h2>
           </div>
