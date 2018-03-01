@@ -8,8 +8,6 @@ import Menu from './menu';
 import Signin from '../containers/goal';
 import {connect} from 'react-redux'; 
 
-
-//sixteen wide mobile eight wide tablet four wide computer column
 class App extends Component {
 
   render() {

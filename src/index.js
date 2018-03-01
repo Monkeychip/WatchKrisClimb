@@ -1,29 +1,46 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'; 
-import { createStore, applyMiddleware } from 'redux'; 
-import reduxPromise from 'redux-promise'; 
+import { PersistGate } from 'redux-persist/integration/react';
 import { Router, Route, browserHistory } from 'react-router';
 
 import App from './components/App'; 
 import About from './components/about';
 import Menu from './components/menu';
-import reduxThunk from 'redux-thunk';
-import reducers from './reducers';
-
+import { store, persistor } from './reduxStore';
 
 require('dotenv').config();
 
-const createStoreWithMiddleware = applyMiddleware(reduxPromise, reduxThunk)(createStore); 
+class Index extends Component {
 
-ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
-  	<Router history={browserHistory}>
-  	  <Route path="/" component={ App }> </Route>
-  	  <Route path="/about" components= { About }></Route>
-  	 </Router>
+	render() {
+		return (
+			 <Provider store={store}>
+  				<PersistGate loading={null} persistor={persistor}>
+  					<Router history={browserHistory}>
+  	  					<Route path="/" component={ App }> </Route>
+  	  					<Route path="/about" components= { About }></Route>
+  	 				</Router>
+  				</PersistGate>
+ 			 </Provider>
+		)
+	}
+}
+
+ReactDOM.render(React.createElement(Index, null),
+	document.querySelector('.container')
+);
+/*ReactDOM.render(
+  //<Provider store={createStoreWithMiddleware(reducers)}>
+  <Provider store={store}>
+  	<PersistGate loading={null} persistor={persistor}>
+  		<Router history={browserHistory}>
+  	  		<Route path="/" component={ App }> </Route>
+  	  		<Route path="/about" components= { About }></Route>
+  	 	</Router>
+  	</PersistGate>
   </Provider>
   , document.querySelector('.container'));
-
+*/
 
   
