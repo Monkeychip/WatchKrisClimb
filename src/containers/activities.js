@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'; 
 import {bindActionCreators} from 'redux';
-import { fetchActivities, fetchActivitiesWithCode } from '../actions/actions_index';
+//import { fetchActivities, fetchActivitiesWithCode } from '../actions/actions_index';
+import { fetchActivities, fetchActivitiesWithCode, fetchCode } from '../actions/actions_index';
 
-
-//SumElevation outsid eof the component
 function sumElevation(allActivities) {
 		let addActivities = (a,b) => a + b 
 		let arrayElevationGain = [];
@@ -31,11 +30,11 @@ class Activities extends Component {
 	constructor(props) { 
 		super(props) 
 		this.state = {term: 'heys'};
-		this.getData = this.getData.bind(this);
+		this.getData = this.getData.bind(this); //making getData part of the state
 	}
 	getData(){
-    //this.props.fetchActivities();
-      let code = new URL(window.location.href).searchParams.get('code')
+      let code = new URL(window.location.href).searchParams.get('code');
+      console.log(this.props.fetchCode().payload,"lajdf")
       if(!code){
         this.props.fetchActivities();
       }else{
@@ -71,7 +70,8 @@ function mapStateToProps({activities}) {
 }
 //activities above references the combine reducers key !!!
 
-function mapDispatchToProps(dispatch){ return bindActionCreators({fetchActivities, fetchActivitiesWithCode}, dispatch); }
+//function mapDispatchToProps(dispatch){ return bindActionCreators({fetchActivities, fetchActivitiesWithCode}, dispatch); }
+function mapDispatchToProps(dispatch){ return bindActionCreators({fetchActivities, fetchActivitiesWithCode, fetchCode}, dispatch); }
 //connect is forming bridge between redux and react CONTAINERS are the bridge.  connect is a function
 //now exporting the container instead of just the class Activities
 export default connect(mapStateToProps, mapDispatchToProps)(Activities); 

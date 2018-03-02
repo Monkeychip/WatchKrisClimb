@@ -1,4 +1,5 @@
 export const FETCH_ACTIVITIES = 'fetch_activities';
+export const FETCH_CODE = 'fetch_code';
 export const CALLBACK_URI = 'winteredition.io';
 
 //Eventually put in .env file and serve from server

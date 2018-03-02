@@ -24,21 +24,27 @@ class Menu extends Component {
 		}else{
 			//If there is a code in the URL fetch Activities with the code and change text and color
 			this.props.fetchActivitiesWithCode();
-			this.setState({isLoggedIn: true});	
+			this.setState({
+				isLoggedIn: true,
+				code: code
+			});	
 		};
 	}
 	handleClick(){
 		window.location.href = `https://www.strava.com/oauth/authorize?client_id=21992&response_type=code&redirect_uri=http://${CALLBACK_URI}`
 	}
 	handleLogOut(){
-	    window.location.href = `http://www.winteredition.io`;	
-	    
+	    window.location.href = `http://www.winteredition.io`;	   
 	}
 
 	render(){
+		
 		let button = null,
-		    isLoggedIn = this.state.isLoggedIn;
+		    isLoggedIn = this.state.isLoggedIn,
+		    isCode = this.state.code,
+		    pathHome = (isCode) ?`/?state=&code=${isCode}` : '/';
 
+		    //problem I need to persist the code even on refresh.  x
 		if(isLoggedIn){
 			button = <div
 			  	 className="ui button" 
@@ -56,8 +62,7 @@ class Menu extends Component {
 		return(
 			<div className="ui four item menu">
 			    <div className="item" id="home-logo"> 
-    				<Link to="/" className="item"><img src={logo_124_124} alt=""></img> </Link>
-			   
+    				<Link to={pathHome} className="item"><img src={logo_124_124} alt=""></img> </Link>
   				</div>
 			  <Link className="item ag-flex-start" to="/about">How to use</Link> 
 			  <a className="item ag-flex-start">More Stats</a>

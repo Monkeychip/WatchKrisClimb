@@ -8,25 +8,17 @@ import reduxPromise from 'redux-promise';
 import reduxThunk from 'redux-thunk';
 
 import reducers from './reducers';
+//need to create reducer that stores the Code
 
 const persistConfig = {
   key: 'root',
   storage: storage,
-  blacklist: ['activities'] // activities reducer will not be persisted
+  whitelist: ['form', 'code'] // only persist the form number
 };
 
 const middlewares = [reduxPromise, reduxThunk, logger];
 
 const persistedReducer = persistReducer(persistConfig, reducers)
-/*const persistedReducer = persistCombineReducers(persistConfig, {
-	reducers
-});*/
-
-//let store = createStore(persistedReducer);
-//let persistor = persistStore(store);
-
-
-//const createStoreWithMiddleware = applyMiddleware(reduxPromise, reduxThunk)(createStore); 
 
 export const store = createStore(
 		persistedReducer,

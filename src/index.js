@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'; 
 import { PersistGate } from 'redux-persist/integration/react';
+import { persistStore } from 'redux-persist';
+import storage from 'redux-persist/lib/storage' // local storage so stays in browserscache
 import { Router, Route, browserHistory } from 'react-router';
 
 import App from './components/App'; 
@@ -30,17 +32,6 @@ class Index extends Component {
 ReactDOM.render(React.createElement(Index, null),
 	document.querySelector('.container')
 );
-/*ReactDOM.render(
-  //<Provider store={createStoreWithMiddleware(reducers)}>
-  <Provider store={store}>
-  	<PersistGate loading={null} persistor={persistor}>
-  		<Router history={browserHistory}>
-  	  		<Route path="/" component={ App }> </Route>
-  	  		<Route path="/about" components= { About }></Route>
-  	 	</Router>
-  	</PersistGate>
-  </Provider>
-  , document.querySelector('.container'));
-*/
+
 
   
