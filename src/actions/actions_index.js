@@ -20,6 +20,7 @@ export function fetchMessage(){
 
 export function fetchCode(){
   let code = new URL(window.location.href).searchParams.get('code') ;
+  console.log(code, "from action guy");
   return {
     type: 'FETCH_CODE',
     payload: code

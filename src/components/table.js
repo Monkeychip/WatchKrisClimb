@@ -3,6 +3,8 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions_index'; 
 
+//TO DO - move to Container folder because of the connect it's a HOC
+
 /*
 A. filter by backcountry ski activiites
 B. create 1 function that takes timestamp, which filters A data into the time stamps of one week, one month, this year. Returns and array of the data.. (that's the key and potentially hard part this.properties.activities)

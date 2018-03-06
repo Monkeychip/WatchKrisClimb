@@ -5,6 +5,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage' // local storage so stays in browserscache
 import { Router, Route, browserHistory } from 'react-router';
+//browserHistory what the router should do to keep track of current URL...
 
 import App from './components/App'; 
 import About from './components/about';
@@ -34,4 +35,4 @@ ReactDOM.render(React.createElement(Index, null),
 );
 
 
-  
+ //

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'; 
 import {bindActionCreators} from 'redux';
-//import { fetchActivities, fetchActivitiesWithCode } from '../actions/actions_index';
 import { fetchActivities, fetchActivitiesWithCode, fetchCode } from '../actions/actions_index';
 
 function sumElevation(allActivities) {
@@ -34,7 +33,7 @@ class Activities extends Component {
 	}
 	getData(){
       let code = new URL(window.location.href).searchParams.get('code');
-      console.log(this.props.fetchCode().payload,"lajdf")
+      //console.log(this.props.fetchCode().payload,"lajdf")
       if(!code){
         this.props.fetchActivities();
       }else{
