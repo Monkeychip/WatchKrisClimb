@@ -17,7 +17,6 @@ class Menu extends Component {
 			homePath: '/'
 		}; //initial state to not logged in
 		this.handleClick = this.handleClick.bind(this);
-		
 	}
 
 	//Everytime the component mounts check if there is a code in the URL
@@ -26,7 +25,6 @@ class Menu extends Component {
 		let codeReplace = this.props.code;
 
 		if(!codeReplace){
-			this.props.fetchActivities();
 			this.setState({
 				isLoggedIn: false,
 				aboutPath: "/about",
@@ -34,7 +32,6 @@ class Menu extends Component {
 			});	
 		}else{
 			//If there is a code in the URL fetch Activities with the code and change text and color
-			this.props.fetchActivitiesWithCode();
 			this.setState({
 				isLoggedIn: true,
 				aboutPath: `about/?state=&code=${codeReplace}`,
@@ -55,13 +52,15 @@ class Menu extends Component {
 		
 		let button = null
 		
-		if(this.state.isLoggedIn){
+		if(this.state.isLoggedIn){ //true
+			console.log(this.state.isLoggedIn,"this is true");
 			button = <div
 			  	 className="ui button" 
 			  	 id="buttonLogOut"
 			  	 onClick={this.handleLogOut}>Log-out
 			  	</div>
 		} else {
+			console.log(this.state.isLoggedIn,"this is false");
 			button = <div
 			  	 className="ui button" 
 			  	 ref='buttonTextLogIn'
@@ -74,8 +73,8 @@ class Menu extends Component {
 			    <div className="item" id="home-logo"> 
     				<Link to={this.state.homePath} className="item"><img src={logo_124_124} alt=""></img> </Link>
   				</div>
-			  <Link className="item" to={this.state.aboutPath}>How to Use</Link> 
-			  <Link className="item ag-flex-start" to='/stats'>More Stats</Link>
+			  <Link className="item" to={this.state.aboutPath}>How to <br /> Use</Link> 
+			  <Link className="item" to='/table'>More <br /> Stats</Link>
 			  <div className="item">
 			   <div isLoggedIn={this.state.isLoggedIn}>{button}</div> {/*getting error here on the isLoggedInProperty on the div tag*/}
 			  </div>

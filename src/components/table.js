@@ -2,6 +2,7 @@ import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions_index'; 
+import Menu from './menu';
 
 //TO DO - move to Container folder because of the connect it's a HOC
 
@@ -40,6 +41,14 @@ class Table extends Component {
 
     render() {
       return (
+        <div className="ui centered grid container" id="about-holder">
+
+        <Menu />
+        <div id="metrics_table" className="ui centered grid container">
+              <h3>Using you Backcountry labeled activities only, here's a break down of your data.</h3>
+         
+         
+         
               <table className="ui basic padded celled table" width="100%">
                 <thead>
                     <tr>
@@ -107,11 +116,13 @@ class Table extends Component {
                    </tr>
                   </tbody>
               </table>
+              </div>
+            </div>
 
 
       )
     }
 }
 
-export default connect(null,actions)(Table);
+export default Table;
 

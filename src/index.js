@@ -10,6 +10,7 @@ import { Router, Route, browserHistory } from 'react-router';
 import App from './components/App'; 
 import About from './components/about';
 import Menu from './components/menu';
+import Table from './components/table';
 import { store, persistor } from './reduxStore';
 
 require('dotenv').config();
@@ -23,6 +24,7 @@ class Index extends Component {
   					<Router history={browserHistory}>
   	  					<Route path="/" component={ App }> </Route>
   	  					<Route path="/about" components= { About }></Route>
+  	  					<Route path="/table" components= { Table }></Route>
   	 				</Router>
   				</PersistGate>
  			 </Provider>

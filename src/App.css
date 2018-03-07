@@ -39,6 +39,9 @@ body {
   color: rgba(231,277,277,.8) !important;
   align-self: flex-start !important;
 }
+.item {
+  line-height: 1.26 !important;
+}
 .ui.menu .active.item{
   color: rgba(231,277,277,1) !important; 
 }
@@ -67,7 +70,7 @@ body {
 }
 /*Table*/
 #metrics_table{
-  padding-top:5vw;
+  padding-top:10vw;
   padding-bottom:5vw;
 }
 #metrics_table > table{

@@ -22,13 +22,7 @@ class App extends Component {
          <div id="activitiesChart" className="sixteen wide column">
               <ActivitiesChart />
          </div>
-       {/* <div id="goal-input">
-            <Signin onSubmit={this.submit} />
-         </div>
-         <div id="metrics_table" className="ui centered grid container">
-              <p>Using you Backcountry labeled activities only, here's a break down of your data.</p>
-             <Table />
-         </div>
+       {/*
          <div className="ui centered grid container">
              <AGPieChart />
          </div>*/}
