@@ -69,9 +69,15 @@ body {
   height:100%;
 }
 /*Table*/
+#table-description{
+  font-size: 11px;
+    font-weight: 100;
+    font-style: italic !important;
+    color: #666;
+}
 #metrics_table{
-  padding-top:10vw;
-  padding-bottom:5vw;
+  padding-top:3vw;
+  padding-bottom:3vw;
 }
 #metrics_table > table{
   color: #e7e3e3;

@@ -13,11 +13,11 @@ export class BarChartGoal extends Component {
 	  labels: ['This week', 'Goal'],
 	  datasets: [
 	    {
-	      backgroundColor: 'rgba(255,99,132,0.2)',
-	      borderColor: 'rgba(255,99,132,1)',
+	      backgroundColor: ['rgba(254,102,39,0.2)','rgba(255,187,40,0.3)'], //second color is Goal
+	      borderColor: ['rgba(254,102,39,1)','rgba(255,187,40,1)'],
 	      borderWidth: 1,
-	      hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-	      hoverBorderColor: 'rgba(255,99,132,1)',
+	      hoverBackgroundColor: ['rgba(254,102,39,0.4)', 'rgba(255,187,40,0.4)'],
+	      hoverBorderColor: ['rgba(254,102,39,1)','rgba(255,187,40,1)'],
 	      data: [65, 59]
 	    }
 	  ]
@@ -62,11 +62,11 @@ export class BarChartSki extends Component {
 	  labels: ['Ski'],
 	  datasets: [
 	    {
-	      backgroundColor: 'rgba(255,99,132,0.2)',
-	      borderColor: 'rgba(255,99,132,1)',
+	      backgroundColor: 'rgba(2,154,230,0.2)',
+	      borderColor: 'rgba(2,154,230,1)',
 	      borderWidth: 1,
-	      hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-	      hoverBorderColor: 'rgba(255,99,132,1)',
+	      hoverBackgroundColor: 'rgba(2,154,230,0.4)',
+	      hoverBorderColor: 'rgba(2,154,230,1)',
 	      data: [65]
 	    }
 	  ]
@@ -109,11 +109,11 @@ export class BarChartSki extends Component {
 	  labels: ['Bike'],
 	  datasets: [
 	    {
-	      backgroundColor: 'rgba(255,99,132,0.2)',
-	      borderColor: 'rgba(255,99,132,1)',
+	      backgroundColor: 'rgba(2,154,230,0.2)',
+	      borderColor: 'rgba(2,154,230,1)',
 	      borderWidth: 1,
-	      hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-	      hoverBorderColor: 'rgba(255,99,132,1)',
+	      hoverBackgroundColor: 'rgba(2,154,230,0.4)',
+	      hoverBorderColor: 'rgba(2,154,230,1)',
 	      data: [14]
 	    }
 	  ]
@@ -138,6 +138,7 @@ export class BarChartSki extends Component {
             }]
     	}
     }
+    
     return (
       <div>
       	
@@ -156,11 +157,11 @@ export class BarChartSki extends Component {
 	  labels: ['Run'],
 	  datasets: [
 	    {
-	      backgroundColor: 'rgba(255,99,132,0.2)',
-	      borderColor: 'rgba(255,99,132,1)',
+	      backgroundColor: 'rgba(2,154,230,0.2)',
+	      borderColor: 'rgba(2,154,230,1)',
 	      borderWidth: 1,
-	      hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-	      hoverBorderColor: 'rgba(255,99,132,1)',
+	      hoverBackgroundColor: 'rgba(2,154,230,0.4)',
+	      hoverBorderColor: 'rgba(2,154,230,1)',
 	      data: [69]
 	    }
 	  ]
@@ -203,11 +204,11 @@ export class BarChartSki extends Component {
 	  labels: ['Else'],
 	  datasets: [
 	    {
-	      backgroundColor: 'rgba(255,99,132,0.2)',
-	      borderColor: 'rgba(255,99,132,1)',
+	      backgroundColor: 'rgba(2,154,230,0.2)',
+	      borderColor: 'rgba(2,154,230,1)',
 	      borderWidth: 1,
-	      hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-	      hoverBorderColor: 'rgba(255,99,132,1)',
+	      hoverBackgroundColor: 'rgba(2,154,230,0.4)',
+	      hoverBorderColor: 'rgba(2,154,230,1)',
 	      data: [5]
 	    }
 	  ]
