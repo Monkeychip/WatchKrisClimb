@@ -3,6 +3,74 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions_index'; 
 import Menu from './menu';
+import { BarChartGoal, BarChartSki, BarChartBike, BarChartRun, BarChartElse } from '../containers/barChart';
+
+class Table extends Component {
+    render() {
+      return (
+        <div className="ui centered grid container" id="about-holder">
+
+        <Menu />
+        <div id="metrics_table" className="ui centered grid container">
+                      
+              <table className="ui basic padded celled table" width="100%">
+                <thead>
+                    <tr>
+                      <th></th>
+                      <th className="center aligned six wide">For the Week</th>
+                      
+                    </tr>
+                  </thead>
+                  <tbody>
+                   <tr>
+                    <td>
+                      <h4 className="ui header" id="goal-emoji"> Total Elevation Gained per week relative to Goal?</h4>
+                         <p className="ag-below-header"></p>
+                    </td>
+                     <td className="center aligned"> <BarChartGoal /></td> 
+      
+                   </tr>
+                   <tr>
+                    <td>
+                      <h4 className="ui header" id="time-climbing"> Elevation gained from Skiing?</h4>
+                         <p className="ag-below-header">In ft</p>
+                    </td>
+                    <td className="center aligned"> <BarChartSki /></td> 
+                   </tr>
+                   <tr>
+                      <td>
+                      <h4 className="ui header" id="bike-emoji"> Elevation gained from biking?</h4>
+                         <p className="ag-below-header">In ft</p>
+                    </td>
+                    <td className="center aligned"> <BarChartBike /> </td> 
+                   </tr>
+                   <tr>
+                      <td>
+                      <h4 className="ui header" id="run-emoji"> Elevation gained from running?</h4>
+                         <p className="ag-below-header">In ft</p>
+                    </td>
+                    <td className="center aligned"> <BarChartRun /> </td> 
+                   </tr>
+                   <tr>
+                    <td>
+                      <h4 className="ui header" id="most-vertical"> Elevation gained from everything else?</h4>
+                         <p className="ag-below-header">In ft</p>
+                    </td>
+                    <td className="center aligned"> <BarChartElse /> </td> 
+                   </tr>
+                  </tbody>
+              </table>
+              </div>
+            </div>
+
+
+      )
+    }
+}
+
+export default Table;
+
+
 
 //TO DO - move to Container folder because of the connect it's a HOC
 
@@ -33,96 +101,4 @@ C. make five individual functions to keep it clean
 - finds max - I know there's an es6 array helper for this.
 - returns data and totalelevation gained. 
 */
-
-
-
-
-class Table extends Component {
-
-    render() {
-      return (
-        <div className="ui centered grid container" id="about-holder">
-
-        <Menu />
-        <div id="metrics_table" className="ui centered grid container">
-              <h3>Using you Backcountry labeled activities only, here's a break down of your data.</h3>
-         
-         
-         
-              <table className="ui basic padded celled table" width="100%">
-                <thead>
-                    <tr>
-                      <th></th>
-                      <th className="center aligned">Week</th>
-                      <th className="center aligned">Month</th>
-                      <th className="center aligned">Year</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-
-                  <tr>
-                    <td>
-                      <h4 className="ui header" id="time-climbing"> How much time have you spent skiing?</h4>
-                         <p className="ag-below-header">In hours and minutes</p>
-                    </td>
-                    <td className="center aligned"> 4 hrs 30 min </td> 
-                    <td className="center aligned"> 22 hrs 42 min</td>
-                    <td className="center aligned"> 90 hrs 12 min</td>
-                   </tr>
-                   <tr>
-                    <td>
-                      <h4 className="ui header" id="elevation-from-skiing"> Elevation gained from skiing</h4>
-                         <p className="ag-below-header">In feet</p>
-                    </td>
-                    <td className="center aligned"> 10,000 ft </td>
-                    <td className="center aligned"> 22,000 ft</td>
-                    <td className="center aligned"> 31,000 ft</td>
-                   </tr>
-                   <tr>
-                    <td>
-                      <h4 className="ui header" id="avg-rise-run"> On Avg, how steep was it?</h4>
-                         <p className="ag-below-header">Avg. Rise / Run e.g Elevation Gain/Distance</p>
-                    </td>
-                    <td className="center aligned"> 2.2 % </td>
-                    <td className="center aligned"> 3.2 % </td>
-                    <td className="center aligned"> 4.6 %</td>
-                   </tr>
-                   <tr>
-                    <td>
-                      <h4 className="ui header" id="feet-per-second">On Avg, what percent of your skiing time is going up hill?</h4>
-                         <p className="ag-below-header">Avg. number of feet per second spent going up-hill, based on moving time</p>
-                    </td>
-                    <td className="center aligned" > 66 %
-                    </td>
-                    <td className="center aligned"> 58 %
-                    </td>
-                    <td className="center aligned"> 49 %
-                    </td>
-                   </tr>
-                   <tr>
-                      <td>
-                      <h4 className="ui header" id="most-vertical">Most Vertical Ft.</h4>
-                         <p className="ag-below-header">Accumlated in one activity.</p>
-                    </td>
-                    <td className="center aligned"> Jan 17, 2018. <br/>
-                         7,131 ft
-                    </td>
-                    <td className="center aligned"> Feb 28, 2018. <br/>
-                         10,211 ft
-                    </td>
-                    <td className="center aligned"> March 28, 2018. <br/>
-                         13,211 ft
-                    </td>
-                   </tr>
-                  </tbody>
-              </table>
-              </div>
-            </div>
-
-
-      )
-    }
-}
-
-export default Table;
 

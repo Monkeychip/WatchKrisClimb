@@ -95,6 +95,19 @@ h4.ui.header{
   margin-top:-2px !important;
 }
 /*Emoji*/
+#goal-emoji:after{
+  content: "\1F3C6"; /*goal*/
+  padding-left:5px;
+}
+
+#bike-emoji:after{
+  content: "\1F6B4"; /*bike*/
+  padding-left:5px;
+}
+#run-emoji:after{
+  content: "\1F3C3"; /*run*/
+  padding-left:5px;
+}
 #time-climbing:after {
     content: "\01F3BF"; /*skiboots*/
     padding-left:3px;

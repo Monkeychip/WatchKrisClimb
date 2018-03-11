@@ -41,10 +41,10 @@ function monthElevation(monthData,timestamp) {
 }
 
 
-class ActivitiesPieChart extends Component{
+class SkiingElevation extends Component{
   constructor(props) { 
     super(props) 
-    this.state = {term: 'heys'};
+    //this.state = {term: 'heys'};
     this.getData = this.getData.bind(this);
   }
   getData(){
@@ -81,60 +81,18 @@ class ActivitiesPieChart extends Component{
 
          const dataType = {
             labels: [
-                "Elevation Skied",
-                "Elevation Run",
-                "Elevation Other"
+                "Elevation Skied"
             ],
             datasets: [  /*ataType.map((entry, index)*/
                 {
-                    data: [elevationSkied, elevationRun, elevationOther],
+                    data: [elevationSkied, elevationRemaining],
                     backgroundColor: [
                         "#029AE6",
-                        "#FE6627",
-                        "#FFBB28"
+                        "#888590"
                     ],
                     hoverBackgroundColor: [ //To Do: make these a shade darker
                         "#029AE6",
-                        "#FE6627",
-                        "#FFBB28"
-                    ]
-                }]
-        };
-
-        const dataProgress = {
-            labels: [
-                "Elevation Climbed",
-                "Elevation Remaining"
-            ],
-            datasets: [  /*ataType.map((entry, index)*/
-                {
-                    data: [totalElevation, elevationRemaining],
-                    backgroundColor: [
-                        "#029AE6",
-                        "#FE6627"
-                    ],
-                    hoverBackgroundColor: [ //To Do: make these a shade darker
-                        "#029AE6",
-                        "#FE6627"
-                    ]
-                }]
-        };
-
-        const dataRaised = {
-            labels: [
-                "Money Raised",
-                "Money To Raise"
-            ],
-            datasets: [  /*ataType.map((entry, index)*/
-                {
-                    data: [20, 80],
-                    backgroundColor: [
-                        "#029AE6",
-                        "#FFBB28"
-                    ],
-                    hoverBackgroundColor: [ //To Do: make these a shade darker
-                        "#029AE6",
-                        "#FFBB28"
+                        "#888590"
                     ]
                 }]
         };
@@ -164,92 +122,13 @@ class ActivitiesPieChart extends Component{
                   },
                   label: function(tooltipItem, data) {
                     return `  ${(data['datasets'][0]['data'][tooltipItem['index']]).toLocaleString()}  ft`;
-                    //return data['datasets'][0]['data'][tooltipItem['index']] ;
                   }
-                  //calculate % underneath if I ever want to later, need to replace the base of the % function.
-                  /*afterLabel: function(tooltipItem, data) {
-                    let dataset = data['datasets'][0];
-                    let percent = Math.round((dataset['data'][tooltipItem['index']] / dataset["_meta"][0]['total']) * 100)
-                    return '%';
-                  }*/
                 }
             }
         };
 
 
-        const optionsTypeRemaining = {
-            animation: {
-                animateScale: true
-            },
-            legend: {
-                display: false
-            },
-            tooltips: {
-                enabled: true
-            },
-            elements: {
-               center: {
-                  text: 'Ft. Remaining',
-                  color: '#e7e3e3', // Default is #000000
-                  fontStyle: 'Roboto Condensed', // Default is Arial
-                  sidePadding: 20 // Defualt is 20 (as a percentage)
-                }
-            },
-            tooltips: {
-              callbacks: {
-                  title: function(tooltipItem, data) {
-                    return data['labels'][tooltipItem[0]['index']];
-                  },
-                  label: function(tooltipItem, data) {
-                    return `  ${(data['datasets'][0]['data'][tooltipItem['index']]).toLocaleString()}  ft`;
-                    //return data['datasets'][0]['data'][tooltipItem['index']] ;
-                  }
-                  //calculate % underneath if I ever want to later, need to replace the base of the % function.
-                  /*afterLabel: function(tooltipItem, data) {
-                    let dataset = data['datasets'][0];
-                    let percent = Math.round((dataset['data'][tooltipItem['index']] / dataset["_meta"][0]['total']) * 100)
-                    return '%';
-                  }*/
-                }
-            }
-        };
-        const optionsTypeMoney = {
-            animation: {
-                animateScale: true
-            },
-            legend: {
-                display: false
-            },
-            tooltips: {
-                enabled: true
-            },
-            elements: {
-               center: {
-                  text: '$ Raised',
-                  color: '#e7e3e3', // Default is #000000
-                  fontStyle: 'Roboto Condensed', // Default is Arial
-                  sidePadding: 20 // Defualt is 20 (as a percentage)
-                }
-            },
-            tooltips: {
-              callbacks: {
-                  title: function(tooltipItem, data) {
-                    return data['labels'][tooltipItem[0]['index']];
-                  },
-                  label: function(tooltipItem, data) {
-                    return `  ${(data['datasets'][0]['data'][tooltipItem['index']]).toLocaleString()}  ft`;
-                    //return data['datasets'][0]['data'][tooltipItem['index']] ;
-                  },
-                  
-                  //calculate % underneath if I ever want to later, need to replace the base of the % function.
-                  /*afterLabel: function(tooltipItem, data) {
-                    let dataset = data['datasets'][0];
-                    let percent = Math.round((dataset['data'][tooltipItem['index']] / dataset["_meta"][0]['total']) * 100)
-                    return '%';
-                  }*/
-                }
-            }
-        };
+       
 /*Adding label inside fo the doughnuts*/
   Chart.pluginService.register({
     beforeDraw: function (chart) {
@@ -294,7 +173,25 @@ class ActivitiesPieChart extends Component{
   });
 
     return (
-      <div id="pieChart" className="three column wide centered row stackable">
+      <div >
+          <Doughnut data={dataType} options={optionsType} />
+      </div>
+        
+     );
+  }
+}
+
+function mapStateToProps({activities}){
+  return {activities};
+}
+
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({fetchActivities, fetchActivitiesWithCode}, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SkiingElevation);
+
+/*      <div id="pieChart" className="three column wide centered row stackable">
 
         <div className="column max-height-col">
           <Doughnut data={dataType} options={optionsType} width="250" height="250"/>
@@ -310,20 +207,4 @@ class ActivitiesPieChart extends Component{
         </div>
 
 
-      </div>
-        
-     );
-  }
-}
-
-function mapStateToProps({activities}){
-  return {activities};
-}
-
-function mapDispatchToProps(dispatch){
-  return bindActionCreators({fetchActivities, fetchActivitiesWithCode}, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ActivitiesPieChart);
-
-
+      </div>*/
