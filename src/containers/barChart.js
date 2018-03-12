@@ -5,8 +5,35 @@ import * as actions from '../actions/actions_index';
 import Moment from 'moment';
 import Chart from 'chart.js';
 import { HorizontalBar } from 'react-chartjs-2'; 
+import Goal from './goal';
+import { persistor, store } from '../reduxStore';
 
+/*BAR CHART 1*/
 export class BarChartGoal extends Component {
+	/*
+	1. when this is loaded, set the state of Goal via the constructor function.
+	2. when it's initially loaded, you set the goal to 0.
+	*/
+
+  constructor(props){
+  	super(props);
+  	this.getGoal = this.getGoal.bind(this); //binding the getGoal function to this.
+  	this.state = { goal: 0}; 
+  }
+
+  getGoal(){
+  	console.log(this.state,"maybe this will return the goal?");
+  	/*
+	get goal from local storage
+	setup a if no goal situation
+	redefine the goal state object to goal using this.setState
+  	*/
+  }
+
+  componentDidMount(){
+  	this.getGoal();
+  }
+
 
   render() {
   	const data = {
@@ -53,7 +80,7 @@ export class BarChartGoal extends Component {
 
 }
 
-
+/*BAR CHART 2*/
 export class BarChartSki extends Component {
 	
 
@@ -138,7 +165,7 @@ export class BarChartSki extends Component {
             }]
     	}
     }
-    
+
     return (
       <div>
       	
@@ -149,8 +176,8 @@ export class BarChartSki extends Component {
 
 }
 
-      export class BarChartRun extends Component {
-	
+/*BAR CHART 3*/
+export class BarChartRun extends Component {
 
   render() {
   	const data = {
@@ -196,8 +223,8 @@ export class BarChartSki extends Component {
 
 }
 
- export class BarChartElse extends Component {
-	
+/*BAR CHART 4*/
+ export class BarChartElse extends Component {	
 
   render() {
   	const data = {

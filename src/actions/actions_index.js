@@ -4,7 +4,8 @@ import {
  ACCESS_TOKEN,
  CLIENT_SECRET,
  CLIENT_ID,
- FETCH_CODE
+ FETCH_CODE,
+ FETCH_GOAL
  } from './types'; 
   
 const activitiesUrl = `https://www.strava.com/api/v3/athlete/activities?access_token=${ACCESS_TOKEN}`;
@@ -20,10 +21,19 @@ export function fetchMessage(){
 
 export function fetchCode(){
   let code = new URL(window.location.href).searchParams.get('code') ;
-  console.log(code, "from action guy");
   return {
     type: 'FETCH_CODE',
     payload: code
+  }
+}
+
+export function fetchGoal(goal){
+  //save to localStorage.
+  localStorage.setItem('goal', goal); //key and the data. 
+  console.log(goal,'goal from within the action creator');
+  return {
+    type: 'FETCH_GOAL',
+    payload: goal
   }
 }
 
@@ -67,7 +77,7 @@ export function fetchActivitiesWithCode(){
     const activitiesUrlUpdated = `https://www.strava.com/api/v3/athlete/activities?access_token=${response.data.access_token}`;
     return axios.get(activitiesUrlUpdated, { params: {
             after: 1483228800, //TODO: THESE NEED TO BE VARIABLES 
-            per_page: 180 //TODO: THIS NEEDS TO BE LARGER
+            per_page: 200 //TODO: THIS NEEDS TO BE LARGER
             //I do see these in the payload
           }})
   })

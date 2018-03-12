@@ -28,12 +28,11 @@ function monthElevation(monthData,timestamp) {
 class Activities extends Component {
 	constructor(props) { 
 		super(props) 
-		this.state = {term: 'heys'};
-		this.getData = this.getData.bind(this); //making getData part of the state
+	    this.getData = this.getData.bind(this); //making getData part of the state
 	}
 	getData(){
       let code = new URL(window.location.href).searchParams.get('code');
-      //console.log(this.props.fetchCode().payload,"lajdf")
+      
       if(!code){
         this.props.fetchActivities();
       }else{
@@ -49,9 +48,10 @@ class Activities extends Component {
 			);
 		}
 		let year = (new Date()).getFullYear();
-    	let month = 0; //january
+    	let month = 0; 
     	let totalElevation = sumElevation(this.props.activities);
-    	let lastYearsElevation = monthElevation(this.props.activities, new Date(year, month, -1).getTime())
+    	let lastYearsElevation = monthElevation(this.props.activities, new Date(year, month, -1).getTime());
+
 		return (	
             <div id="activities_header">{`Total Climbed this Year:`}<span id="elevation_total"><br/>{`${(totalElevation - lastYearsElevation).toLocaleString()} ft`}</span></div>
         )

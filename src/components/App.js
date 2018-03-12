@@ -22,10 +22,6 @@ class App extends Component {
          <div id="activitiesChart" className="sixteen wide column">
               <ActivitiesChart />
          </div>
-       {/*
-         <div className="ui centered grid container">
-             <AGPieChart />
-         </div>*/}
       </div>
     );
   }

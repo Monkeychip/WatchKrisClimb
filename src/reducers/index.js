@@ -3,7 +3,7 @@
 //2. telling redux how to create application state.  Rember redux just holds data in the state object
 
 import { createStore, combineReducers } from 'redux';
-import { reducer as formReducer } from 'redux-form'; //for submit action on form
+import { reducer as formReducer } from 'redux-form'; //grab reducer property off of it and call it formReducer
 import ActivitiesReducer from './reducer_activities';
 import CodeReducer from './reducer_code';
 

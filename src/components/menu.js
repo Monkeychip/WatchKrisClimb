@@ -53,14 +53,14 @@ class Menu extends Component {
 		let button = null
 		
 		if(this.state.isLoggedIn){ //true
-			console.log(this.state.isLoggedIn,"this is true");
+			
 			button = <div
 			  	 className="ui button" 
 			  	 id="buttonLogOut"
 			  	 onClick={this.handleLogOut}>Log-out
 			  	</div>
 		} else {
-			console.log(this.state.isLoggedIn,"this is false");
+			
 			button = <div
 			  	 className="ui button" 
 			  	 ref='buttonTextLogIn'

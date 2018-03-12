@@ -12,10 +12,9 @@ class Table extends Component {
 
         <Menu />
         <div id="metrics_table" className="ui centered grid container">
-                <h3>Breakdown by the Week</h3>      
+                <h3>Breakdown By Week</h3>      
               <table className="ui basic padded celled table" width="100%">
-     
-                  <tbody>
+                       <tbody>
                    <tr>
                     <td>
                       <h4 className="ui header" id="goal-emoji"> Total Elevation Gained per week relative to Goal?</h4>

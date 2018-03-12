@@ -86,7 +86,7 @@ class ActivitiesChart extends Component {
       goal = this.state.goal
       monthGoal = goal / 12; 
         for(g = 1; g < 13; g++){
-         goalArray.push(monthGoal * g)
+         goalArray.push(Math.ceil(monthGoal * g)); 
         }
     }else{
       goal = 0 ; 
