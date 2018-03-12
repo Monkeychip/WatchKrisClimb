@@ -36,6 +36,8 @@ export class BarChartGoal extends Component {
 
 
   render() {
+  	
+
   	const data = {
 	  labels: ['This week', 'Goal'],
 	  datasets: [

@@ -29,7 +29,7 @@ export function fetchCode(){
 
 export function fetchGoal(goal){
   //save to localStorage.
-  localStorage.setItem('goal', goal); //key and the data. 
+  //localStorage.setItem('goal', goal); //key and the data. 
   console.log(goal,'goal from within the action creator');
   return {
     type: 'FETCH_GOAL',

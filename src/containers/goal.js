@@ -20,7 +20,7 @@ From SG:
 //{..input} destructing, pass object into input, turns out to be this.props.input, passing into input object. onChange={input.onChange} :/
 const renderField = ({ input, type }) => (
   <div className="ui right labeled input">
-    <input {...input} className="two wide field" placeholder="50,000 ft" type={type}/> 
+    <input {...input} className="two wide field" placeholder="50,000 ft" type={type} max={2000000}/> 
   </div>
 )
 
@@ -30,7 +30,7 @@ class Goal extends Component {
   render(){
     const { handleSubmit } = this.props; //pass in action creator, so that whenever it's submitted, it saves to local storage via action creator.
     return (
-      <form onSubmit={handleSubmit(this.props.fetchGoal)} size='large' key='large'>
+      <form onSubmit={handleSubmit} size='large' key='large'>  
         <div className="field">
           <div id="elevation-label">
               <label>Enter Elevation Goal for the Year:</label> 
@@ -53,7 +53,10 @@ class Goal extends Component {
 
 
 Goal = reduxForm({
-  form: 'goal'
+  form: 'goal',
 })(Goal);
 
-export default Goal = connect(null, {fetchGoal})(Goal);
+export default Goal;
+//export default Goal = connect(null, {fetchGoal})(Goal);
+
+//on click I need to somehow make activities Chart check it's value and reload.
