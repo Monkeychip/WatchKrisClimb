@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import '../App.css';
 import Activities from '../containers/activities';
 import ActivitiesChart from '../containers/activitiesChart';
-//import AGPieChart from '../containers/pieChart';
-//import Table from './table';
 import Menu from './menu';
 import Signin from '../containers/goal';
-import {connect} from 'react-redux'; 
+
 
 class App extends Component {
 

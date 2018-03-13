@@ -7,7 +7,7 @@ import logo_124_124 from '../../build/assets/images/logo_124_124.png';
 import { Link } from 'react-router'; //shows up as anchor tag
 
 
-//TO DO - move to Container folder because of the connect it's a HOC
+//TO DO - move to Container folder because it's CONNECTING TO REDUX
 class Menu extends Component {
 	constructor(props){
 		super(props);

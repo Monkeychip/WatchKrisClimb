@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
 import Menu from './menu';
-import {connect} from 'react-redux'; 
 
 class About extends Component {
 

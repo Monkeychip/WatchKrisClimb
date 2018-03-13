@@ -50,7 +50,9 @@ class ActivitiesChart extends Component {
     if(!values){
       return
     }else{
-      //I'm sure there is a better way, but I'm updating state.
+      //Set goal to local storage so that you can use it from barCharts.js
+      localStorage.setItem('goal', values.number);
+
       this.setState({
         goal: values.number
       });

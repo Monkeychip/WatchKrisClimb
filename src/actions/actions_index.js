@@ -27,17 +27,6 @@ export function fetchCode(){
   }
 }
 
-export function fetchGoal(goal){
-  //save to localStorage.
-  //localStorage.setItem('goal', goal); //key and the data. 
-  console.log(goal,'goal from within the action creator');
-  return {
-    type: 'FETCH_GOAL',
-    payload: goal
-  }
-}
-
-
 //only call on initial load
 export function fetchActivities(){
   
@@ -55,6 +44,7 @@ export function fetchActivities(){
 
 
 export function fetchActivitiesPayload(activities){
+  
   return {
     type: 'FETCH_ACTIVITIES',
     payload: activities

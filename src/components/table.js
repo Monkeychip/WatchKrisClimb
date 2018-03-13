@@ -1,9 +1,9 @@
 import React from 'react';
 import { Component } from 'react';
-import { connect } from 'react-redux';
 import * as actions from '../actions/actions_index'; 
 import Menu from './menu';
-import { BarChartGoal, BarChartSki, BarChartBike, BarChartRun, BarChartElse } from '../containers/barChart';
+//import { BarChartGoal, BarChartSki, BarChartBike, BarChartRun, BarChartElse } from '../containers/barChart';
+import BarChartGoal from '../containers/barChart';
 
 class Table extends Component {
     render() {
@@ -28,28 +28,28 @@ class Table extends Component {
                       <h4 className="ui header" id="time-climbing"> Elevation gained from Skiing?</h4>
                          <p className="ag-below-header">In Ft.</p>
                     </td>
-                    <td className="center aligned"> <BarChartSki /></td> 
+                    <td className="center aligned"> { /*<BarChartSki />*/}</td> 
                    </tr>
                    <tr>
                       <td>
                       <h4 className="ui header" id="bike-emoji"> Elevation gained from biking?</h4>
                          <p className="ag-below-header">In Ft.</p>
                     </td>
-                    <td className="center aligned"> <BarChartBike /> </td> 
+                    <td className="center aligned"> {/*<BarChartBike />*/} </td> 
                    </tr>
                    <tr>
                       <td>
                       <h4 className="ui header" id="run-emoji"> Elevation gained from running?</h4>
                          <p className="ag-below-header">In Ft.</p>
                     </td>
-                    <td className="center aligned"> <BarChartRun /> </td> 
+                    <td className="center aligned"> {/*<BarChartRun />*/} </td> 
                    </tr>
                    <tr>
                     <td>
                       <h4 className="ui header" id="most-vertical"> Elevation gained from everything else?</h4>
                          <p className="ag-below-header">In Ft.</p>
                     </td>
-                    <td className="center aligned"> <BarChartElse /> </td> 
+                    <td className="center aligned">{/* <BarChartElse />*/} </td> 
                    </tr>
                   </tbody>
               </table>
