@@ -11,7 +11,7 @@ import { fetchActivities} from '../actions/actions_index'; //importing activitie
 function weekElevation(allData) {
 	let now = new Date();
 	let today = moment(new Date()).valueOf(); //1520976377824
-	let lastSunday = moment().startOf('week').valueOf(); //1520751600000  1520772096000
+	let lastSunday = moment().startOf('isoWeek').valueOf(); //1520751600000  1520772096000
     
     let weekActivity = allData.filter( 
     	
@@ -21,7 +21,7 @@ function weekElevation(allData) {
       		return (activityDate > lastSunday);  
     	}
   	)
-    console.log(weekActivity,"weekActivity, only activities for the week");
+    
   return sumElevation(weekActivity); // now with correct array run through the Sum Elevation and return that value  */
 }
 
@@ -41,8 +41,6 @@ function sumElevation(weekActivity) {
 }
 
 
-
-/*BAR CHART 1*/
 class BarChartGoal extends Component {
 
   constructor(props){
@@ -151,198 +149,3 @@ function mapStateToProps(state){
 }
 //connect function says take component, and return container
 export default connect(mapStateToProps, mapDispatchToProps)(BarChartGoal);
-
-
-/*BAR CHART 2*/
-/*export class BarChartSki extends Component {
-	
-
-  render() {
-  	const data = {
-	  labels: ['Ski'],
-	  datasets: [
-	    {
-	      backgroundColor: 'rgba(2,154,230,0.2)',
-	      borderColor: 'rgba(2,154,230,1)',
-	      borderWidth: 1,
-	      hoverBackgroundColor: 'rgba(2,154,230,0.4)',
-	      hoverBorderColor: 'rgba(2,154,230,1)',
-	      data: [65]
-	    }
-	  ]
-	};
-
-	const barOptions = {
-    	legend: {
-        	display: false
-		},
-		scales: {
-        	yAxes: [{
-                barPercentage: 0.9,
-                gridLines: {
-              	  display:false,
-            	},
-              
-            }],
-            xAxes: [{
-            	ticks: {beginAtZero:true, max: 100},
-
-
-            }]
-    	}
-    }
-   return (
-      <div>
-      	
-      	<HorizontalBar data={data} options={barOptions} height="50px"/>
-      </div>
-    );
-  }
-
-}
-
-  export class BarChartBike extends Component {
-	
-
-  render() {
-  	const data = {
-	  labels: ['Bike'],
-	  datasets: [
-	    {
-	      backgroundColor: 'rgba(2,154,230,0.2)',
-	      borderColor: 'rgba(2,154,230,1)',
-	      borderWidth: 1,
-	      hoverBackgroundColor: 'rgba(2,154,230,0.4)',
-	      hoverBorderColor: 'rgba(2,154,230,1)',
-	      data: [14]
-	    }
-	  ]
-	};
-
-	const barOptions = {
-    	legend: {
-        	display: false
-		},
-		scales: {
-        	yAxes: [{
-                barPercentage: 0.9,
-                gridLines: {
-              	  display:false,
-            	},
-              
-            }],
-            xAxes: [{
-            	ticks: {beginAtZero:true, max: 100},
-
-
-            }]
-    	}
-    }
-
-    return (
-      <div>
-      	
-      	<HorizontalBar data={data} options={barOptions} height="50px"/>
-      </div>
-    );
-  }
-
-}
-*/
-/*BAR CHART 3*/
-/*export class BarChartRun extends Component {
-
-  render() {
-  	const data = {
-	  labels: ['Run'],
-	  datasets: [
-	    {
-	      backgroundColor: 'rgba(2,154,230,0.2)',
-	      borderColor: 'rgba(2,154,230,1)',
-	      borderWidth: 1,
-	      hoverBackgroundColor: 'rgba(2,154,230,0.4)',
-	      hoverBorderColor: 'rgba(2,154,230,1)',
-	      data: [69]
-	    }
-	  ]
-	};
-
-	const barOptions = {
-    	legend: {
-        	display: false
-		},
-		scales: {
-        	yAxes: [{
-                barPercentage: 0.9,
-                gridLines: {
-              	  display:false,
-            	},
-              
-            }],
-            xAxes: [{
-            	ticks: {beginAtZero:true, max: 100},
-
-
-            }]
-    	}
-    }
-        return (
-      <div>
-      	
-      	<HorizontalBar data={data} options={barOptions} height="50px"/>
-      </div>
-    );
-  }
-
-}
-
-/*BAR CHART 4*/
- /*export class BarChartElse extends Component {	
-
-  render() {
-  	const data = {
-	  labels: ['Else'],
-	  datasets: [
-	    {
-	      backgroundColor: 'rgba(2,154,230,0.2)',
-	      borderColor: 'rgba(2,154,230,1)',
-	      borderWidth: 1,
-	      hoverBackgroundColor: 'rgba(2,154,230,0.4)',
-	      hoverBorderColor: 'rgba(2,154,230,1)',
-	      data: [5]
-	    }
-	  ]
-	};
-
-	const barOptions = {
-    	legend: {
-        	display: false
-		},
-		scales: {
-        	yAxes: [{
-                barPercentage: 0.9,
-                gridLines: {
-              	  display:false,
-            	},
-              
-            }],
-            xAxes: [{
-            	ticks: {beginAtZero:true, max: 100},
-
-            }]
-    	}
-    }
-
-
-    return (
-      <div>
-      	<HorizontalBar data={data} options={barOptions} height="50px"/>
-      </div>
-    );
-  }
-
-}
-
-
-*/
- 

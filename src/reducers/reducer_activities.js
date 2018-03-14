@@ -1,8 +1,7 @@
 export default function(state = null, action){
 	switch(action.type) {
 	case 'FETCH_ACTIVITIES': //reducer needs to return new object each time return state
-	console.log(action.payload.data,"from the reducer_activities")
-		return action.payload.data; //{...state,all: action.payload.data}
+			return action.payload.data; //{...state,all: action.payload.data}
 	}
 	return state;
 };
