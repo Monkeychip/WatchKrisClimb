@@ -32,6 +32,7 @@ body {
 #how-to-use-p{
     line-height: 1.5em;
     font-size: 1.2em;
+    text-align: left;
 }
 /*MENU*/
 .ui.menu {
@@ -101,6 +102,13 @@ h4.ui.header{
   margin-top:-2px !important;
 }
 /*Emoji*/
+#man-emoji{
+  font-style: italic;
+}
+#man-emoji:after{
+  content: "\1F46B"; /*boyfriend*/
+  padding-left:5px;
+}
 #goal-emoji:after{
   content: "\1F3C6"; /*goal*/
   padding-left:5px;

@@ -102,7 +102,6 @@ function mapDispatchToProps(dispatch){
   return bindActionCreators({ fetchActivities } , dispatch)
 }
 
-/* CONNNECTING TO APPLICATION STATE*/
 function mapStateToProps(state){
 
   return {

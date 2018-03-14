@@ -2,7 +2,6 @@ import React from 'react';
 import { Component } from 'react';
 import * as actions from '../actions/actions_index'; 
 import Menu from './menu';
-//import { BarChartGoal, BarChartSki, BarChartBike, BarChartRun, BarChartElse } from '../containers/barChart';
 import BarChartGoal from '../containers/barChart';
 import BarChartSki from  '../containers/barChartSki';
 import BarChartBike from  '../containers/barChartBike';
