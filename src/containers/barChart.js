@@ -66,7 +66,9 @@ class BarChartGoal extends Component {
     let goal = Math.ceil(goalTotal / 52.1429);
     //call the sumation calculator
     let weekTotal = this.getActvitiesWeek();
-
+    //Setting xAxisMax to local storage.  Might be better way to do this. 
+    let xAxisMax = Math.max(goal,weekTotal);
+    localStorage.setItem('xAxisMax', xAxisMax);
 
   	const data = {
 	  labels: ['This week', 'Goal'],
@@ -106,7 +108,7 @@ class BarChartGoal extends Component {
                   offset: true,
                   tickMarkLength: true,
                   min: 0,
-                  max: 10000,
+                  max: xAxisMax,
                   callback: value => `${value.toLocaleString()} ft`
                 }
             }]

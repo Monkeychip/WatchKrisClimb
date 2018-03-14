@@ -27,7 +27,7 @@ export function fetchCode(){
   }
 }
 
-//only call on initial load
+
 export function fetchActivities(){
   
   let activities = 
@@ -77,4 +77,8 @@ export function fetchActivitiesWithCode(){
 
  } 
 }
+
+
+
+
 

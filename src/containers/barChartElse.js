@@ -28,6 +28,7 @@ export class BarChartElse extends Component {
     }
 
     let weekElseTotal = this.getElseActvitiesWeek();
+    let xAxisMax = Number(localStorage.getItem('xAxisMax'));
     
   	const data = {
 	  labels: ['Else'],
@@ -67,7 +68,7 @@ export class BarChartElse extends Component {
                   offset: true,
                   tickMarkLength: true,
                   min: 0,
-                  max: 10000,
+                  max: xAxisMax,
                   callback: value => `${value.toLocaleString()} ft`
                 }
             }]

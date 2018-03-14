@@ -31,6 +31,7 @@ class BarChartRun extends Component {
     }
 
     let weekRunTotal = this.getRunActvitiesWeek();
+    let xAxisMax = Number(localStorage.getItem('xAxisMax'));
     
   	const data = {
 	  labels: ['Run'],
@@ -70,7 +71,7 @@ const barOptions = {
                   offset: true,
                   tickMarkLength: true,
                   min: 0,
-                  max: 10000,
+                  max: xAxisMax,
                   callback: value => `${value.toLocaleString()} ft`
                 }
             }]

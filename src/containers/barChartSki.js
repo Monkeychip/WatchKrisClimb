@@ -30,6 +30,7 @@ class BarChartSki extends Component {
     }
 
     let weekSkiTotal = this.getSkiActvitiesWeek();
+    let xAxisMax = Number(localStorage.getItem('xAxisMax'));
     
   	const data = {
 	  labels: ['Ski'],
@@ -69,7 +70,7 @@ class BarChartSki extends Component {
                   offset: true,
                   tickMarkLength: true,
                   min: 0,
-                  max: 10000,
+                  max: xAxisMax,
                   callback: value => `${value.toLocaleString()} ft`
                 }
             }]

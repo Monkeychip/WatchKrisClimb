@@ -31,8 +31,8 @@ class BarChartBike extends Component {
     }
 
     let weekBikeTotal = this.getBikeActvitiesWeek();
+    let xAxisMax = Number(localStorage.getItem('xAxisMax'));
     
-
   	const data = {
 	  labels: ['Bike'],
 	  datasets: [
@@ -71,7 +71,7 @@ class BarChartBike extends Component {
                   offset: true,
                   tickMarkLength: true,
                   min: 0,
-                  max: 10000,
+                  max: xAxisMax,
                   callback: value => `${value.toLocaleString()} ft`
                 }
             }]

@@ -52,3 +52,4 @@ export function sumElevationHelper(activityArray) {
   
   return Number(sumActivities);
 }
+

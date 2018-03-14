@@ -8,10 +8,19 @@ import ActivitiesReducer from './reducer_activities';
 import CodeReducer from './reducer_code';
 
 const rootReducer = combineReducers({
-	activities: ActivitiesReducer,
+	activities: ActivitiesReducer, //holds all the activities data. 
 	form: formReducer, //reducer is apart of the package
 	code: CodeReducer 
 });
 
 export default rootReducer;
 
+/*
+
+Key -> actvities
+Reducer -> Activities Reducer
+
+//not using createStore, and probably should be.
+
+GOAL get Activities Payload to go into application state, and access it from differnet parts of the app
+*/

@@ -28,7 +28,7 @@ function monthElevation(monthData,timestamp) {
     
      let monthActivity = monthData.filter( 
      function(value){
-      let epochDate = new Date(String(value.start_date_local)).getTime();
+      let epochDate = new Date(String(value.start_date_local)).getTime(); //start_date_local from strava
       return (epochDate <  timestamp);  
     }
   )
@@ -147,7 +147,7 @@ class ActivitiesChart extends Component {
     }
 
     yAxisMax();
-
+    
     //xaxis label array maker
     let z;
     let today = new Date();
