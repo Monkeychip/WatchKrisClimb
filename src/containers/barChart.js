@@ -5,6 +5,7 @@ import {bindActionCreators} from 'redux';
 import moment from 'moment';
 import { HorizontalBar } from 'react-chartjs-2'; 
 import { fetchActivities} from '../actions/actions_index'; //importing activities axios data
+import { sumElevationHelper, filterElevationDataHelper, barOptions } from '../helperFunctions';
 
 
 //Takes in the full object of activities data and sends to sumElevation only those dates relevant per the second parameter, timestamp
@@ -84,49 +85,7 @@ class BarChartGoal extends Component {
 	  ]
 	};
 
-	const barOptions = {
-    	legend: {
-        	display: false
-		},
-		scales: {
-        	yAxes: [{
-
-                barPercentage: 0.9,
-                gridLines: {
-              	  display:false,
-            	},
-              
-            }],
-            xAxes: [{
-            	afterTickToLabelConversion: function(scaleInstance){
-                  scaleInstance.ticks[0] = null;
-                  scaleInstance.ticksAsNumbers[0] = null;
-                },
-            	ticks: {
-                  beginAtZero:true,
-                  autoSkip:true,
-                  offset: true,
-                  tickMarkLength: true,
-                  min: 0,
-                  max: xAxisMax,
-                  callback: value => `${value.toLocaleString()} ft`
-                }
-            }]
-    	},
-    	tooltips: {
-              mode: 'index',
-              callbacks: {
-                  label: function (t, d) {
-                    if (t.datasetIndex === 0) {
-                      return `${t.xLabel.toLocaleString()} ft  `;
-                    } else { 
-                      return `${t.xLabel.toLocaleString()} ft  `;
-                    }
-               	  },
-    		}	
-    	}
-    }
-
+	
     return (
       <div>
       	<HorizontalBar data={data} options={barOptions} height="100px"/>

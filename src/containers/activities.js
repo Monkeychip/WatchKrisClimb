@@ -28,29 +28,19 @@ function monthElevation(monthData,timestamp) {
 class Activities extends Component {
 	constructor(props) { 
 		super(props) 
-	    this.getData = this.getData.bind(this); //making getData part of the state
 	}
-	getData(){
-      let code = new URL(window.location.href).searchParams.get('code');
-      
-      if(!code){
-        this.props.fetchActivities();
-      }else{
-        this.props.fetchActivitiesWithCode();
-      };
-  	};
 	
-	componentDidMount() {this.getData(); }
+	componentDidMount() { this.props.activitiesArray; }
 	render() {
-		if(!this.props.activities) {
+		if(!this.props.activitiesArray) {
 			return(
 				<div>Loading Activities ...</div>
 			);
 		}
 		let year = (new Date()).getFullYear();
     	let month = 0; 
-    	let totalElevation = sumElevation(this.props.activities);
-    	let lastYearsElevation = monthElevation(this.props.activities, new Date(year, month, -1).getTime());
+    	let totalElevation = sumElevation(this.props.activitiesArray);
+    	let lastYearsElevation = monthElevation(this.props.activitiesArray, new Date(year, month, -1).getTime());
 
 		return (	
             <div id="activities_header">{`Total Climbed this Year:`}<span id="elevation_total"><br/>{`${(totalElevation - lastYearsElevation).toLocaleString()} ft`}</span></div>
@@ -59,20 +49,16 @@ class Activities extends Component {
     }
 }
 
-//takes application state activities state as an argument, and returns it. 
-// redux has a global application state which is what is being passed. 
-// the return is what shows up as props inside of Activities
-// now the return is avaliable as props
-//if application state changes, say you add another activity in Strava, container instantly rerenders... not sure about strava.
-function mapStateToProps({activities}) {
-	return {activities};
+function mapStateToProps(state) {
+	return {
+		activitiesArray: state.activities
+	};
 }
-//activities above references the combine reducers key !!!
 
-//function mapDispatchToProps(dispatch){ return bindActionCreators({fetchActivities, fetchActivitiesWithCode}, dispatch); }
-function mapDispatchToProps(dispatch){ return bindActionCreators({fetchActivities, fetchActivitiesWithCode, fetchCode}, dispatch); }
-//connect is forming bridge between redux and react CONTAINERS are the bridge.  connect is a function
-//now exporting the container instead of just the class Activities
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({fetchActivities}, dispatch);
+ }
+
 export default connect(mapStateToProps, mapDispatchToProps)(Activities); 
 
 

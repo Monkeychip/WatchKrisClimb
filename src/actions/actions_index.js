@@ -7,6 +7,7 @@ import {
  FETCH_CODE,
  FETCH_GOAL
  } from './types'; 
+import { janFirstLastYear } from '../helperFunctions'
   
 const activitiesUrl = `https://www.strava.com/api/v3/athlete/activities?access_token=${ACCESS_TOKEN}`;
 
@@ -32,13 +33,13 @@ export function fetchActivities(){
   
   let activities = 
     axios.get(activitiesUrl, { params: {
-      after: 1483228800,
+      after: janFirstLastYear,
       per_page: 180
     } } );
   
   return {
     type: 'FETCH_ACTIVITIES',
-    payload: activities //returns an array of two
+    payload: activities 
   };
 }
 
@@ -58,7 +59,7 @@ export function fetchActivitiesWithCode(){
     let parameters = {
         client_id: CLIENT_ID,
         client_secret: CLIENT_SECRET,
-        code: new URL(window.location.href).searchParams.get('code') //string
+        code: new URL(window.location.href).searchParams.get('code') //Needs to be in Application State
     };
     //not sure if i can persist this code, but I ultimately want to save it so on routing I can feed it to Fetch Activities
 
@@ -66,9 +67,8 @@ export function fetchActivitiesWithCode(){
   .then(response => {
     const activitiesUrlUpdated = `https://www.strava.com/api/v3/athlete/activities?access_token=${response.data.access_token}`;
     return axios.get(activitiesUrlUpdated, { params: {
-            after: 1483228800, //TODO: THESE NEED TO BE VARIABLES 
+            after: janFirstLastYear,
             per_page: 200 //TODO: THIS NEEDS TO BE LARGER
-            //I do see these in the payload
           }})
   })
   .then(response => {

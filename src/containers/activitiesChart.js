@@ -4,24 +4,10 @@ import {bindActionCreators} from 'redux';
 import { fetchActivities, fetchActivitiesWithCode} from '../actions/actions_index'; //importing activities axios data
 import Chart from 'chart.js'; 
 import { Line } from 'react-chartjs-2';
-import Moment from 'moment';
+import moment from 'moment';
 import Goal from './goal';
+import { janFirstLastYear, sumElevationHelper , filterElevationDataHelper, EndOfDecLastYear} from '../helperFunctions'; 
 
-
-//Sums Elevations via a reduce and forEach method.  Takes in data object from Month Elevation.
-function sumElevation(allActivities) {
-  let addActivities = (a,b) => a + b 
-  let arrayElevationGain = [];
-  let sumActivities = 0;
-
-  allActivities.forEach(activity => arrayElevationGain.push(activity.total_elevation_gain))
-  
-  if(arrayElevationGain.length > 0){
-     sumActivities = parseInt(arrayElevationGain.reduce(addActivities)/.3048,10)
-   }  //TODO: should add an else here for error handling
-  
-  return Number(sumActivities);
-}
 
 //Takes in the full object of activities data and sends to sumElevation only those dates relevant per the second parameter, timestamp
 function monthElevation(monthData,timestamp) {
@@ -29,17 +15,18 @@ function monthElevation(monthData,timestamp) {
      let monthActivity = monthData.filter( 
      function(value){
       let epochDate = new Date(String(value.start_date_local)).getTime(); //start_date_local from strava
-      return (epochDate <  timestamp);  
+      return (epochDate <  timestamp);  //because filtering after, not using the helper function.
     }
   )
     
-  return sumElevation(monthActivity); // now with correct array run through the Sum Elevation and return that value  
+  return sumElevationHelper(monthActivity); // now with correct array run through the Sum Elevation and return that value  
 }
+
 
 class ActivitiesChart extends Component {
   constructor(props) { 
     super(props); //parent method on Component 
-    this.getData = this.getData.bind(this);
+    this.getData = this.getData.bind(this); //only place in app I'm calling the data.
     this.submit = this.submit.bind(this); 
     this.state = {
       goal : 0
@@ -68,12 +55,12 @@ class ActivitiesChart extends Component {
       };
   }
 
-  componentDidMount() {
-    this.getData(); 
-  }
+  componentDidMount() { 
+        this.getData();
+  } 
   
   render() {
-    if(!this.props.activities) {
+    if(!this.props.activitiesArray) {
       return(
         <div>Loading Activities ...</div>
       );
@@ -95,21 +82,23 @@ class ActivitiesChart extends Component {
     }
 
     //Time and Calendar Variables
-    let monthData = this.props.activities; //activities data
+    let monthData = this.props.activitiesArray; //activities data
     let now = new Date();
     let todayEpochTime = (new Date(now.getFullYear(), now.getMonth() + 1, 1)).getTime();
-    
+    //1521135501112 "1522562400000" //today vs April 1st
     //create calendar Arrays
     let year = (new Date()).getFullYear();
     let dataArray = [];
     let dataArrayLastYear = [];
     let xaxisLabels = [];
-    let lastYearsElevation = monthElevation(monthData, new Date(year-1,12,0).getTime()); //dec 31 2017
-
+    let lastYearsElevation = monthElevation(monthData, EndOfDecLastYear); 
+        
     //Data Array maker this year
     let ind ; 
     for(ind = 1; ind <= 12; ind++){
-      let thisYearDate = new Date(year,ind,0).getTime(); //2018     
+      let thisYearDate = new Date(year,ind,0).getTime(); //2018 
+      //console.log(thisYearDate,"thisYearDate");
+      //console.log(moment().startOf('year').endOf('month').subtract(1,'day').valueOf(),"meep");    
       if (todayEpochTime >= thisYearDate){
         let data = new Number(monthElevation(monthData,thisYearDate) - lastYearsElevation);
         dataArray.push(data);
@@ -120,10 +109,9 @@ class ActivitiesChart extends Component {
     
     //Data Array maker last year
     let i ;
-    for(i = 1; i <=12; i++){
-      let lastDayOfLastYear = (new Date(year,0,0)).getTime(); 
-      let lastYearDate = new Date(year-1,i,0).getTime(); 
-      if(lastDayOfLastYear >= lastYearDate){
+    for(i = 0; i <=11; i++){ //jan 31,2017
+      let lastYearDate = moment().startOf('year').subtract(1,'year').add(i,'month').endOf('month').subtract(1,'day').valueOf();
+      if(EndOfDecLastYear >= lastYearDate){
         dataArrayLastYear.push(monthElevation(monthData,lastYearDate));
       }else{dataArrayLastYear.push(0)}
     }
@@ -272,7 +260,7 @@ class ActivitiesChart extends Component {
           }
         ]
     };
-    const chartOptions = {
+    const chartOptionsActvitiies = {
             repsonsive: true,
             maintainAspectRatio: false,
             title: {
@@ -334,7 +322,7 @@ class ActivitiesChart extends Component {
                   
                 },
                 title: function(tooltipItem, data) {
-                   return `${Moment(tooltipItem[0].xLabel).format('MMM')}`;
+                   return `${moment(tooltipItem[0].xLabel).format('MMM')}`;
                 },
                 labelTextColor:function(tooltipItem, chart){
                     return '#888590';
@@ -350,7 +338,7 @@ class ActivitiesChart extends Component {
 
     return (  
        <div id="dumb">
-       <Line data={data} options={chartOptions} width="1000" height="300"/>
+       <Line data={data} options={chartOptionsActvitiies} width="1000" height="300"/>
        <Goal onSubmit={this.submit} />
        </div>
       )
@@ -358,8 +346,11 @@ class ActivitiesChart extends Component {
     }
 }
 
-function mapStateToProps({activities, form}){
-  return {activities, form}; //adding form here connects the form props to this components state
+function mapStateToProps(state){
+  return {
+    activitiesArray: state.activities, 
+    form: state.form //I know ES6, but for readability.
+  }; //adding form here connects the form props to this components state
 }
 
 function mapDispatchToProps(dispatch){
