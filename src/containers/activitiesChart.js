@@ -39,7 +39,7 @@ class ActivitiesChart extends Component {
     }else{
       //Set goal to local storage so that you can use it from barCharts.js
       localStorage.setItem('goal', values.number);
-
+      
       this.setState({
         goal: values.number
       });
@@ -57,6 +57,7 @@ class ActivitiesChart extends Component {
 
   componentDidMount() { 
         this.getData();
+        this.setState({goal: localStorage.getItem('goal')});
   } 
   
   render() {
