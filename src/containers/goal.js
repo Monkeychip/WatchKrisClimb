@@ -1,9 +1,6 @@
 import React from 'react';
 import { Component } from 'react';
-import { connect } from 'react-redux';
-import { Button, Form } from 'semantic-ui-react';
 import { Field, reduxForm} from 'redux-form';  //reduxForm is like a connect middleware
-import { fetchGoal } from '../actions/actions_index'; //which saves the goal to local Storage
 
 /*
 From SG:

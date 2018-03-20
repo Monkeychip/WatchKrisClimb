@@ -1,12 +1,10 @@
-import React from 'react';
-import { createStore, applyMiddleware, compose } from 'redux'; 
-import { persistStore, persistReducer, persistCombineReducers } from 'redux-persist'
+import { createStore, applyMiddleware } from 'redux'; 
+import { persistStore, persistReducer} from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // local storage so stays in browserscache
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { logger } from 'redux-logger';
 import reduxPromise from 'redux-promise'; 
 import reduxThunk from 'redux-thunk';
-
 import reducers from './reducers';
 //need to create reducer that stores the Code
 
@@ -23,7 +21,7 @@ const persistedReducer = persistReducer(persistConfig, reducers)
 export const store = createStore(
 		persistedReducer,
 		composeWithDevTools(
-			applyMiddleware(... middlewares),
+			applyMiddleware(...middlewares),
 		)
 	);
 export const persistor = persistStore(store);

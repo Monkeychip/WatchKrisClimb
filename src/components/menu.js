@@ -21,7 +21,7 @@ class Menu extends Component {
 
 	//Everytime the component mounts check if there is a code in the URL
 	componentDidMount(){
-		let calltheFetchCodeFunction = this.props.fetchCode() ;
+		this.props.fetchCode() ;
 		let codeReplace = this.props.code;
 
 		if(!codeReplace){

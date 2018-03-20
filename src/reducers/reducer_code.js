@@ -1,4 +1,4 @@
-import { FETCH_CODE } from '../actions/types';
+//import { FETCH_CODE } from '../actions/types';
 
 export default function(state = null, action){
 	switch(action.type) {

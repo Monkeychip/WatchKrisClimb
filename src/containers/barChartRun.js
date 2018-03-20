@@ -3,16 +3,13 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
 import moment from 'moment';
-import { HorizontalBar, Chart } from 'react-chartjs-2'; 
+import { HorizontalBar } from 'react-chartjs-2'; 
 import { fetchActivities} from '../actions/actions_index'; //importing activities axios data
-import { sumElevationHelper, filterElevationDataHelper, barOptions } from '../helperFunctions';
+import { sumElevationHelper, filterElevationDataHelper } from '../helperFunctions';
 
 
 class BarChartRun extends Component {
 
-  constructor(props){
-    super(props);
-  }
 
   getRunActvitiesWeek(){
     let lastSunday = moment().startOf('isoWeek').valueOf(); 
@@ -32,6 +29,7 @@ class BarChartRun extends Component {
 
     let weekRunTotal = this.getRunActvitiesWeek();
     let xAxisMax = Number(localStorage.getItem('xAxisMax'));
+    let stepSize = Math.ceil(xAxisMax / 5);
     
   	const data = {
 	  labels: ['Run'],
@@ -46,6 +44,56 @@ class BarChartRun extends Component {
 	    }
 	  ]
 	};
+  
+  const barOptions = {
+      legend: {
+          display: false
+    },
+    scales: {
+          yAxes: [{
+
+                barPercentage: 0.9,
+                gridLines: {
+                  display:false,
+              },
+              
+            }],
+            xAxes: [{
+              afterTickToLabelConversion: function(scaleInstance){
+                  scaleInstance.ticks[0] = null;
+                  scaleInstance.ticksAsNumbers[0] = null;
+                },
+              ticks: {
+                  beginAtZero:true,
+                  autoSkip:true,
+                  offset: true,
+                  tickMarkLength: true,
+                  min: 0,
+                  max: xAxisMax,
+                  maxTicksLimit: 5,
+                  stepSize: stepSize,
+                  callback: value => `${value.toLocaleString()} ft`
+                }
+            }]
+      },
+      tooltips: {
+              position: 'myCustomPosition',
+              mode: 'index',
+              xPadding: 10,
+              yPadding: 10,
+              callbacks: {
+                  label: function (t, d) {
+                    if (t.datasetIndex === 0) {
+                      return `${t.xLabel.toLocaleString()} ft  `;
+                    } else { 
+                      return `${t.xLabel.toLocaleString()} ft  `;
+                    }
+                  },
+
+          } 
+    }
+ }
+
 
         return (
       <div>

@@ -3,7 +3,6 @@ import '../App.css';
 import Activities from '../containers/activities';
 import ActivitiesChart from '../containers/activitiesChart';
 import Menu from './menu';
-import Signin from '../containers/goal';
 
 
 class App extends Component {

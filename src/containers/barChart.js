@@ -5,13 +5,12 @@ import {bindActionCreators} from 'redux';
 import moment from 'moment';
 import { HorizontalBar } from 'react-chartjs-2'; 
 import { fetchActivities} from '../actions/actions_index'; //importing activities axios data
-import { sumElevationHelper, filterElevationDataHelper, barOptions } from '../helperFunctions';
 
 
 //Takes in the full object of activities data and sends to sumElevation only those dates relevant per the second parameter, timestamp
 function weekElevation(allData) {
-	let now = new Date();
-	let today = moment(new Date()).valueOf(); //1520976377824
+	
+	
 	let lastSunday = moment().startOf('isoWeek').valueOf(); //1520751600000  1520772096000
     
     let weekActivity = allData.filter( 
@@ -70,6 +69,58 @@ class BarChartGoal extends Component {
     //Setting xAxisMax to local storage.  Might be better way to do this. 
     let xAxisMax = Math.max(goal,weekTotal);
     localStorage.setItem('xAxisMax', xAxisMax);
+    let stepSize = Math.ceil(xAxisMax / 5);
+
+    const barOptions = {
+      
+      legend: {
+          display: false
+    },
+      scales: {
+            yAxes: [{
+                  barPercentage: 0.9,
+                  gridLines: {
+                    display:false,
+                },
+                
+              }],
+              xAxes: [{
+                afterTickToLabelConversion: function(scaleInstance){
+                    scaleInstance.ticks[0] = null;
+                    scaleInstance.ticksAsNumbers[0] = null;
+                  },
+                
+                ticks: {
+                    beginAtZero:true,
+                    autoSkip:true,
+                    offset: true,
+                    tickMarkLength: true,
+                    stepSize: stepSize,
+                    min: 0,
+                    max: xAxisMax,
+                    maxTicksLimit: 5,
+                    callback: value => `${value.toLocaleString()} ft`
+                  }
+              }]
+        },
+        tooltips: {
+                position: 'myCustomPosition',
+                mode: 'index',
+                xPadding: 10,
+                yPadding: 10,
+                callbacks: {
+                    label: function (t, d) {
+                      if (t.datasetIndex === 0) {
+                        return `${t.xLabel.toLocaleString()} ft  `;
+                      } else { 
+                        return `${t.xLabel.toLocaleString()} ft  `;
+                      }
+                    },
+
+            } 
+      }
+  }
+
 
   	const data = {
 	  labels: ['This week', 'Goal'],

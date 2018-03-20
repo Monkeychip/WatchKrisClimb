@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+ import React, {Component} from 'react';
 import {connect} from 'react-redux'; 
 import {bindActionCreators} from 'redux';
 import { fetchActivities, fetchActivitiesWithCode} from '../actions/actions_index'; //importing activities axios data
@@ -6,7 +6,7 @@ import Chart from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import moment from 'moment';
 import Goal from './goal';
-import { janFirstLastYear, sumElevationHelper , filterElevationDataHelper, EndOfDecLastYear} from '../helperFunctions'; 
+import { sumElevationHelper , EndOfDecLastYear} from '../helperFunctions'; 
 
 
 //Takes in the full object of activities data and sends to sumElevation only those dates relevant per the second parameter, timestamp
@@ -39,7 +39,6 @@ class ActivitiesChart extends Component {
     }else{
       //Set goal to local storage so that you can use it from barCharts.js
       localStorage.setItem('goal', values.number);
-      
       this.setState({
         goal: values.number
       });

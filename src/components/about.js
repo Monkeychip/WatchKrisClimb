@@ -1,20 +1,14 @@
 import React, { Component } from 'react';
 import '../App.css';
 import Menu from './menu';
-import { Button, Form } from 'semantic-ui-react';
-import { Field, reduxForm} from 'redux-form';  //reduxForm is like a connect middleware
 import Mailto from 'react-mailto';
-
-function emailMe(){
-  //
-}
 
 class About extends Component {
 
 
 	render(){
     
-		
+
     return(
 		  <div id="about-holder" className="ui centered grid container "> 
           	<Menu />
@@ -33,7 +27,7 @@ class About extends Component {
               </p>
                 <h3>Comment, constructive feedback or feature request?</h3>
                 
-
+                 <div className="sixteen wide column">
                       <div className="field">
                                              
                           
@@ -42,6 +36,7 @@ class About extends Component {
                             </Mailto>
           	      
                       </div>
+                  </div>
               </div>
           </div>
 		)

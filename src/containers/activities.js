@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'; 
 import {bindActionCreators} from 'redux';
-import { fetchActivities, fetchActivitiesWithCode, fetchCode } from '../actions/actions_index';
+import { fetchActivities } from '../actions/actions_index';
 
 function sumElevation(allActivities) {
 		let addActivities = (a,b) => a + b 
@@ -26,9 +26,7 @@ function monthElevation(monthData,timestamp) {
 
 
 class Activities extends Component {
-	constructor(props) { 
-		super(props) 
-	}
+
 	
 	componentDidMount() { this.props.activitiesArray; }
 	render() {

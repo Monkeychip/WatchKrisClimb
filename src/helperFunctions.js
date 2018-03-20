@@ -1,6 +1,5 @@
-import React from 'react';
 import moment from 'moment';
-import { HorizontalBar, Chart } from 'react-chartjs-2'; 
+import { Chart } from 'react-chartjs-2'; 
 
 
 export const janFirstLastYear = (moment().startOf('year').subtract(1,'year').valueOf())/1000; //jan 1 2017

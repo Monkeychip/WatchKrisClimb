@@ -1,17 +1,21 @@
 import React from 'react';
 import { Component } from 'react';
-import * as actions from '../actions/actions_index'; 
+import moment from 'moment';
 import Menu from './menu';
 import BarChartGoal from '../containers/barChart';
 import BarChartSki from  '../containers/barChartSki';
 import BarChartBike from  '../containers/barChartBike';
 import BarChartRun from  '../containers/barChartRun';
 import BarChartElse from  '../containers/barChartElse';
+import DaysSkied from '../containers/daysSkied';
 
 
 class Table extends Component {
-    render() {
+
+   render(){
+
       return (
+
         <div className="ui centered grid container" id="about-holder">
 
         <Menu />
@@ -30,7 +34,7 @@ class Table extends Component {
                    <tr>
                     <td>
                       <h4 className="ui header" id="time-climbing"> Elevation gained from Skiing?</h4>
-                         <p className="ag-below-header">In Ft.</p>
+                         <p className="ag-below-header"><DaysSkied /></p>
                     </td>
                     <td className="center aligned"> <BarChartSki /></td> 
                    </tr>
@@ -65,37 +69,7 @@ class Table extends Component {
     }
 }
 
-export default Table;
+//export default BarChartSki;
+export default Table
 
-
-
-//TO DO - move to Container folder because of the connect it's a HOC
-
-/*
-A. filter by backcountry ski activiites
-B. create 1 function that takes timestamp, which filters A data into the time stamps of one week, one month, this year. Returns and array of the data.. (that's the key and potentially hard part this.properties.activities)
-C. make five individual functions to keep it clean
-
-1. TIME SPENT SKIING takes in array A [week,month,year] 
-- grabs time , and SUMS them forEach item on the array
-- return hrs, then mintues `${hrs min}` 
-
-2. ELEVATION GAINED. takes in array A
-- grabs the elevation gain, and sums them forEach
-- returns ft.
-
-3. AVERAGE RISE:RUN takes in array A
-- forEach array of array, grabs the elevation gained (see #2) and distance, and ratio 
-- averages based on week/month/year
-- returns percent
-
-4. AVERAGE UP HILL takes in array A
-- forEach array of aray, takes elevation gained (see #2) and time.  Ft / seconds.
-- avaerages based on week/month/year
-- returns a percent
-
-5. MOST VERTIFCAL FT IN DAY takes in array A
-- finds max - I know there's an es6 array helper for this.
-- returns data and totalelevation gained. 
-*/
 
