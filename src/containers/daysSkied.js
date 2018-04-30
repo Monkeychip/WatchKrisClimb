@@ -52,7 +52,7 @@ class DaysSkied extends Component{
 
     return(
     	
-     	<div>{`Days Skied this season: ${this.getDaysArray().daysSkied}`}</div>
+     	<div>{`Activities Skied this season: ${this.getDaysArray().daysSkied}`}</div>
      )
     }
 

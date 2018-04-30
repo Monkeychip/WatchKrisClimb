@@ -15,6 +15,7 @@
     "dotenv-webpack": "^1.5.4",
     "ejs": "^2.5.7",
     "express": "^4.16.2",
+    "formik": "^0.11.11",
     "history": "^4.7.2",
     "jquery": "^3.2.1",
     "moment": "^2.20.1",
@@ -44,7 +45,8 @@
     "request": "^2.83.0",
     "semantic-ui-react": "^0.78.2",
     "util": "^0.10.3",
-    "utils": "^0.3.1"
+    "utils": "^0.3.1",
+    "yup": "^0.24.1"
   },
   "scripts": {
     "start": "react-scripts start",

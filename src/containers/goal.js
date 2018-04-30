@@ -1,6 +1,10 @@
 import React from 'react';
 import { Component } from 'react';
 import { Field, reduxForm} from 'redux-form';  //reduxForm is like a connect middleware
+//Trying to move off of ReduxForm and go to Formik and Yup
+//import { connect } from 'react-redux';
+//import Yup from "yup";
+//import { withFormik, Form, Field} from 'formik';
 
 /*
 From SG:
@@ -21,9 +25,10 @@ const renderField = ({ input, type }) => (
   </div>
 )
 
+
 class Goal extends Component {
 
-
+ 
   render(){
     const { handleSubmit } = this.props; //pass in action creator, so that whenever it's submitted, it saves to local storage via action creator.
     return (
@@ -53,6 +58,66 @@ Goal = reduxForm({
   form: 'goal',
 })(Goal);
 
+
+//with Formik and Yup
+
+
+//const Goal = ({values, errors, touched, isSubmitting}) => {
+/*const GoalForm = (props) => {
+  const {
+    values,
+    touched,
+    errors,
+    isSubmitting,
+    handleChange,
+    setFieldValue,
+    handleBlur,
+    handleSubmit,
+    handleReset,
+  } = props;
+
+
+  return(
+    <Form>
+      <div className="ui right labeled input">
+       <Field 
+          type="number"
+          name="number"
+          placeholder="50,000 ft"
+        />
+      </div>
+      <button disabled={isSubmitting}>Show Goal</button>
+    </Form>
+  );
+}
+
+const FormikApp = withFormik({
+  mapPropsToValues( { number }) {
+    return {
+      number: number || 0
+    };
+  },
+  validationSchema: Yup.object().shape({
+    //number: Yup.number().required().positive().integer().max(3000000,"Must be a reasonable number")
+    number: Yup.number()
+  }),
+  
+  handleSubmit(values, {resetForm, setSubmitting}){
+      
+    //setSubmitting(false);
+     console.log(values)
+  setTimeout(() => {
+      resetForm(),
+      setSubmitting(false)
+    },2000)
+
+    console.log(values)
+
+  }
+})(GoalForm);
+
+const Goal = connect()(FormikApp);
+*/
 export default Goal;
 //export default Goal = connect(null, {fetchGoal})(Goal);
 
