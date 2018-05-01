@@ -5,14 +5,21 @@
 import { createStore, combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form'; //grab reducer property off of it and call it formReducer
 import ActivitiesReducer from './reducer_activities';
+import ActivitiesReducerThisYear from './reducer_activitiesThisYear';
 import CodeReducer from './reducer_code';
 
+
+
 const rootReducer = combineReducers({
-	activities: ActivitiesReducer, //holds all the activities data. 
+	activities: ActivitiesReducer,  
+	activitiesThisYear: ActivitiesReducerThisYear,
 	form: formReducer, //reducer is apart of the package
 	code: CodeReducer 
 });
 
+
+const store = createStore(rootReducer);
+console.log(store.getState(),"store");
 export default rootReducer;
 
 /*
@@ -23,4 +30,10 @@ Reducer -> Activities Reducer
 //not using createStore, and probably should be.
 
 GOAL get Activities Payload to go into application state, and access it from differnet parts of the app
+*/
+
+/*
+import { createStore } from 'redux';
+let store = createStore(counter);
+console.log(store.getState()); // 0
 */

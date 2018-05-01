@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'; 
 import {bindActionCreators} from 'redux';
-import { fetchActivities } from '../actions/actions_index';
+import { fetchThisYear } from '../actions/actions_index';
+
 
 function sumElevation(allActivities) {
 		let addActivities = (a,b) => a + b 
@@ -12,49 +13,34 @@ function sumElevation(allActivities) {
         return sumActivities;
 }
 
-function monthElevation(monthData,timestamp) {
-    
-     let monthActivity = monthData.filter( //added data to widdle down
-     function(value){
-      let epochDate = new Date(String(value.start_date_local)).getTime();
-      return (epochDate <  timestamp);  //today < 2017
-    }
-  )
-    
-  return sumElevation(monthActivity); // now with correct array run through the Sum Elevation and return that value  
-}
 
 
 class Activities extends Component {
 
-	
-	componentDidMount() { this.props.activitiesArray; }
+	componentDidMount() { this.props.fetchThisYear()}
 	render() {
-		if(!this.props.activitiesArray) {
+		if(!this.props.thisYear) {
 			return(
 				<div>Loading Activities ...</div>
 			);
 		}
-		let year = (new Date()).getFullYear();
-    	let month = 0; 
-    	let totalElevation = sumElevation(this.props.activitiesArray);
-    	let lastYearsElevation = monthElevation(this.props.activitiesArray, new Date(year, month, -1).getTime());
-
 		return (	
-            <div id="activities_header">{`Total Climbed this Year:`}<span id="elevation_total"><br/>{`${(totalElevation - lastYearsElevation).toLocaleString()} ft`}</span></div>
+            <div id="activities_header">{`Total Climbed this Year:`}<span id="elevation_total"><br/>{`${sumElevation(this.props.thisYear).toLocaleString()} ft`}</span></div>
         )
        
     }
 }
-
+/*NOT SURE I NEED THIS HERE*/
 function mapStateToProps(state) {
+
 	return {
-		activitiesArray: state.activities
+		thisYear: state.activitiesThisYear
 	};
+	
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({fetchActivities}, dispatch);
+  return bindActionCreators({ fetchThisYear}, dispatch);
  }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Activities); 

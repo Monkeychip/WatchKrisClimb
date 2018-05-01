@@ -1,7 +1,7 @@
  import React, {Component} from 'react';
 import {connect} from 'react-redux'; 
 import {bindActionCreators} from 'redux';
-import { fetchActivities, fetchActivitiesWithCode} from '../actions/actions_index'; //importing activities axios data
+import { fetchActivities, fetchActivitiesWithCode, fetchThisYear, fetchActivitiesWithCodeThisYear} from '../actions/actions_index'; //importing activities axios data
 import Chart from 'chart.js'; 
 import { Line } from 'react-chartjs-2';
 import moment from 'moment';
@@ -49,8 +49,10 @@ class ActivitiesChart extends Component {
     let code = new URL(window.location.href).searchParams.get('code')
       if(!code){
         this.props.fetchActivities();
+        this.props.fetchThisYear();
       }else{
         this.props.fetchActivitiesWithCode();
+        this.props.fetchActivitiesWithCodeThisYear();
       };
   }
 
@@ -60,7 +62,7 @@ class ActivitiesChart extends Component {
   } 
   
   render() {
-    if(!this.props.activitiesArray) {
+    if(!this.props.activitiesArray ) {
       return(
         <div>Loading Activities ...</div>
       );
@@ -83,6 +85,8 @@ class ActivitiesChart extends Component {
 
     //Time and Calendar Variables
     let monthData = this.props.activitiesArray; //activities data
+    let monthDataThisYear = this.props.thisYear;
+
     let now = new Date();
     let todayEpochTime = (new Date(now.getFullYear(), now.getMonth() + 1, 1)).getTime();
     //1521135501112 "1522562400000" //today vs April 1st
@@ -97,10 +101,9 @@ class ActivitiesChart extends Component {
     let ind ; 
     for(ind = 1; ind <= 12; ind++){
       let thisYearDate = new Date(year,ind,0).getTime(); //2018 
-      //console.log(thisYearDate,"thisYearDate");
-      //console.log(moment().startOf('year').endOf('month').subtract(1,'day').valueOf(),"meep");    
+   
       if (todayEpochTime >= thisYearDate){
-        let data = new Number(monthElevation(monthData,thisYearDate) - lastYearsElevation);
+        let data = new Number(monthElevation(monthDataThisYear,thisYearDate));
         dataArray.push(data);
       }else{
 
@@ -349,12 +352,13 @@ class ActivitiesChart extends Component {
 function mapStateToProps(state){
   return {
     activitiesArray: state.activities, 
-    form: state.form //I know ES6, but for readability.
+    form: state.form,
+    thisYear: state.activitiesThisYear,
   }; //adding form here connects the form props to this components state
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({fetchActivities, fetchActivitiesWithCode}, dispatch);
+  return bindActionCreators({fetchActivities, fetchActivitiesWithCode, fetchThisYear, fetchActivitiesWithCodeThisYear}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ActivitiesChart);

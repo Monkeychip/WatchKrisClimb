@@ -1,15 +1,26 @@
-export default function(state = null, action){
+
+/*JUST GET THE FIRST YER*/
+export default function(state = 0, action){
 	switch(action.type) {
-	case 'FETCH_ACTIVITIES': //reducer needs to return new object each time return state
-			return action.payload.data; //{...state,all: action.payload.data}
-	}
-	return state;
-};
+		case 'FETCH_ACTIVITIES': //reducer needs to return new object each time return state		
+				return action.payload.data;
+			}
+		return state
+}
+
+
+
 
 
 /*
-Could break this up so returns array of data, but also runs the filter for days, etc.
+export default (state = 0, action) => {
 
-const INITIAL_STATE = { all: [] , thisyear: null, last year: null}
-
-*/
+    switch(action.type) {
+        case 'FETCH_ACTIVITIES':
+            return [...state, action.payload.data]; // same as state.concat(action.portfolio)
+        case 'FETCH_THIS_YEAR':
+        	return [...state, "meep"];
+        default:
+            return state;
+    }
+}*/

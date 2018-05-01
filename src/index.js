@@ -10,7 +10,7 @@ import { store, persistor } from './reduxStore';
 
 require('dotenv').config();
 
-class Index extends Component {
+class Dashboard extends Component {
 
 	render() {
 		return (
@@ -27,7 +27,7 @@ class Index extends Component {
 	}
 }
 
-ReactDOM.render(React.createElement(Index, null),
+ReactDOM.render(React.createElement(Dashboard, null),
 	document.querySelector('.container')
 );
 
