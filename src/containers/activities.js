@@ -1,7 +1,5 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux'; 
-import {bindActionCreators} from 'redux';
-import { fetchThisYear } from '../actions/actions_index';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';  //direct connection to the state redux, which container the thisYearsActivities property on the application state.
 
 
 function sumElevation(allActivities) {
@@ -17,7 +15,6 @@ function sumElevation(allActivities) {
 
 class Activities extends Component {
 
-	componentDidMount() { this.props.fetchThisYear()}
 	render() {
 		if(!this.props.thisYear) {
 			return(
@@ -30,21 +27,14 @@ class Activities extends Component {
        
     }
 }
-/*NOT SURE I NEED THIS HERE*/
-function mapStateToProps(state) {
 
+function mapStateToProps(state) {
 	return {
-		thisYear: state.activitiesThisYear
+		thisYear: state.thisYearsActivities 
 	};
-	
 }
 
-function mapDispatchToProps(dispatch){
-  return bindActionCreators({ fetchThisYear}, dispatch);
- }
-
-export default connect(mapStateToProps, mapDispatchToProps)(Activities); 
+export default connect(mapStateToProps)(Activities); 
 
 
-
-
+/*do not need to connect to a action creator because of it's already connected on activitiesChart*/

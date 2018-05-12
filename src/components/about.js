@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
-import Menu from './menu';
+import MenuNoLogIn from '../components/menuNoLogIn';
 import Mailto from 'react-mailto';
 
 class About extends Component {
@@ -11,7 +11,7 @@ class About extends Component {
 
     return(
 		  <div id="about-holder" className="ui centered grid container "> 
-          	<Menu />
+          	<MenuNoLogIn />
           	 <div className="row">
              	<h2 id="how-to-use-title">How To Use</h2>
              	<p id="how-to-use-p">
@@ -34,7 +34,7 @@ class About extends Component {
                             <Mailto email="argarbarino@gmail.com" obfuscate={false} id="submit-button" className="ui inverted blue button ">
                             Email me!
                             </Mailto>
-          	      
+
                       </div>
                   </div>
               </div>
@@ -45,3 +45,8 @@ class About extends Component {
 
 
 export default About;
+
+
+
+
+

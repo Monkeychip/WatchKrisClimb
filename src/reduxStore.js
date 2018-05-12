@@ -6,7 +6,7 @@ import { logger } from 'redux-logger';
 import reduxPromise from 'redux-promise'; 
 import reduxThunk from 'redux-thunk';
 import reducers from './reducers';
-//need to create reducer that stores the Code
+
 
 const persistConfig = {
   key: 'root',
@@ -24,6 +24,7 @@ export const store = createStore(
 			applyMiddleware(...middlewares),
 		)
 	);
+
 export const persistor = persistStore(store);
 
 

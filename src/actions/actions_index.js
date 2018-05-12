@@ -5,10 +5,11 @@ import {
  ACCESS_TOKEN,
  CLIENT_SECRET,
  CLIENT_ID,
- FETCH_CODE,
- FETCH_GOAL
+ FETCH_CODE
  } from './types'; 
-import { janFirstLastYear, janFirstThisYear } from '../helperFunctions'
+import { janFirstLastYear, janFirstThisYear } from '../helperFunctions';
+import {store} from '../reduxStore';
+
   
 const activitiesUrl = `https://www.strava.com/api/v3/athlete/activities?access_token=${ACCESS_TOKEN}`;
 
@@ -20,9 +21,11 @@ export function fetchMessage(){
     window.location.href = SERVER_URL; 
   }
 }
-
+//not sure if this is KOSHER
 export function fetchCode(){
+
   let code = new URL(window.location.href).searchParams.get('code') ;
+
   return {
     type: 'FETCH_CODE',
     payload: code
@@ -48,14 +51,14 @@ export function fetchActivities(){
 /*WHY THE FUCK IS THIS NOT GETTING CALLED*/
 export function fetchThisYear(){
   
-let activitiesThisYear = 
+let thisYearsActivities = 
     axios.get(activitiesUrl, { params: {
       after: janFirstThisYear,
       per_page: 200
     }});
   return {
     type: FETCH_THIS_YEAR,
-    payload: activitiesThisYear 
+    payload: thisYearsActivities 
   };
 }
 
@@ -84,9 +87,10 @@ export function fetchActivitiesWithCode(){
     let parameters = {
         client_id: CLIENT_ID,
         client_secret: CLIENT_SECRET,
-        code: new URL(window.location.href).searchParams.get('code') //Needs to be in Application State
+        code: new URL(window.location.href).searchParams.get('code') || store.getState().code //Needs to be in Application State
+        /*31b79fe479ef612d5f1537e4de003e91cb23a80f vs d02cb08fabfeb04ca8f8354504f59025d97fc96b*/
     };
-    //not sure if i can persist this code, but I ultimately want to save it so on routing I can feed it to Fetch Activities
+  console.log(parameters,"parameters code")
 
   axios.post('https://www.strava.com/oauth/token', parameters)
   .then(response => {
@@ -105,15 +109,15 @@ export function fetchActivitiesWithCode(){
 }
 
 export function fetchActivitiesWithCodeThisYear(){
+
  return function action(dispatch){
   dispatch({ type: FETCH_ACTIVITIES })
 
     let parameters = {
         client_id: CLIENT_ID,
         client_secret: CLIENT_SECRET,
-        code: new URL(window.location.href).searchParams.get('code') //Needs to be in Application State
+        code: new URL(window.location.href).searchParams.get('code') || store.getState().code//Needs to be in Application State
     };
-    //not sure if i can persist this code, but I ultimately want to save it so on routing I can feed it to Fetch Activities
 
   axios.post('https://www.strava.com/oauth/token', parameters)
   .then(response => {
@@ -124,7 +128,6 @@ export function fetchActivitiesWithCodeThisYear(){
           }})
   })
   .then(response => {
-    console.log(fetchActivitiesPayloadThisYear(response))
     return dispatch(fetchActivitiesPayloadThisYear(response));
   })
 

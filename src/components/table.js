@@ -1,16 +1,16 @@
 import React from 'react';
 import { Component } from 'react';
-import moment from 'moment';
-import Menu from './menu';
+import MenuNoLogIn from '../components/menuNoLogIn';
 import BarChartGoal from '../containers/barChart';
-import BarChartSki from  '../containers/barChartSki';
-import BarChartBike from  '../containers/barChartBike';
-import BarChartRun from  '../containers/barChartRun';
-import BarChartElse from  '../containers/barChartElse';
+import BarChartSki from '../containers/barChartSki';
+import BarChartBike from '../containers/barChartBike';
+import BarChartRun from '../containers/barChartRun';
+import BarChartElse from '../containers/barChartElse';
 import DaysSkied from '../containers/daysSkied';
 
-
 class Table extends Component {
+//needs to grab redux store of activities and goal
+
 
    render(){
 
@@ -18,7 +18,7 @@ class Table extends Component {
 
         <div className="ui centered grid container" id="about-holder">
 
-        <Menu />
+        <MenuNoLogIn />
         <div id="metrics_table" className="ui centered grid container">
                 <h3>Breakdown By Week</h3>      
               <table className="ui basic padded celled table" width="100%">
@@ -69,7 +69,6 @@ class Table extends Component {
     }
 }
 
-//export default BarChartSki;
 export default Table
 
 

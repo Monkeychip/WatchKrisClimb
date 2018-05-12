@@ -4,7 +4,7 @@ import { Chart } from 'react-chartjs-2';
 
 export const janFirstLastYear = (moment().startOf('year').subtract(1,'year').valueOf())/1000; //jan 1 2017
 export const EndOfDecLastYear = moment().startOf('year').subtract(1,'day').valueOf(); //dec 31 2017
-export const janFirstThisYear = (moment().startOf('year').valueOf())/1000;
+export const janFirstThisYear = (moment().startOf('year').valueOf())/1000; //Jan 1 2018
 
 
 //Filter activity data based on date

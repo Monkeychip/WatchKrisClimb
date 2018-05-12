@@ -1,13 +1,13 @@
- import React, {Component} from 'react';
-import {connect} from 'react-redux'; 
-import {bindActionCreators} from 'redux';
+import React, {Component} from 'react';
+import { connect } from 'react-redux'; 
+import { bindActionCreators } from 'redux';
 import { fetchActivities, fetchActivitiesWithCode, fetchThisYear, fetchActivitiesWithCodeThisYear} from '../actions/actions_index'; //importing activities axios data
 import Chart from 'chart.js'; 
 import { Line } from 'react-chartjs-2';
 import moment from 'moment';
 import Goal from './goal';
-import { sumElevationHelper , EndOfDecLastYear} from '../helperFunctions'; 
-
+import { sumElevationHelper , EndOfDecLastYear} from '../helperFunctions';
+import {store} from '../reduxStore';
 
 //Takes in the full object of activities data and sends to sumElevation only those dates relevant per the second parameter, timestamp
 function monthElevation(monthData,timestamp) {
@@ -46,8 +46,9 @@ class ActivitiesChart extends Component {
   }
 
   getData(){
-    let code = new URL(window.location.href).searchParams.get('code')
-      if(!code){
+
+    //let code = new URL(window.location.href).searchParams.get('code')
+      if(!store.getState().code) {
         this.props.fetchActivities();
         this.props.fetchThisYear();
       }else{
@@ -353,7 +354,7 @@ function mapStateToProps(state){
   return {
     activitiesArray: state.activities, 
     form: state.form,
-    thisYear: state.activitiesThisYear,
+    thisYear: state.thisYearsActivities,
   }; //adding form here connects the form props to this components state
 }
 
