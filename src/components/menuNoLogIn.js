@@ -2,13 +2,10 @@ import React from 'react';
 import { Component } from 'react';
 import { Link } from 'react-router'; //shows up as anchor tag
 import logo_124_124 from '../../build/assets/images/logo_124_124.png';
-import {store} from '../reduxStore';
 
 class MenuNoLogIn extends Component {
 
     render(){
-
-    console.log(store.getState().code,"meep")
 
         return(
             <div className="ui four item menu">
@@ -25,24 +22,3 @@ class MenuNoLogIn extends Component {
 
 export default MenuNoLogIn;
 
-/*
-    store.subscribe(() => {
-      // When state will be updated(in our case, when items will be fetched),
-      // we will update local component state and force component to rerender
-      // with new data.
-
-      this.setState({
-        items: store.getState().items;
-      });
-    });
-  }
-
-  render() {
-    return (
-      <div>
-        {this.state.items.map((item) => <p> {item.title} </p> )}
-      </div>
-    );
-  }
-};
-}*/

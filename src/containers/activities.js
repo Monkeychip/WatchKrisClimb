@@ -11,8 +11,6 @@ function sumElevation(allActivities) {
         return sumActivities;
 }
 
-
-
 class Activities extends Component {
 
 	render() {

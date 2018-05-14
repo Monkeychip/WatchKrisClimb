@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'; 
 import { bindActionCreators } from 'redux';
-import { fetchActivities, fetchActivitiesWithCode, fetchThisYear, fetchActivitiesWithCodeThisYear} from '../actions/actions_index'; //importing activities axios data
+import { fetchActivities, fetchActivitiesWithCode, fetchThisYear, fetchActivitiesWithCodeThisYear, fetchGoal} from '../actions/actions_index'; //importing activities axios data
 import Chart from 'chart.js'; 
 import { Line } from 'react-chartjs-2';
 import moment from 'moment';
-import Goal from './goal';
+import FormikApp from './goal-formik-persist';
 import { sumElevationHelper , EndOfDecLastYear} from '../helperFunctions';
 import {store} from '../reduxStore';
 
@@ -27,27 +27,27 @@ class ActivitiesChart extends Component {
   constructor(props) { 
     super(props); //parent method on Component 
     this.getData = this.getData.bind(this); //only place in app I'm calling the data.
-    this.submit = this.submit.bind(this); 
+    this.submit = this.submit.bind(this);
     this.state = {
       goal : 0
     }
   }
 /*Getting the submit data*/
   submit(values){
+      console.log("I'm being called");
     if(!values){
       return
     }else{
       //Set goal to local storage so that you can use it from barCharts.js
-      localStorage.setItem('goal', values.number);
+      //localStorage.setItem('goal-form', values.number);
       this.setState({
-        goal: values.number
+        goal: JSON.parse(localStorage.getItem('goal-form')).values.number
       });
     }
   }
-
+//REFACTOR SO NOT RUNNING ALL THE TIME, NEEDED TO SEARCH FOR CODE SO IT DOESN"T OVER RIDE IT.
   getData(){
-
-    //let code = new URL(window.location.href).searchParams.get('code')
+      this.props.fetchGoal();
       if(!store.getState().code) {
         this.props.fetchActivities();
         this.props.fetchThisYear();
@@ -59,7 +59,7 @@ class ActivitiesChart extends Component {
 
   componentDidMount() { 
         this.getData();
-        this.setState({goal: localStorage.getItem('goal')});
+        this.setState({goal: JSON.parse(localStorage.getItem('goal-form')).values.number });
   } 
   
   render() {
@@ -69,6 +69,7 @@ class ActivitiesChart extends Component {
       );
     }
     //Goal Projection
+      console.log(this.props.goal,"this.props")
     let goalArray = [],
         g,
         monthGoal,
@@ -338,28 +339,29 @@ class ActivitiesChart extends Component {
 /*TODO Place these settings somewhere else, they're global*/
     Chart.defaults.global.responsive = true;
     Chart.defaults.global.legend.labels.usePointStyle = true; //legend into circle
-   
 
-    return (  
+
+    return (
        <div id="dumb">
        <Line data={data} options={chartOptionsActvitiies} width="1000" height="300"/>
-       <Goal onSubmit={this.submit} />
+
+       <FormikApp onSubmit={this.submit}/>
        </div>
       )
-       
+
     }
 }
 
 function mapStateToProps(state){
   return {
     activitiesArray: state.activities, 
-    form: state.form,
     thisYear: state.thisYearsActivities,
+    goal: state.goal
   }; //adding form here connects the form props to this components state
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({fetchActivities, fetchActivitiesWithCode, fetchThisYear, fetchActivitiesWithCodeThisYear}, dispatch);
+  return bindActionCreators({fetchActivities, fetchActivitiesWithCode, fetchThisYear, fetchActivitiesWithCodeThisYear, fetchGoal}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ActivitiesChart);

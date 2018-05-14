@@ -7,11 +7,13 @@ import { reducer as formReducer } from 'redux-form'; //grab reducer property off
 import ActivitiesReducer from './reducer_activities';
 import ThisYearsActivitiesReducer from './reducer_thisyearsactivities';
 import CodeReducer from './reducer_code';
+import GoalReducer from './reducer_goal';
 
 const rootReducer = combineReducers({
 	activities: ActivitiesReducer,  
 	thisYearsActivities: ThisYearsActivitiesReducer,
-	form: formReducer, //reducer is apart of the package
+	goal: GoalReducer,
+	//form: formReducer, //reducer is apart of the package
 	code: CodeReducer 
 });
 

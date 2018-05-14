@@ -11,7 +11,8 @@ import reducers from './reducers';
 const persistConfig = {
   key: 'root',
   storage: storage,
-  whitelist: ['form', 'code', 'goal'] // only persist the form number
+  //whitelist: ['form', 'code', 'goal'] // only persist the form number
+    whitelist: ['form', 'code'] // only persist the form number
 };
 
 const middlewares = [reduxPromise, reduxThunk, logger];

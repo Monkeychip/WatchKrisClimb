@@ -51,8 +51,9 @@ class BarChartGoal extends Component {
         	<div>Loading Activities ...</div>
       	);
   	}
-  	//not sure I want to save goal in local storage... ?
-    let goalTotal = localStorage.getItem('goal') ? localStorage.getItem('goal') : 0 ;
+
+    //let goalTotal = localStorage.getItem('goal') ? localStorage.getItem('goal') : 0 ;
+    let goalTotal = JSON.parse(localStorage.getItem('goal-form')).values.number ? JSON.parse(localStorage.getItem('goal-form')).values.number : 0; //lame that it comes in as a string.
     let goal = Math.ceil(goalTotal / 52.1429);
     //call the sumation calculator
     let weekTotal = this.getActvitiesWeek();

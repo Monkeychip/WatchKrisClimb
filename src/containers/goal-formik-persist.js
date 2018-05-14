@@ -1,0 +1,53 @@
+import React from 'react';
+import { withFormik, Field, Form } from 'formik';
+import { Persist } from 'formik-persist';
+import Yup from 'yup';
+
+
+const GoalPersist = ({values, isSubmitting, handleSubmit}) => (
+//const { handleSubmit } = this.props; //pass in action creator, so that whenever it's submitted, it saves to local storage via action creator.
+            <form onSubmit={handleSubmit}>
+                <div className="field">
+                    <div id="elevation-label">
+                        <label>Enter Elevation Goal for the Year:</label>
+                    </div>
+                    <div className="ui right labeled input">
+                        { /*values.number && <p>{errors.number}</p> */}
+                        <Field
+                            type="number"
+                            name="number"
+                            placeholder="50,000 ft"
+                        />
+                        <div className="ui basic label" id="fix-ft-label">ft</div>
+                    </div>
+                </div>
+                    <button type="submit" id="submit-button" className="ui inverted blue button" disabled={isSubmitting}>Show Goal</button>
+
+            </form>
+)
+
+//withFormik wraps the form. Also initializes everything e.g. initial state. Accepts an options object.
+const FormikApp = withFormik({
+  /*mapPropsToValues allows you to setup default values.
+  Makes values avaliable using props.values.number*/
+  mapPropsToValues( { number }) {
+      return {
+          number: number || 0
+        };
+  },
+  validationSchema: Yup.object().shape({
+    //number: Yup.number().required().positive().integer().max(3000000,"Must be a reasonable number")
+    number: Yup.number()
+  }),
+  handleSubmit(values, { resetForm, setSubmitting }) {
+    //setSubmitting(false);
+      setTimeout(() => {
+          resetForm(),
+        setSubmitting(false)
+      },2000)
+
+    console.log(values, "goal values form the goal formik")
+  }
+})(GoalPersist);
+
+export default FormikApp;

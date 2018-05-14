@@ -21,7 +21,7 @@ export function fetchMessage(){
     window.location.href = SERVER_URL; 
   }
 }
-//not sure if this is KOSHER
+
 export function fetchCode(){
 
   let code = new URL(window.location.href).searchParams.get('code') ;
@@ -30,6 +30,15 @@ export function fetchCode(){
     type: 'FETCH_CODE',
     payload: code
   }
+}
+
+export function fetchGoal(){
+    let goal = JSON.parse(localStorage.getItem('goal-form')).values.number
+
+    return {
+        type: 'FETCH_GOAL',
+        payload: goal
+    }
 }
 
 /*Fetches last year */
@@ -88,10 +97,7 @@ export function fetchActivitiesWithCode(){
         client_id: CLIENT_ID,
         client_secret: CLIENT_SECRET,
         code: new URL(window.location.href).searchParams.get('code') || store.getState().code //Needs to be in Application State
-        /*31b79fe479ef612d5f1537e4de003e91cb23a80f vs d02cb08fabfeb04ca8f8354504f59025d97fc96b*/
     };
-  console.log(parameters,"parameters code")
-
   axios.post('https://www.strava.com/oauth/token', parameters)
   .then(response => {
     const activitiesUrlUpdated = `https://www.strava.com/api/v3/athlete/activities?access_token=${response.data.access_token}`;

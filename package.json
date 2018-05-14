@@ -16,6 +16,7 @@
     "ejs": "^2.5.7",
     "express": "^4.16.2",
     "formik": "^0.11.11",
+    "formik-persist": "^1.0.0",
     "history": "^4.7.2",
     "jquery": "^3.2.1",
     "moment": "^2.20.1",
