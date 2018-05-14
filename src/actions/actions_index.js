@@ -22,16 +22,6 @@ export function fetchMessage(){
   }
 }
 
-export function fetchCode(){
-
-  let code = new URL(window.location.href).searchParams.get('code') ;
-
-  return {
-    type: 'FETCH_CODE',
-    payload: code
-  }
-}
-
 export function fetchGoal(){
     let goal = JSON.parse(localStorage.getItem('goal-form')).values.number
 

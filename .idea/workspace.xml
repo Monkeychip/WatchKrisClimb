@@ -2,20 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d7ecafaa-e1b1-4327-8375-053012e88107" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/containers/goal-formik-persist.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reducers/reducer_goal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/actions/actions_index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/actions_index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/types.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/menuNoLogIn.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/menuNoLogIn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/activities.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/activities.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/activitiesChart.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/activitiesChart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/barChart.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/barChart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/goal-formik-persist.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/goal-formik-persist.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/goal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/goal.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/reducers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reduxStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reduxStore.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -43,8 +34,8 @@
       <file leaf-file-name="goal-formik-persist.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/containers/goal-formik-persist.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="35" lean-forward="true" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
+            <state relative-caret-position="136">
+              <caret line="8" column="40" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="40" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -52,15 +43,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activitiesChart.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="activitiesChart.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/containers/activitiesChart.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
-              <caret line="49" column="29" selection-start-line="49" selection-start-column="29" selection-end-line="49" selection-end-column="29" />
+            <state relative-caret-position="34">
+              <caret line="2" column="43" lean-forward="true" selection-start-line="2" selection-start-column="43" selection-end-line="2" selection-end-column="43" />
               <folding>
-                <element signature="e#0#39#0" expanded="true" />
                 <element signature="e#290#319#0" expanded="true" />
-                <element signature="n#!!block;n#monthElevation#0" />
               </folding>
             </state>
           </provider>
@@ -84,11 +73,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/reducers/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="19" />
+            <state relative-caret-position="221">
+              <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="e#383#436#0" expanded="true" />
@@ -100,8 +89,11 @@
       <file leaf-file-name="goal.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/containers/goal.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="22" column="34" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="34" />
+            <state relative-caret-position="850">
+              <caret line="50" lean-forward="true" selection-start-line="50" selection-end-line="50" />
+              <folding>
+                <element signature="e#73#99#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -109,8 +101,8 @@
       <file leaf-file-name="actions_index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/actions/actions_index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="641">
-              <caret line="38" column="14" lean-forward="true" selection-start-line="38" selection-start-column="14" selection-end-line="38" selection-end-column="14" />
+            <state relative-caret-position="386">
+              <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -151,7 +143,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>fetchCOde</find>
       <find>act</find>
       <find>createStor</find>
       <find>persistor</find>
@@ -174,13 +165,14 @@
       <find>values.number</find>
       <find>form</find>
       <find>submit</find>
-      <find>error</find>
-      <find>fetch_goal</find>
       <find>console.ogs</find>
       <find>console</find>
-      <find>fetch</find>
       <find>fetc</find>
+      <find>error</find>
       <find>thisYear</find>
+      <find>Formik</find>
+      <find>fetch</find>
+      <find>fetch_goal</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/public</dir>
@@ -206,12 +198,12 @@
         <option value="$PROJECT_DIR$/src/containers/barChart.js" />
         <option value="$PROJECT_DIR$/src/reduxStore.js" />
         <option value="$PROJECT_DIR$/src/actions/types.js" />
-        <option value="$PROJECT_DIR$/src/containers/goal.js" />
-        <option value="$PROJECT_DIR$/src/containers/goal-formik-persist.js" />
-        <option value="$PROJECT_DIR$/src/actions/actions_index.js" />
         <option value="$PROJECT_DIR$/src/reducers/reducer_goal.js" />
-        <option value="$PROJECT_DIR$/src/reducers/index.js" />
+        <option value="$PROJECT_DIR$/src/containers/goal-formik-persist.js" />
+        <option value="$PROJECT_DIR$/src/containers/goal.js" />
         <option value="$PROJECT_DIR$/src/containers/activitiesChart.js" />
+        <option value="$PROJECT_DIR$/src/actions/actions_index.js" />
+        <option value="$PROJECT_DIR$/src/reducers/index.js" />
       </list>
     </option>
   </component>
@@ -240,9 +232,9 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="952" />
+    <option name="x" value="878" />
     <option name="y" value="23" />
-    <option name="width" value="1378" />
+    <option name="width" value="1452" />
     <option name="height" value="1240" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -338,15 +330,15 @@
       <workItem from="1526149659762" duration="145000" />
       <workItem from="1526149818327" duration="398000" />
       <workItem from="1526150274496" duration="27000" />
-      <workItem from="1526150314058" duration="22080000" />
+      <workItem from="1526150314058" duration="24020000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26932000" />
+    <option name="totallyTimeSpent" value="28872000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="952" y="23" width="1378" height="1240" extended-state="0" />
+    <frame x="878" y="23" width="1452" height="1240" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="7" />
@@ -357,7 +349,7 @@
       <window_info id="npm" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Terminal" order="10" />
       <window_info anchor="bottom" id="TypeScript" order="0" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23802613" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22589532" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Find" order="2" weight="0.32933104" />
@@ -718,33 +710,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/containers/goal-formik-persist.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="35" lean-forward="true" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/containers/goal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="34" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/actions/actions_index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="641">
-          <caret line="38" column="14" lean-forward="true" selection-start-line="38" selection-start-column="14" selection-end-line="38" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/reducers/reducer_code.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -756,17 +721,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="2" lean-forward="true" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/reducers/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="19" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#383#436#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -782,14 +736,53 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/goal-formik-persist.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="40" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/goal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="850">
+          <caret line="50" lean-forward="true" selection-start-line="50" selection-end-line="50" />
+          <folding>
+            <element signature="e#73#99#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/containers/activitiesChart.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="49" column="29" selection-start-line="49" selection-start-column="29" selection-end-line="49" selection-end-column="29" />
+        <state relative-caret-position="34">
+          <caret line="2" column="43" lean-forward="true" selection-start-line="2" selection-start-column="43" selection-end-line="2" selection-end-column="43" />
           <folding>
-            <element signature="e#0#39#0" expanded="true" />
             <element signature="e#290#319#0" expanded="true" />
-            <element signature="n#!!block;n#monthElevation#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/actions/actions_index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="386">
+          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/reducers/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#383#436#0" expanded="true" />
           </folding>
         </state>
       </provider>

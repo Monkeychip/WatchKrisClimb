@@ -12,8 +12,7 @@ import GoalReducer from './reducer_goal';
 const rootReducer = combineReducers({
 	activities: ActivitiesReducer,  
 	thisYearsActivities: ThisYearsActivitiesReducer,
-	goal: GoalReducer,
-	//form: formReducer, //reducer is apart of the package
+	form: formReducer, //reducer is apart of the package
 	code: CodeReducer 
 });
 
