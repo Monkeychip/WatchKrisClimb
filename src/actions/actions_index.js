@@ -5,7 +5,7 @@ import {
  ACCESS_TOKEN,
  CLIENT_SECRET,
  CLIENT_ID,
- FETCH_CODE
+ FETCH_CODE //need to have per redux-form though not listed as action
  } from './types'; 
 import { janFirstLastYear, janFirstThisYear } from '../helperFunctions';
 import {store} from '../reduxStore';
@@ -23,7 +23,7 @@ export function fetchMessage(){
 }
 
 export function fetchGoal(){
-    
+
     let goal = Number(localStorage.getItem('goal'));
     return {
         type: 'FETCH_GOAL',
@@ -47,7 +47,6 @@ export function fetchActivities(){
   };
 }
 
-/*WHY THE FUCK IS THIS NOT GETTING CALLED*/
 export function fetchThisYear(){
   
 let thisYearsActivities = 
@@ -60,7 +59,6 @@ let thisYearsActivities =
     payload: thisYearsActivities 
   };
 }
-
 
 export function fetchActivitiesPayload(activities){
   
@@ -77,7 +75,6 @@ export function fetchActivitiesPayloadThisYear(activitiesThisYear){
     payload: activitiesThisYear
   };
 }
-
 
 export function fetchActivitiesWithCode(){
  return function action(dispatch){
@@ -128,6 +125,21 @@ export function fetchActivitiesWithCodeThisYear(){
   })
 
  } 
+}
+
+export function cleanStore(){
+
+    localStorage.clear();
+
+    return {
+        type: 'LOG_OUT'
+    }
+}
+
+export function fetchCode(){
+    return {
+        type: FETCH_CODE
+    }
 }
 
 

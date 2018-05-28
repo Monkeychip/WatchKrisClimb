@@ -9,19 +9,19 @@ import Goal from './goal';
 import { sumElevationHelper , EndOfDecLastYear} from '../helperFunctions';
 import {store} from '../reduxStore';
 
-//Takes in the full object of activities data and sends to sumElevation only those dates relevant per the second parameter, timestamp
+
 function monthElevation(monthData,timestamp) {
-    
+
      let monthActivity = monthData.filter( 
+
      function(value){
-      let epochDate = new Date(String(value.start_date_local)).getTime(); //start_date_local from strava
-      return (epochDate <  timestamp);  //because filtering after, not using the helper function.
+        let epochDate = new Date(String(value.start_date_local)).getTime();
+        return (epochDate <  timestamp);
     }
   )
     
-  return sumElevationHelper(monthActivity); // now with correct array run through the Sum Elevation and return that value  
+  return sumElevationHelper(monthActivity);
 }
-
 
 class ActivitiesChart extends Component {
   constructor(props) { 

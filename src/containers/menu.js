@@ -1,8 +1,9 @@
 import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux'; //allows me to get state
+import { bindActionCreators } from 'redux';
+import { cleanStore, fetchCode } from '../actions/actions_index'; //importing activities axios data
 import { Link } from 'react-router'; //shows up as anchor tag
-import * as actions from '../actions/actions_index'; //change just fetch_code
 import { CALLBACK_URI } from '../actions/types';
 import logo_124_124 from '../../build/assets/images/logo_124_124.png';
 import {store} from "../reduxStore";
@@ -16,15 +17,19 @@ class Menu extends Component {
 			aboutPath: '/about',
 			homePath: '/'
 		}; //initial state to not logged in
-		this.handleClick = this.handleClick.bind(this);
+		this.handleLogIn = this.handleLogIn.bind(this);
+        this.handleLogOut = this.handleLogOut.bind(this);
 	}
 
-	handleClick(){
+	handleLogIn(){
 		//should eventually make this an action creator
 		window.location.href = `https://www.strava.com/oauth/authorize?client_id=21992&response_type=code&redirect_uri=http://${CALLBACK_URI}`;
 	}
 	handleLogOut(){
-	    window.location.href = `http://www.winteredition.io`;	   
+		//change this to just redirect home
+	    //window.location.href = `http://www.winteredition.io`;
+        window.location.href = '../'; //one level up
+	    this.props.cleanStore();
 	}
 
 	render(){
@@ -47,7 +52,7 @@ class Menu extends Component {
 			button = <div
 			  	 className="ui button" 
 			  	 ref='buttonTextLogIn'
-			  	 onClick={this.handleClick}>Log-in
+			  	 onClick={this.handleLogIn}>Log-in
 			  	</div>
 		}
 		
@@ -59,7 +64,7 @@ class Menu extends Component {
 			  <Link className="item" to={this.state.aboutPath}>How to <br /> Use</Link> 
 			  <Link className="item" to='/table'>More <br /> Stats</Link>
 			  <div className="item">
-			   <div>{button}</div> {/*getting error here on the isLoggedInProperty on the div tag*/}
+			   <div>{button}</div>
 			  </div>
 			  
 			</div>
@@ -71,6 +76,10 @@ function mapStateToProps(state) {
 	return { code: state.code};
 }
 
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({cleanStore, fetchCode}, dispatch);
+}
 
-export default connect(mapStateToProps,actions)(Menu);
+
+export default connect(mapStateToProps,mapDispatchToProps)(Menu);
 

@@ -1,7 +1,6 @@
 export const FETCH_ACTIVITIES = 'fetch_activities';
 export const FETCH_THIS_YEAR = 'fetch_this_year';
 export const FETCH_CODE = 'fetch_code';
-//export const FETCH_GOAL = 'fetch_goal';
 export const CALLBACK_URI = 'winteredition.io';
 
 //Eventually put in .env file and serve from server
