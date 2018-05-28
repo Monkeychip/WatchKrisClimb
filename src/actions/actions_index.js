@@ -23,8 +23,8 @@ export function fetchMessage(){
 }
 
 export function fetchGoal(){
-    let goal = JSON.parse(localStorage.getItem('goal-form')).values.number
-
+    
+    let goal = Number(localStorage.getItem('goal'));
     return {
         type: 'FETCH_GOAL',
         payload: goal

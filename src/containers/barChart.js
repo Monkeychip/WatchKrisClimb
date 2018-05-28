@@ -63,7 +63,7 @@ class BarChartGoal extends Component {
       	);
   	}
 
-    let goalTotal = JSON.parse(localStorage.getItem('goal-form')).values.number ? JSON.parse(localStorage.getItem('goal-form')).values.number : 0; //lame that it comes in as a string.
+    let goalTotal = Number(localStorage.getItem('goal'));
     let goal = Math.ceil(goalTotal / 52.1429);
     let weekTotal = this.getActvitiesWeek();
     let xAxisMax = Math.max(goal,weekTotal);

@@ -19,6 +19,3 @@ package-lock.json
 package.json
 yarn.lock
 types.js
-container_notes.md
-todo.md
-reducer_notes.md
