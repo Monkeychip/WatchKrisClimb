@@ -1,8 +1,9 @@
-//import { FETCH_CODE } from '../actions/types';
 
 export default function(state = null, action){
 	switch(action.type) {
-	case 'FETCH_CODE': //when you call this action type.  
+
+	case 'FETCH_CODE': //when you call this action type.
+        console.log("reducer come find me");
 		return action.payload;
 	}
 	return state;

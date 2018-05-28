@@ -1,5 +1,4 @@
 
-/*JUST GET THE FIRST YER*/
 export default function(state = 0, action){
 	switch(action.type) {
 		case 'FETCH_ACTIVITIES': //reducer needs to return new object each time return state		

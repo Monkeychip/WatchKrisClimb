@@ -26,30 +26,30 @@ class Menu extends Component {
 		window.location.href = `https://www.strava.com/oauth/authorize?client_id=21992&response_type=code&redirect_uri=http://${CALLBACK_URI}`;
 	}
 	handleLogOut(){
-		//change this to just redirect home
-	    //window.location.href = `http://www.winteredition.io`;
-        window.location.href = '../'; //one level up
+        window.location.href = '../';
 	    this.props.cleanStore();
 	}
 
 	render(){
 	    //important
         if(!store.getState().code) {
+            console.log("i'm without a code");
             this.props.fetchCode();
         }
 
-		let button = null
+        let button = null
 
-		if(this.props.code){ //true
-			
-			button = <div
-			  	 className="ui button" 
-			  	 id="buttonLogOut"
-			  	 onClick={this.handleLogOut}>Log-out
-			  	</div>
-		} else {
-			
-			button = <div
+        if(this.props.code){ //true
+
+            button = <div
+                className="ui button"
+                id="buttonLogOut"
+                onClick={this.handleLogOut}>Log-out
+            </div>
+        } else {
+
+
+            button = <div
 			  	 className="ui button" 
 			  	 ref='buttonTextLogIn'
 			  	 onClick={this.handleLogIn}>Log-in
@@ -81,5 +81,5 @@ function mapDispatchToProps(dispatch){
 }
 
 
+//export default connect(mapStateToProps,mapDispatchToProps)(Menu);
 export default connect(mapStateToProps,mapDispatchToProps)(Menu);
-

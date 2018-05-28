@@ -137,8 +137,10 @@ export function cleanStore(){
 }
 
 export function fetchCode(){
+    let code = new URL(window.location.href).searchParams.get('code') || store.getState().code
     return {
-        type: FETCH_CODE
+        type: 'FETCH_CODE',
+        payload: code
     }
 }
 
