@@ -34,7 +34,7 @@ class Table extends Component {
                    <tr>
                     <td>
                       <h4 className="ui header" id="time-climbing"> Elevation gained from Skiing?</h4>
-                         <p className="ag-below-header"><DaysSkied /></p>
+                        <p className="ag-below-header">In Ft.</p>
                     </td>
                     <td className="center aligned"> <BarChartSki /></td> 
                    </tr>

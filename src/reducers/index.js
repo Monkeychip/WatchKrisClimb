@@ -20,18 +20,3 @@ const rootReducer = combineReducers({
 
 export default rootReducer;
 
-/*
-
-Key -> actvities
-Reducer -> Activities Reducer
-
-//not using createStore, and probably should be.
-
-GOAL get Activities Payload to go into application state, and access it from differnet parts of the app
-*/
-
-/*
-import { createStore } from 'redux';
-let store = createStore(counter);
-console.log(store.getState()); // 0
-*/

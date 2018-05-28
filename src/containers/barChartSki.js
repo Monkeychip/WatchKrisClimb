@@ -1,10 +1,8 @@
 import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import {bindActionCreators} from 'redux';
 import moment from 'moment';
 import { HorizontalBar } from 'react-chartjs-2'; 
-import { fetchActivities} from '../actions/actions_index'; //importing activities axios data
 import { sumElevationHelper, filterElevationDataHelper } from '../helperFunctions';
 
 
@@ -12,16 +10,16 @@ class BarChartSki extends Component {
 
   getSkiActvitiesWeek(){
     let lastSunday = moment().startOf('isoWeek').valueOf(); 
-    let filteredData = filterElevationDataHelper(this.props.activitiesArray, lastSunday, "BackcountrySki");
+    let filteredData = filterElevationDataHelper(this.props.thisYear, lastSunday, "BackcountrySki");
     let weekSkiElevationGain = sumElevationHelper(filteredData);
     return weekSkiElevationGain; 
   }
   
   render() {
 
-    if(!this.props.activitiesArray){     
+    if(!this.props.thisYear){
       return(
-          <div>Loading Activities ...</div>
+          <div>...</div>
         );
     }
 
@@ -80,7 +78,7 @@ class BarChartSki extends Component {
               xPadding: 10,
               yPadding: 10,
               callbacks: {
-                  label: function (t, d) {
+                  label: function (t) {
                     if (t.datasetIndex === 0) {
                       return `${t.xLabel.toLocaleString()} ft  `;
                     } else { 
@@ -95,7 +93,6 @@ class BarChartSki extends Component {
 
    return (
       <div>
-      	
       	<HorizontalBar data={data} options={barOptions} height="50px"/>
       </div>
     );
@@ -103,20 +100,15 @@ class BarChartSki extends Component {
 
 }
 
-function mapDispatchToProps(dispatch){
-  return bindActionCreators({ fetchActivities } , dispatch)
-}
 
-/* CONNNECTING TO APPLICATION STATE*/
+
 function mapStateToProps(state){
-
-  return {
-    activitiesArray: state.activities // this.props.activitiesArray now accessible in the component.
-    //whatever container here is === this.props of component asdf: 123 this.props.asdf == 123
-    //see the reducer key for getting activiites name
-  }
+      return {
+        thisYear: state.thisYearsActivities
+      }
 }
-//connect function says take component, and return container
-export default connect(mapStateToProps, mapDispatchToProps)(BarChartSki);
-//export default BarChartSki;
+
+
+export default connect(mapStateToProps)(BarChartSki);
+
 

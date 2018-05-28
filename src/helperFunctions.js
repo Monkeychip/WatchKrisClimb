@@ -9,25 +9,21 @@ export const janFirstThisYear = (moment().startOf('year').valueOf())/1000; //Jan
 
 //Filter activity data based on date
 export function filterElevationDataHelper(allData, filterAfterDate, filteredActivity) {
-  //let now = new Date();
-  //let today = moment(new Date()).valueOf(); //1520976377824
-      
+
   let filteredActivitiesByDate = allData.filter(      
       function(value){
           let activityDate = moment(new Date(String(value.start_date_local))).valueOf();
-          return (activityDate > filterAfterDate);  
+          return (activityDate > filterAfterDate);
       }
     )
-  
   	if(typeof filteredActivity === "undefined"){
     		return filteredActivitiesByDate;
   		//you just want to jump and return filteredActivitiesByDate
   	}else if(filteredActivity === "else"){
-  		
   		let allOtherActivitiesFiltered = filteredActivitiesByDate.filter(
     		function(value){
       			let activityType = value.type;
-      			if(('BackcountrySki Run Bike').indexOf(activityType) < 0) {return activityType}
+      			if(('BackcountrySki Run Ride').indexOf(activityType) < 0) {return activityType}
     		}
   		)
   		return allOtherActivitiesFiltered;

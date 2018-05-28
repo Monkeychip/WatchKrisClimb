@@ -1,10 +1,8 @@
 import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import {bindActionCreators} from 'redux';
 import moment from 'moment';
 import { HorizontalBar } from 'react-chartjs-2'; 
-import { fetchActivities} from '../actions/actions_index'; //importing activities axios data
 import { sumElevationHelper, filterElevationDataHelper } from '../helperFunctions';
 
 
@@ -13,7 +11,7 @@ class BarChartRun extends Component {
 
   getRunActvitiesWeek(){
     let lastSunday = moment().startOf('isoWeek').valueOf(); 
-    let filteredData = filterElevationDataHelper(this.props.activitiesArray, lastSunday, "Run");
+    let filteredData = filterElevationDataHelper(this.props.thisYear, lastSunday, "Run");
     let weekRunElevationGain = sumElevationHelper(filteredData);
     return weekRunElevationGain; 
   }
@@ -21,9 +19,9 @@ class BarChartRun extends Component {
 
   render() {
 
-  	if(!this.props.activitiesArray){     
+  	if(!this.props.thisYear){
       return(
-          <div>Loading Activities ...</div>
+          <div>...</div>
         );
     }
 
@@ -95,24 +93,20 @@ class BarChartRun extends Component {
  }
 
 
-        return (
-      <div>
-      	
-      	<HorizontalBar data={data} options={barOptions} height="50px"/>
-      </div>
+    return (
+          <div>
+
+              <HorizontalBar data={data} options={barOptions} height="50px"/>
+          </div>
     );
   }
 
 }
-function mapDispatchToProps(dispatch){
-  return bindActionCreators({ fetchActivities } , dispatch)
-}
 
 function mapStateToProps(state){
-
-  return {
-    activitiesArray: state.activities 
-  }
+      return {
+        thisYear: state.thisYearsActivities
+      }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BarChartRun);
+export default connect(mapStateToProps)(BarChartRun);

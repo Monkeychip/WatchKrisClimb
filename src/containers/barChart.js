@@ -1,8 +1,11 @@
 import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import moment from 'moment';
-import { HorizontalBar } from 'react-chartjs-2'; 
+import { HorizontalBar } from 'react-chartjs-2';
+import {fetchActivitiesWithCodeThisYear, fetchThisYear} from "../actions/actions_index";
+import {store} from '../reduxStore';
 
 function weekElevation(allData) {
 	
@@ -43,6 +46,14 @@ class BarChartGoal extends Component {
  		return weekElevationGain;	
   }
 
+  componentDidMount(){
+      if(!store.getState().code) {
+          this.props.fetchThisYear();
+      }else{
+          this.props.fetchActivitiesWithCodeThisYear();
+      };
+  }
+
   render() {
 
   	if(!this.props.thisYear){
@@ -52,12 +63,9 @@ class BarChartGoal extends Component {
       	);
   	}
 
-    //let goalTotal = localStorage.getItem('goal') ? localStorage.getItem('goal') : 0 ;
     let goalTotal = JSON.parse(localStorage.getItem('goal-form')).values.number ? JSON.parse(localStorage.getItem('goal-form')).values.number : 0; //lame that it comes in as a string.
     let goal = Math.ceil(goalTotal / 52.1429);
-    //call the sumation calculator
     let weekTotal = this.getActvitiesWeek();
-    //Setting xAxisMax to local storage.  Might be better way to do this. 
     let xAxisMax = Math.max(goal,weekTotal);
     localStorage.setItem('xAxisMax', xAxisMax);
     let stepSize = Math.ceil(xAxisMax / 5);
@@ -139,11 +147,15 @@ class BarChartGoal extends Component {
 
 
 function mapStateToProps(state){
-//this.props.key (e.g.this.props.thisYear
 	return {
         thisYear: state.thisYearsActivities,
         goal: state.form
 	}
 }
 
-export default connect(mapStateToProps)(BarChartGoal);
+//need so that if navigate with hitting home first, load data.
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({fetchThisYear, fetchActivitiesWithCodeThisYear}, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BarChartGoal);
