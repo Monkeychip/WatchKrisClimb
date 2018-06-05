@@ -1,7 +1,3 @@
-
-
-//NOW USING FORMIK AND SAVING ONLY IN LOCAL STORAGE INSTEAD OF REDUX.
-
 import React from 'react';
 import { Component } from 'react';
 import { Field, reduxForm} from 'redux-form';

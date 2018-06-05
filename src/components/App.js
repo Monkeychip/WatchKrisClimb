@@ -3,7 +3,12 @@ import '../App.css';
 import Activities from '../containers/activities';
 import ActivitiesChart from '../containers/activitiesChart';
 import Menu from '../containers/menu';
+import CreateItemModal from "../containers/testing";
+import Amplify, { API } from 'aws-amplify';
+import aws_exports from '../aws-exports';
 
+
+Amplify.configure(aws_exports);
 
 class App extends Component {
 
@@ -20,7 +25,7 @@ class App extends Component {
               <ActivitiesChart />
           </div>
          <div>
-           
+                <CreateItemModal/>
          </div>
       </div>
     );
