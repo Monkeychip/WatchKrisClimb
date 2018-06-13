@@ -1,47 +1,45 @@
 import React, { Component } from 'react';
-import Amplify, { API } from 'aws-amplify';
+import axios from "axios";
 
 class CreateItemModal extends Component {
 
     constructor(props) {
         super(props)
-        this.state = {}
+        this.state = { accessToken: '' }
         this.handleSubmit = this.handleSubmit.bind(this);
 
     }
 
-    handleSubmit(event) {
-        let apiName = 'sampleCloudApi';
-        let path = '/items';
-        let newItem = {
-            body: {
-                "ID": "testing_id"
-            }
-        }
-        /*API.post(apiName, path, newItem).then(response => {
-            console.log(response,"within API call");
-        }).catch(error => {
-            console.log(error.response)
-        });
-        event.preventDefault();*/
-        API.post(apiName, path,newItem).then(response => {
-            console.log(response,"from within API call")
-        }).catch(error => {
-            console.log(error.response,"SOMETHINGS NOT RIGHT?!")
-        });
+    async handleSubmit(event){
         event.preventDefault();
-    }
+        let GATEWAY_URL= ['https://pwgoqx1296.execute-api.us-east-1.amazonaws.com/beta/activities'];
 
-
+        try {
+            const result = await fetch(GATEWAY_URL, {
+                method: 'GET',
+                mode: 'cors', //important here
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                crossDomain: true
+            });
+            console.log(result,"result");
+        }catch(error){
+            console.log("error");
+        }
+    };
 
     render () {
         return (
             <form onSubmit={this.handleSubmit} size='large' key='large'>
                 <button type="submit" id="submit-button" className="ui inverted blue button ">TESTING</button>
             </form>
-
         );
     }
 }
 
 export default CreateItemModal;
+
+
+///
