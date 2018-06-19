@@ -11,15 +11,6 @@ import {store} from '../reduxStore';
 
 const activitiesUrl = `https://www.strava.com/api/v3/athlete/activities?access_token=${ACCESS_TOKEN}`; //TODO: replace with lamda function aybe.
 
-const SERVER_URL ='http://localhost:3002/auth/strava'; //this is the url of the API server that you made
-
-export function fetchMessage(){
-  return function(dispatch){
-    //when time comes you would cancel this out, and you don't need it unless you want to keep the server functionality.
-    window.location.href = SERVER_URL;
-  }
-}
-
 export function fetchGoal(){
 
     let goal = Number(localStorage.getItem('goal'));
