@@ -1,6 +1,8 @@
 A react app that pulls in Strava Data from their API, and displays total Elv. Gained YTD from ALL activities.
-Eventually to be deployed as a sinlge page app to help fundraise for a non-profit.  Will show supporters, sponsors, and other elevation details per request of client.
+The app is a "simple" project my boyfriend asked if I could do.  Many months later, and it's become a tool for learning various react / redux concepts.
 
 ### WORK IN PROGRESS
 
-Hosted on S3
+Using S3 bucket and Route 53 for hosting
+Using AWS Lambda and API Gateway for concealing handshake with Strava.
+
