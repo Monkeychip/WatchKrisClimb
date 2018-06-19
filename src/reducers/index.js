@@ -7,10 +7,12 @@ import { reducer as formReducer } from 'redux-form'; //grab reducer property off
 import ActivitiesReducer from './reducer_activities';
 import ThisYearsActivitiesReducer from './reducer_thisyearsactivities';
 import CodeReducer from './reducer_code';
+import AuthorizationToken from './reducer_authorizationtoken';
 
 const appReducer = combineReducers({
 	activities: ActivitiesReducer,  
 	thisYearsActivities: ThisYearsActivitiesReducer,
+	authorizationToken: AuthorizationToken,
 	form: formReducer, //reducer is apart of the package
 	code: CodeReducer 
 });

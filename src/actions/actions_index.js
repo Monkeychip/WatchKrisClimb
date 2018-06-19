@@ -1,6 +1,7 @@
 import axios from 'axios'; 
 import {
  FETCH_ACTIVITIES,
+ FETCH_AUTHORIZATION_TOKEN,
  FETCH_THIS_YEAR,
  ACCESS_TOKEN,
  CLIENT_SECRET,
@@ -10,7 +11,6 @@ import {
 import { janFirstLastYear, janFirstThisYear } from '../helperFunctions';
 import {store} from '../reduxStore';
 
-  
 const activitiesUrl = `https://www.strava.com/api/v3/athlete/activities?access_token=${ACCESS_TOKEN}`;
 
 const SERVER_URL ='http://localhost:3002/auth/strava'; //this is the url of the API server that you made
@@ -31,130 +31,194 @@ export function fetchGoal(){
     }
 }
 
-/*Fetches last year */
 export function fetchActivities(){
-  
-  let activities = 
-    axios.get(activitiesUrl, { params: {
-      after: janFirstLastYear,
-      before: janFirstThisYear,
-      per_page: 200
-    }});
-  
-  return {
-    type: 'FETCH_ACTIVITIES',
-    payload: activities 
-  };
+    let activities =
+        axios.get(activitiesUrl, { params: {
+                after: janFirstLastYear,
+                before: janFirstThisYear,
+                per_page: 200
+            }});
+
+    return {
+        type: 'FETCH_ACTIVITIES',
+        payload: activities
+    };
 }
 
 export function fetchThisYear(){
-  
-let thisYearsActivities = 
-    axios.get(activitiesUrl, { params: {
-      after: janFirstThisYear,
-      per_page: 200
-    }});
-  return {
-    type: FETCH_THIS_YEAR,
-    payload: thisYearsActivities 
-  };
+
+    let thisYearsActivities =
+        axios.get(activitiesUrl, { params: {
+                after: janFirstThisYear,
+                per_page: 200
+            }});
+    return {
+        type: FETCH_THIS_YEAR,
+        payload: thisYearsActivities
+    };
 }
 
 export function fetchActivitiesPayload(activities){
-  
-  return {
-    type: 'FETCH_ACTIVITIES',
-    payload: activities
-  };
-}
 
+    return {
+        type: FETCH_ACTIVITIES,
+        payload: activities
+    };
+}
 export function fetchActivitiesPayloadThisYear(activitiesThisYear){
-  
-  return {
-    type: FETCH_THIS_YEAR,
-    payload: activitiesThisYear
-  };
+
+    return {
+        type: FETCH_THIS_YEAR,
+        payload: activitiesThisYear
+    };
 }
+/*export function fetchActivitiesWithCode(){
+ return function action(dispatch){
+  dispatch({ type: FETCH_ACTIVITIES })
+    let parameters = {
+        client_id: CLIENT_ID,
+        client_secret: CLIENT_SECRET,
+        code: new URL(window.location.href).searchParams.get('code') || store.getState().code //Needs to be in Application State
+    };
+  axios.post('https://www.strava.com/oauth/token', parameters)
+  .then(response => { //response is the authorization token...
+    const activitiesUrlUpdated = `https://www.strava.com/api/v3/athlete/activities?access_token=${response.data.access_token}`;
+    return axios.get(activitiesUrlUpdated, { params: {
+            after: janFirstLastYear,
+            before: janFirstThisYear,
+            per_page: 200
+          }})
+  })
+  .then(response => {
+    return dispatch(fetchActivitiesPayload(response));
+  })
+ }
+}
+*/
 
+/*
+* 1. calling async on the dispatch method.  Waiting on the response constant to return it's promise.
+* 2.  then calling dispatch method which will action sending to all middlewares and reducers of app.
+* 3. sending the type and the payload
+* 4. */
 
-export function fetchActivitiesWithCode(){
-    return function action(dispatch){
-        dispatch({ type: FETCH_ACTIVITIES })
+function fetchAuthorizationToken() {
+    let GATEWAY_URL= ['https://pwgoqx1296.execute-api.us-east-1.amazonaws.com/beta/activities'];
+    let code = new URL(window.location.href).searchParams.get('code') || store.getState().code //Needs to be in
 
-        let GATEWAY_URL= "https://pwgoqx1296.execute-api.us-east-1.amazonaws.com/beta/activities";
-            let code = new URL(window.location.href).searchParams.get('code') || store.getState().code //Needs to be in Application State
-
-            fetch(GATEWAY_URL, { //lambda function
-                method: 'POST',
-                mode: 'cors',
-                body: JSON.stringify({
-                    //code: 'a0b9cff13b19d0b9f86a759e38a3d133fba3dcc8' //replace
-                    code: code
-                }),
-
+    try {
+        return fetch(GATEWAY_URL, { //lambda function
+            method: 'POST',
+            mode: 'cors',
+            body: JSON.stringify({
+                code: code
+            }),
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-
-                withCredentials: true,
-                crossDomain: true
-            }).then(response => {
-                return response.json(); //puts into json object
-
-            }).then( json => {
-                console.log(json.done.json,"success");
-                return json.done.json
-            }).then( authtoken => {
-                const activitiesUrlUpdated = `https://www.strava.com/api/v3/athlete/activities?access_token=${authtoken}`;
-
-            return axios.get(activitiesUrlUpdated, { params: {
-                    after: janFirstLastYear,
-                    before: janFirstThisYear,
-                    per_page: 200
-                }});
-
-            }).then(response => {
-                return dispatch(fetchActivitiesPayload(response));
-            });
+            withCredentials: true,
+            crossDomain: true
+        }).then(response => {
+            return response.json(); //puts into json object
+        }).then(json => {
+            return json.done.json
+        }).then(data => {
+            return { type: FETCH_AUTHORIZATION_TOKEN, payload: data}
+        })
+    } catch(e){
+        return e;
     }
 }
 
-export function fetchActivitiesWithCodeThisYear(){
+export function fetchActivitiesWithCode(){
 
- return function action(dispatch){
-  dispatch({ type: FETCH_ACTIVITIES })
-
-    let parameters = {
-        client_id: CLIENT_ID,
-        client_secret: CLIENT_SECRET,
-        code: new URL(window.location.href).searchParams.get('code') || store.getState().code//Needs to be in Application State
+    return (dispatch, getState) => {
+         //first look to see if already in state, and then call the dispatch to move it to state
+        if(!getState().authorizationToken){
+            fetchAuthorizationToken()
+                .then(() => {
+                    return dispatch(fetchAuthorizationToken());
+                })
+                .then(() => {
+                    let authorizationToken = getState().authorizationToken;
+                    return axios.get(`https://www.strava.com/api/v3/athlete/activities?access_token=${authorizationToken}`, { params: {
+                         after: janFirstLastYear,
+                         before: janFirstThisYear,
+                         per_page: 200
+                    }})
+                })
+                .then(data => {
+                    console.log("meep")
+                    return dispatch(fetchActivitiesPayload(data))
+                })
+        }else{
+            let authorizationToken = getState().authorizationToken;
+            console.log("in ELSE statement", authorizationToken);
+            return axios.get(`https://www.strava.com/api/v3/athlete/activities?access_token=${authorizationToken}`, { params: {
+                    after: janFirstLastYear,
+                    before: janFirstThisYear,
+                    per_page: 200
+            }})
+            .then(data => {
+                 console.log("Im here with", data)
+                 return dispatch({ type: FETCH_ACTIVITIES, type: data })
+            })
+        }
     };
-
-  axios.post('https://www.strava.com/oauth/token', parameters)
-  .then(response => {
-    const activitiesUrlUpdated = `https://www.strava.com/api/v3/athlete/activities?access_token=${response.data.access_token}`;
-    return axios.get(activitiesUrlUpdated, { params: {
-            after: janFirstThisYear,
-            per_page: 200 //TODO: THIS NEEDS TO BE LARGER
-          }})
-  })
-  .then(response => {
-    return dispatch(fetchActivitiesPayloadThisYear(response));
-  })
-
- } 
 }
 
+//DONT DELETE BACKUP
+/*export function fetchActivitiesWithCode(){
+    return function action(dispatch){
+        dispatch({ type: FETCH_ACTIVITIES })
+        let parameters = {
+            client_id: CLIENT_ID,
+            client_secret: CLIENT_SECRET,
+            code: new URL(window.location.href).searchParams.get('code') || store.getState().code
+        };
+        axios.post('https://www.strava.com/oauth/token', parameters)
+            .then(response => {
+                const activitiesUrlUpdated = `https://www.strava.com/api/v3/athlete/activities?access_token=${response.data.access_token}`;
+                return axios.get(activitiesUrlUpdated, { params: {
+                        after: janFirstLastYear,
+                        before: janFirstThisYear,
+                        per_page: 200
+                    }})
+            })
+            .then(response => {
+                return dispatch(fetchActivitiesPayload(response));
+            })
+    }
+}
+*/
+export function fetchActivitiesWithCodeThisYear(){
+    return function action(dispatch){
+        //dispatch({ type: FETCH_ACTIVITIES })
+        let parameters = {
+            client_id: CLIENT_ID,
+            client_secret: CLIENT_SECRET,
+            code: new URL(window.location.href).searchParams.get('code') || store.getState().code
+        };
+        axios.post('https://www.strava.com/oauth/token', parameters)
+            .then(response => {
+                const activitiesUrlUpdated = `https://www.strava.com/api/v3/athlete/activities?access_token=${response.data.access_token}`;
+                return axios.get(activitiesUrlUpdated, { params: {
+                        after: janFirstThisYear,
+                        per_page: 200
+                    }})
+            })
+            .then(response => {
+                return dispatch(fetchActivitiesPayloadThisYear(response));
+            })
+    }
+}
 export function cleanStore(){
-
     localStorage.clear();
-
     return {
         type: 'LOG_OUT'
     }
 }
-
 export function fetchCode(){
     let code = new URL(window.location.href).searchParams.get('code') || store.getState().code
     return {
@@ -162,7 +226,3 @@ export function fetchCode(){
         payload: code
     }
 }
-
-
-
-

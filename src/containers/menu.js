@@ -32,15 +32,13 @@ class Menu extends Component {
 
 	render(){
 	    //important
-        if(!store.getState().code) {
-            console.log("i'm without a code");
+        if(!store.getState().code) {-
             this.props.fetchCode();
         }
 
         let button = null
 
         if(this.props.code){ //true
-
             button = <div
                 className="ui button"
                 id="buttonLogOut"
@@ -73,7 +71,10 @@ class Menu extends Component {
 }
 
 function mapStateToProps(state) {
-	return { code: state.code};
+	return {
+		code: state.code,
+        authorizationToken: state.authorizationToken
+	};
 }
 
 function mapDispatchToProps(dispatch){
@@ -81,5 +82,4 @@ function mapDispatchToProps(dispatch){
 }
 
 
-//export default connect(mapStateToProps,mapDispatchToProps)(Menu);
 export default connect(mapStateToProps,mapDispatchToProps)(Menu);
