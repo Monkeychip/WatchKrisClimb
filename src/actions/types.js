@@ -5,7 +5,5 @@ export const CALLBACK_URI = 'winteredition.io';
 export const FETCH_AUTHORIZATION_TOKEN = 'fetch_authorization_token';
 
 export const ACCESS_TOKEN ='5a75c79d19d9994c0c98bbb843225dbcfecacf5f';
-export const CLIENT_ID = 21992; //number
-export const CLIENT_SECRET = '22664cc703cd3adbff5dea59fda7d2439d333931'; //string
 
 
