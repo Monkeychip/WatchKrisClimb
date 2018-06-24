@@ -32,7 +32,7 @@ class Menu extends Component {
 
 	render(){
 	    //important
-        if(!store.getState().code) {-
+        if(!store.getState().code) {
             this.props.fetchCode();
         }
 

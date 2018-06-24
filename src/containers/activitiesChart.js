@@ -49,7 +49,6 @@ class ActivitiesChart extends Component {
 
     //let code = new URL(window.location.href).searchParams.get('code')
       if(!store.getState().code) {
-        console.log("hello no code");
         this.props.fetchActivities();
         this.props.fetchThisYear();
       }else{

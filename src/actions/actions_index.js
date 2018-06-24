@@ -4,12 +4,12 @@ import {
  FETCH_AUTHORIZATION_TOKEN,
  FETCH_THIS_YEAR,
  ACCESS_TOKEN,
- FETCH_CODE //need to have per redux-form though not listed as action
+ FETCH_CODE
  } from './types'; 
 import { janFirstLastYear, janFirstThisYear } from '../helperFunctions';
 import {store} from '../reduxStore';
 
-const activitiesUrl = `https://www.strava.com/api/v3/athlete/activities?access_token=${ACCESS_TOKEN}`; //TODO: replace with lamda function aybe.
+const activitiesUrl = `https://www.strava.com/api/v3/athlete/activities?access_token=${ACCESS_TOKEN}`; //TODO: replace with lamda function or dummy data
 
 export function fetchGoal(){
 
@@ -35,12 +35,13 @@ export function fetchActivities(){
 }
 
 export function fetchThisYear(){
-    console.log("test");
+
     let thisYearsActivities =
         axios.get(activitiesUrl, { params: {
                 after: janFirstThisYear,
                 per_page: 200
             }});
+    console.log(thisYearsActivities,"maybe")
     return {
         type: FETCH_THIS_YEAR,
         payload: thisYearsActivities
@@ -54,6 +55,7 @@ export function fetchActivitiesPayload(activities){
         payload: activities
     };
 }
+
 export function fetchActivitiesPayloadThisYear(activitiesThisYear){
 
     return {
@@ -90,39 +92,96 @@ function fetchAuthorizationToken() {
         return e;
     }
 }
-//LAST YEAR FETCH_ACTIVITIES
-export function fetchActivitiesWithCode(){
+
+export function fetchActivitiesWithCode(){ //LAST YEAR FETCH_ACTIVITIES
 
     return (dispatch, getState) => {
-         //first look to see if already in state, and then call the dispatch to move it to state
-        if(!getState().authorizationToken){
+
+        if(!getState().authorizationToken){ //TO DO: Put this in a if/else, but having issues with dispatch and promises defining a variable.  Revisit later.
+
             fetchAuthorizationToken()
                 .then(() => {
+
                     return dispatch(fetchAuthorizationToken());
+
                 })
                 .then(() => {
+
                     let authorizationToken = getState().authorizationToken;
-                    return axios.get(`https://www.strava.com/api/v3/athlete/activities?access_token=${authorizationToken}`, { params: {
-                         after: janFirstLastYear,
-                         before: janFirstThisYear,
-                         per_page: 200
-                    }})
+
+                    let pageOne = axios.get(`https://www.strava.com/api/v3/athlete/activities?access_token=${authorizationToken}`, {
+                        params: {
+                            after: janFirstLastYear,
+                            before: janFirstThisYear,
+                            page:1,
+                            per_page: 100
+                        }
+                    });
+
+                    let pageTwo = axios.get(`https://www.strava.com/api/v3/athlete/activities?access_token=${authorizationToken}`, { params: {
+                            after: janFirstLastYear,
+                            before: janFirstThisYear,
+                            page: 2,
+                            per_page: 100
+                        }
+                    });
+
+                    return Promise.all([pageOne,pageTwo])
+
                 })
-                .then(data => {
-                    return dispatch(fetchActivitiesPayload(data))
+                .then(object => {
+
+                    let pageOne = object[0].data;
+                    let pageTwo = object[1].data;
+
+                    return pageOne.concat(pageTwo);
+
+                })
+                .then(object => {
+
+                    return dispatch(fetchActivitiesPayload(object))
+
                 })
         }else{
-            let authorizationToken = getState().authorizationToken;
-            return axios.get(`https://www.strava.com/api/v3/athlete/activities?access_token=${authorizationToken}`, { params: {
-                    after: janFirstLastYear,
-                    before: janFirstThisYear,
-                    per_page: 200
-            }})
-            .then(data => {
-                return dispatch(fetchActivitiesPayload(data))
+
+            (() => { //Is this OK?
+                let authorizationToken = getState().authorizationToken;
+
+                let pageOne = axios.get(`https://www.strava.com/api/v3/athlete/activities?access_token=${authorizationToken}`, {
+                    params: {
+                        after: janFirstLastYear,
+                        before: janFirstThisYear,
+                        page: 1,
+                        per_page: 100
+                    }
+                });
+
+                let pageTwo = axios.get(`https://www.strava.com/api/v3/athlete/activities?access_token=${authorizationToken}`, {
+                    params: {
+                        after: janFirstLastYear,
+                        before: janFirstThisYear,
+                        page: 2,
+                        per_page: 100
+                    }
+                });
+
+                return Promise.all([pageOne, pageTwo])
+            })
+            .then(object => {
+
+                let pageOne = object[0].data;
+                let pageTwo = object[1].data;
+
+                return pageOne.concat(pageTwo);
+
+            })
+            .then(object => {
+
+                return dispatch(fetchActivitiesPayload(object))
+
             })
         }
-    };
+    }
 }
 
 export function fetchActivitiesWithCodeThisYear(){
@@ -138,7 +197,8 @@ export function fetchActivitiesWithCodeThisYear(){
                     let authorizationToken = getState().authorizationToken;
                     return axios.get(`https://www.strava.com/api/v3/athlete/activities?access_token=${authorizationToken}`, { params: {
                             after: janFirstThisYear,
-                            per_page: 200
+                            per_page: 200,
+                            page: 1
                         }})
                 })
                 .then(data => {
@@ -167,7 +227,8 @@ export function cleanStore(){
     }
 }
 export function fetchCode(){
-    let code = new URL(window.location.href).searchParams.get('code') || store.getState().code
+    let code = new URL(window.location.href).searchParams.get('code') || store.getState().code;
+
     return {
         type: FETCH_CODE,
         payload: code
