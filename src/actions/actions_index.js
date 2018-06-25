@@ -188,37 +188,88 @@ export function fetchActivitiesWithCodeThisYear(){
 
     return (dispatch, getState) => {
 
-        if(!getState().authorizationToken){
+        if(!getState().authorizationToken){ //TO DO: Put this in a if/else, but having issues with dispatch and promises defining a variable.  Revisit later.
+
             fetchAuthorizationToken()
                 .then(() => {
+
                     return dispatch(fetchAuthorizationToken());
+
                 })
                 .then(() => {
+
                     let authorizationToken = getState().authorizationToken;
-                    return axios.get(`https://www.strava.com/api/v3/athlete/activities?access_token=${authorizationToken}`, { params: {
+
+                    let pageOne = axios.get(`https://www.strava.com/api/v3/athlete/activities?access_token=${authorizationToken}`, {
+                        params: {
                             after: janFirstThisYear,
-                            per_page: 200,
-                            page: 1
-                        }})
+                            page:1,
+                            per_page: 100
+                        }
+                    });
+
+                    let pageTwo = axios.get(`https://www.strava.com/api/v3/athlete/activities?access_token=${authorizationToken}`, { params: {
+                            after: janFirstThisYear,
+                            page: 2,
+                            per_page: 100
+                        }
+                    });
+
+                    return Promise.all([pageOne,pageTwo])
+
                 })
-                .then(data => {
-                    return dispatch(fetchActivitiesPayloadThisYear(data));
+                .then(object => {
+
+                    let pageOne = object[0].data;
+                    let pageTwo = object[1].data;
+
+                    return pageOne.concat(pageTwo);
+
+                })
+                .then(object => {
+
+                    return dispatch(fetchActivitiesPayloadThisYear(object))
+
                 })
         }else{
-            let authorizationToken = getState().authorizationToken;
 
-            return axios.get(`https://www.strava.com/api/v3/athlete/activities?access_token=${authorizationToken}`, { params: {
-                    after: janFirstThisYear,
-                    per_page: 200
-                }})
-                .then(data => {
-                    return dispatch(fetchActivitiesPayloadThisYear(data));
+            (() => { //Is this OK?
+                let authorizationToken = getState().authorizationToken;
+
+                let pageOne = axios.get(`https://www.strava.com/api/v3/athlete/activities?access_token=${authorizationToken}`, {
+                    params: {
+                        after: janFirstThisYear,
+                        page:1,
+                        per_page: 100
+                    }
+                });
+
+                let pageTwo = axios.get(`https://www.strava.com/api/v3/athlete/activities?access_token=${authorizationToken}`, {
+                    params: {
+                        after: janFirstThisYear,
+                        page: 2,
+                        per_page: 100
+                    }
+                });
+
+                return Promise.all([pageOne, pageTwo])
+            })
+                .then(object => {
+
+                    let pageOne = object[0].data;
+                    let pageTwo = object[1].data;
+
+                    return pageOne.concat(pageTwo);
+
+                })
+                .then(object => {
+
+                    return dispatch(fetchActivitiesPayloadThisYear(object))
+
                 })
         }
-    };
+    }
 }
-
-
 
 export function cleanStore(){
     localStorage.clear();

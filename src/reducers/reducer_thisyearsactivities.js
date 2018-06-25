@@ -5,7 +5,7 @@ export default function(state = null, action){
 	switch(action.type) {
 
 	case FETCH_THIS_YEAR:
-        return action.payload.data;
+        return action.payload;
 	}
 	return state;
 };
