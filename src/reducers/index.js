@@ -8,6 +8,7 @@ import ActivitiesReducer from './reducer_activities';
 import ThisYearsActivitiesReducer from './reducer_thisyearsactivities';
 import CodeReducer from './reducer_code';
 import AuthorizationToken from './reducer_authorizationtoken';
+import { LOG_OUT } from '../actions/types';
 
 const appReducer = combineReducers({
 	activities: ActivitiesReducer,  
@@ -18,7 +19,8 @@ const appReducer = combineReducers({
 });
 
 const rootReducer = (state, action) => {
-	if(action.type === 'LOG_OUT') {
+	if(action.type === LOG_OUT) {
+	    console.log("here");
 		state = undefined
 	}
     return appReducer(state,action)

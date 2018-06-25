@@ -5,7 +5,8 @@ import {
  FETCH_THIS_YEAR,
  ACCESS_TOKEN,
  FETCH_CODE,
- FETCH_GOAL
+ FETCH_GOAL,
+ LOG_OUT
  } from './types'; 
 import { janFirstLastYear, janFirstThisYear } from '../helperFunctions';
 import {store} from '../reduxStore';
@@ -28,7 +29,10 @@ export function fetchActivities(){
                 after: janFirstLastYear,
                 before: janFirstThisYear,
                 per_page: 200
-            }});
+            }}).then((object) => {
+                return object.data
+            })
+    console.log(activities,"arg");
 
     return {
         type: FETCH_ACTIVITIES,
@@ -42,7 +46,11 @@ export function fetchThisYear(){
         axios.get(activitiesUrl, { params: {
                 after: janFirstThisYear,
                 per_page: 200
-            }});
+            }}).then((object) => {
+                return object.data;
+            });
+    console.log(thisYearsActivities,"arg2");
+
     return {
         type: FETCH_THIS_YEAR,
         payload: thisYearsActivities
@@ -275,7 +283,7 @@ export function fetchActivitiesWithCodeThisYear(){
 export function cleanStore(){
     localStorage.clear();
     return {
-        type: 'LOG_OUT'
+        type: LOG_OUT
     }
 }
 export function fetchCode(){
