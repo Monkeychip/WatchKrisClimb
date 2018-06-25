@@ -32,7 +32,6 @@ export function fetchActivities(){
             }}).then((object) => {
                 return object.data
             })
-    console.log(activities,"arg");
 
     return {
         type: FETCH_ACTIVITIES,
@@ -49,7 +48,7 @@ export function fetchThisYear(){
             }}).then((object) => {
                 return object.data;
             });
-    console.log(thisYearsActivities,"arg2");
+
 
     return {
         type: FETCH_THIS_YEAR,
