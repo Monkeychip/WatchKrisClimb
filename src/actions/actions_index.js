@@ -4,7 +4,8 @@ import {
  FETCH_AUTHORIZATION_TOKEN,
  FETCH_THIS_YEAR,
  ACCESS_TOKEN,
- FETCH_CODE
+ FETCH_CODE,
+ FETCH_GOAL
  } from './types'; 
 import { janFirstLastYear, janFirstThisYear } from '../helperFunctions';
 import {store} from '../reduxStore';
@@ -15,11 +16,12 @@ export function fetchGoal(){
 
     let goal = Number(localStorage.getItem('goal'));
     return {
-        type: 'FETCH_GOAL',
+        type: FETCH_GOAL,
         payload: goal
     }
 }
 
+//TODO: will improve after figured out most efficient way for user data or if I need to use dummy data
 export function fetchActivities(){
     let activities =
         axios.get(activitiesUrl, { params: {
@@ -41,7 +43,6 @@ export function fetchThisYear(){
                 after: janFirstThisYear,
                 per_page: 200
             }});
-    console.log(thisYearsActivities,"maybe")
     return {
         type: FETCH_THIS_YEAR,
         payload: thisYearsActivities
