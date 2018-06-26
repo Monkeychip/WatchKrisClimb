@@ -47,7 +47,6 @@ class ActivitiesChart extends Component {
 
   getData(){
 
-    //let code = new URL(window.location.href).searchParams.get('code')
       if(!store.getState().code) {
         this.props.fetchActivities();
         this.props.fetchThisYear();
@@ -338,11 +337,11 @@ class ActivitiesChart extends Component {
 /*TODO Place these settings somewhere else, they're global*/
     Chart.defaults.global.responsive = true;
     Chart.defaults.global.legend.labels.usePointStyle = true; //legend into circle
-   
+    let width = 1000, height = 300;
 
     return (  
        <div id="dumb">
-       <Line data={data} options={chartOptionsActvitiies} width="1000" height="300"/>
+       <Line data={data} options={chartOptionsActvitiies} width={width} height={height}/>
        <Goal onSubmit={this.submit} />
        </div>
       )
