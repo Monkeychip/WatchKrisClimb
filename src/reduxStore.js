@@ -11,18 +11,22 @@ import reducers from './reducers';
 const persistConfig = {
   key: 'root',
   storage: storage,
-  //whitelist: ['form', 'code', 'goal'] // only persist the form number
-    whitelist: ['form', 'code'] // only persist the form number
+      whitelist: ['form', 'code'] // only persist the form number
 };
 
-const middlewares = [reduxPromise, reduxThunk, logger];
+let middleware = [reduxPromise, reduxThunk];
+
+if(process.env.NODE_ENV !== 'production'){
+	console.log("here");
+    middleware = [...middleware,logger]
+}
 
 const persistedReducer = persistReducer(persistConfig, reducers)
 
 export const store = createStore(
 		persistedReducer,
 		composeWithDevTools(
-			applyMiddleware(...middlewares),
+			applyMiddleware(...middleware),
 		)
 	);
 

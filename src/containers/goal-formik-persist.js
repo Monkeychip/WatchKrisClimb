@@ -46,7 +46,7 @@ const FormikApp = withFormik({
         setSubmitting(false)
       },2000)
 
-    
+
   }
 })(GoalPersist);
 
