@@ -25,13 +25,14 @@ function monthElevation(monthData,timestamp) {
 
 class ActivitiesChart extends Component {
   constructor(props) { 
-    super(props); //parent method on Component 
+    super(props);
     this.getData = this.getData.bind(this); //only place in app I'm calling the data.
     this.submit = this.submit.bind(this); 
     this.state = {
       goal : 0
     }
   }
+
 /*Getting the submit data*/
   submit(values){
     if(!values){

@@ -69,6 +69,7 @@ class BarChartGoal extends Component {
     let xAxisMax = Math.max(goal,weekTotal);
     localStorage.setItem('xAxisMax', xAxisMax);
     let stepSize = Math.ceil(xAxisMax / 5);
+    let height = 100;
 
     const barOptions = {
       
@@ -138,7 +139,7 @@ class BarChartGoal extends Component {
 	
     return (
       <div>
-      	<HorizontalBar data={data} options={barOptions} height="100px"/>
+      	<HorizontalBar data={data} options={barOptions} height={height}/>
       </div>
     );
   }

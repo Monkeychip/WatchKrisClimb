@@ -41,6 +41,7 @@ export class BarChartElse extends Component {
 	};
   let xAxisMax = Number(localStorage.getItem('xAxisMax'));
   let stepSize = Math.ceil(xAxisMax / 5);
+  let height = 50;
 
   const barOptions = {
       legend: {
@@ -94,7 +95,7 @@ export class BarChartElse extends Component {
 
     return (
       <div>
-      	<HorizontalBar data={data} options={barOptions} height="50px"/>
+      	<HorizontalBar data={data} options={barOptions} height={height}/>
       </div>
     );
   }

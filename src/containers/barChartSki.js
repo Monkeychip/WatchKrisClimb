@@ -41,6 +41,8 @@ class BarChartSki extends Component {
 	};
   let xAxisMax = Number(localStorage.getItem('xAxisMax'));
   let stepSize = Math.ceil(xAxisMax / 5);
+  let height = 50;
+
   const barOptions = {
       legend: {
           display: false
@@ -93,7 +95,7 @@ class BarChartSki extends Component {
 
    return (
       <div>
-      	<HorizontalBar data={data} options={barOptions} height="50px"/>
+      	<HorizontalBar data={data} options={barOptions} height={height}/>
       </div>
     );
   }
