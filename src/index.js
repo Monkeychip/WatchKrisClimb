@@ -8,7 +8,7 @@ import About from './components/about';
 import Table from './components/table';
 import { store, persistor } from './reduxStore';
 
-require('dotenv').config();
+
 
 class Dashboard extends Component {
 

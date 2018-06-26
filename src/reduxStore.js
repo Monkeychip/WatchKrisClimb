@@ -17,7 +17,6 @@ const persistConfig = {
 let middleware = [reduxPromise, reduxThunk];
 
 if(process.env.NODE_ENV !== 'production'){
-	console.log("here");
     middleware = [...middleware,logger]
 }
 
