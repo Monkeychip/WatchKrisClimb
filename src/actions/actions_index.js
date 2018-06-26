@@ -152,7 +152,7 @@ export function fetchActivitiesWithCode(){ //LAST YEAR FETCH_ACTIVITIES
                 })
         }else{
 
-            (() => { //Is this OK?
+            (() => {
                 let authorizationToken = getState().authorizationToken;
 
                 let pageOne = axios.get(`https://www.strava.com/api/v3/athlete/activities?access_token=${authorizationToken}`, {

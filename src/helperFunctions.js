@@ -49,14 +49,16 @@ export function sumElevationHelper(activityArray) {
   
   if(arrayElevationGain.length > 0){
      sumActivities = parseInt(arrayElevationGain.reduce(addActivities)/.3048,10) //to correct for meter conversion
-   }  //TODO: should add an else here for error handling
+   }else{
+      console.log("no activities found for arrayElevationGain");
+  }
   
   return Number(sumActivities);
 }
 
 
 //Horizontal Bar Options
-Chart.Tooltip.positioners.myCustomPosition = function(unused, position) {
+Chart.Tooltip.positioners.myCustomPosition = function(unused, position) { //TODO: remove unused parameters
    return { x: 160, y: -10 }; // HARDCODING VALUES
 }
 let xAxisMax = Number(localStorage.getItem('xAxisMax'));
