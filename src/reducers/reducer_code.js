@@ -6,6 +6,7 @@ export default function(state = null, action){
 	case FETCH_CODE: //when you call this action type.
 
 		return action.payload;
+        // no default
 	}
 	return state;
 };

@@ -103,7 +103,7 @@ class ActivitiesChart extends Component {
       let thisYearDate = new Date(year,ind,0).getTime(); //2018 
    
       if (todayEpochTime >= thisYearDate){
-        let data = new Number(monthElevation(monthDataThisYear,thisYearDate));
+        let data = Number(monthElevation(monthDataThisYear,thisYearDate));
         dataArray.push(data);
       }else{
 

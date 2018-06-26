@@ -6,7 +6,9 @@ export default function(state = 0, action){
 		case FETCH_ACTIVITIES:
 
             return action.payload;
+        // no default
 		}
+
 		return state
 }
 

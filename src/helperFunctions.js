@@ -23,7 +23,7 @@ export function filterElevationDataHelper(allData, filterAfterDate, filteredActi
   		let allOtherActivitiesFiltered = filteredActivitiesByDate.filter(
     		function(value){
       			let activityType = value.type;
-      			if(('BackcountrySki Run Ride').indexOf(activityType) < 0) {return activityType}
+      			if(('BackcountrySki Run Ride').indexOf(activityType) < 0) {return activityType} else {return console.log("no other activity found")}
     		}
   		)
   		return allOtherActivitiesFiltered;

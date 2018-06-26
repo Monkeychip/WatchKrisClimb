@@ -6,6 +6,7 @@ export default function(state = null, action){
         case FETCH_AUTHORIZATION_TOKEN:
 
             return action.payload;
+        // no default
     }
     return state;
 };
