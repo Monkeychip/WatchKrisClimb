@@ -47,14 +47,24 @@ class ActivitiesChart extends Component {
   }
 
   getData(){
+      let code = store.getState().code;
+      let thisYearsActivities = store.getState().thisYearsActivities;
+      let lastYearsActivites = store.getState().activities;
 
-      if(!store.getState().code) {
-        this.props.fetchActivities();
-        this.props.fetchThisYear();
+      if(code){
+          //if no activities for either last or this year, then run the fetch, otherwise, do nothing
+          !thisYearsActivities ? this.props.fetchActivitiesWithCodeThisYear() : "";
+
+          !lastYearsActivites ? this.props.fetchActivitiesWithCode() : "" ;
+
       }else{
-        this.props.fetchActivitiesWithCode();
-        this.props.fetchActivitiesWithCodeThisYear();
-      };
+
+          !thisYearsActivities ? this.props.fetchThisYear() : "";
+
+          !lastYearsActivites ? this.props.fetchActivities() : "" ;
+      }
+
+
   }
 
   componentDidMount() {
