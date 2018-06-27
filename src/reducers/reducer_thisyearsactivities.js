@@ -1,11 +1,9 @@
 import { FETCH_THIS_YEAR } from '../actions/types';
 
-export default function(state = null, action){
-
+export default function(state = null, action) {
 	switch(action.type) {
-
-	case FETCH_THIS_YEAR:
-        return action.payload;
+  	case FETCH_THIS_YEAR:
+    return action.payload;
         // no default
 	}
 	return state;

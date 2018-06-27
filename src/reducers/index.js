@@ -4,6 +4,7 @@
 
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form'; //grab reducer property off of it and call it formReducer
+
 import ActivitiesReducer from './reducer_activities';
 import ThisYearsActivitiesReducer from './reducer_thisyearsactivities';
 import CodeReducer from './reducer_code';
@@ -20,7 +21,6 @@ const appReducer = combineReducers({
 
 const rootReducer = (state, action) => {
 	if(action.type === LOG_OUT) {
-
 		state = undefined
 	}
     return appReducer(state,action)
