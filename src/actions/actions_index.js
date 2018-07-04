@@ -1,18 +1,30 @@
 import axios from 'axios';
 
 import {
- FETCH_ACTIVITIES,
- FETCH_AUTHORIZATION_TOKEN,
- FETCH_THIS_YEAR,
- ACCESS_TOKEN,
- FETCH_CODE,
- FETCH_GOAL,
- LOG_OUT
- } from './types'; 
+  FETCH_ACTIVITIES,
+  FETCH_AUTHORIZATION_TOKEN,
+  FETCH_THIS_YEAR,
+  ACCESS_TOKEN,
+  FETCH_CODE,
+  FETCH_GOAL,
+  LOG_OUT,
+  LOG_IN,
+  CALLBACK_URI
+} from './types';
 import { janFirstLastYear, janFirstThisYear } from '../helperFunctions';
 import { store } from '../reduxStore';
 
 const activitiesUrl = `https://www.strava.com/api/v3/athlete/activities?access_token=${ACCESS_TOKEN}`; //TODO: replace with lamda function or dummy data
+
+export function logIn(){
+  //TODO: Make this a lambda call to hide the client ID
+  let logInNow = () => { window.location.href = `https://www.strava.com/oauth/authorize?client_id=21992&response_type=code&redirect_uri=http://${CALLBACK_URI}` };
+
+  return {
+    type: LOG_IN,
+    payload: logInNow()
+  }
+}
 
 export function fetchGoal(){
   let goal = Number(localStorage.getItem('goal'));
@@ -240,6 +252,7 @@ export function cleanStore(){
     type: LOG_OUT
   }
 }
+
 export function fetchCode(){
   let code = new URL(window.location.href).searchParams.get('code') || store.getState().code;
   return {

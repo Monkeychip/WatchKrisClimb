@@ -5,6 +5,7 @@ import ActivitiesReducer from './reducer_activities';
 import ThisYearsActivitiesReducer from './reducer_thisyearsactivities';
 import CodeReducer from './reducer_code';
 import AuthorizationToken from './reducer_authorizationtoken';
+import logInReducer from './reducer_logIn';
 import { LOG_OUT } from '../actions/types';
 
 const appReducer = combineReducers({
@@ -12,13 +13,12 @@ const appReducer = combineReducers({
 	thisYearsActivities: ThisYearsActivitiesReducer,
 	authorizationToken: AuthorizationToken,
 	form: formReducer, //reducer is apart of the package
+  login: logInReducer,
 	code: CodeReducer
 });
 
 const rootReducer = (state, action) => {
-  console.log("action type", action.type);
 	if(action.type === LOG_OUT) {
-	  console.log("I was clicked Logged Out");
 		state = undefined
 	}
     return appReducer(state,action)
@@ -26,10 +26,4 @@ const rootReducer = (state, action) => {
 
 export default rootReducer;
 
-/*
-To clear store when users logouts.
-- reducers return initial state when they are called with undefined
-- thus if action is log_out, we are going to strip out state by calling undefined.
-https://stackoverflow.com/questions/35622588/how-to-reset-the-state-of-a-redux-store?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
-*/
 

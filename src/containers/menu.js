@@ -2,7 +2,7 @@ import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { cleanStore, fetchCode } from '../actions/actions_index';
+import { cleanStore, fetchCode, logIn } from '../actions/actions_index';
 import { Link } from 'react-router'; //shows up as anchor tag
 
 import { CALLBACK_URI } from '../actions/types';
@@ -22,7 +22,8 @@ class Menu extends Component {
 
 	handleLogIn() {
 		//TODO: should eventually make this an action creator
-		window.location.href = `https://www.strava.com/oauth/authorize?client_id=21992&response_type=code&redirect_uri=http://${CALLBACK_URI}`;
+    this.props.logIn();
+		//window.location.href = `https://www.strava.com/oauth/authorize?client_id=21992&response_type=code&redirect_uri=http://${CALLBACK_URI}`;
 	}
 
 	handleLogOut() {
@@ -73,7 +74,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({cleanStore, fetchCode}, dispatch);
+  return bindActionCreators({cleanStore, fetchCode, logIn}, dispatch);
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(Menu);
