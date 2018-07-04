@@ -68,7 +68,9 @@ export function fetchActivitiesPayloadThisYear(activitiesThisYear){
 
 function fetchAuthorizationToken() {
   let GATEWAY_URL= ['https://pwgoqx1296.execute-api.us-east-1.amazonaws.com/beta/activities'];
-  let code = new URL(window.location.href).searchParams.get('code') || store.getState().code //Needs to be in
+  let codeInUrl = new URL(window.location.href).searchParams.get('code');
+  let codeInState = store.getState().code;
+  let code = codeInUrl ? codeInUrl : codeInState;
 
   try {
     return fetch(GATEWAY_URL, { //lambda function
@@ -181,13 +183,13 @@ export function fetchActivitiesWithCodeThisYear(){
             params: {
               after: janFirstThisYear,
               page:1,
-              per_page: 100
+              per_page: 200
             }
           });
           let pageTwo = axios.get(`https://www.strava.com/api/v3/athlete/activities?access_token=${authorizationToken}`, { params: {
               after: janFirstThisYear,
               page: 2,
-              per_page: 100
+              per_page: 200
             }
           });
           return Promise.all([pageOne,pageTwo])
@@ -207,14 +209,14 @@ export function fetchActivitiesWithCodeThisYear(){
           params: {
             after: janFirstThisYear,
             page:1,
-            per_page: 100
+            per_page: 200
           }
         })
         let pageTwo = axios.get(`https://www.strava.com/api/v3/athlete/activities?access_token=${authorizationToken}`, {
           params: {
             after: janFirstThisYear,
             page: 2,
-            per_page: 100
+            per_page: 200
           }
         })
         return Promise.all([pageOne, pageTwo])
@@ -232,6 +234,7 @@ export function fetchActivitiesWithCodeThisYear(){
 }
 
 export function cleanStore(){
+  console.log("clean store");
   localStorage.clear();
   return {
     type: LOG_OUT

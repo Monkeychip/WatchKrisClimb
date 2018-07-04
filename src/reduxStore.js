@@ -11,7 +11,7 @@ import reducers from './reducers';
 const persistConfig = {
   key: 'root',
   storage: storage,
-      whitelist: ['form', 'code'] // only persist the form number
+      whitelist: ['form'] // only persist the form number
 };
 
 let middleware = [reduxPromise, reduxThunk];
@@ -31,11 +31,3 @@ export const store = createStore(
 
 export const persistor = persistStore(store);
 
-
-/*PERSIST STORE NOTES
-- I pass the createStore function a persistedReducer that wraps the apps root reducer.  For my case because I have promises I had to use persistCombineReducers
-- 
-
-
-
-*/

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Component} from 'react';
+import { Component } from 'react';
 
 import MenuNoLogIn from '../components/menuNoLogIn';
 import BarChartGoal from '../containers/barChart';

@@ -50,7 +50,7 @@ export function sumElevationHelper(activityArray) {
   if(arrayElevationGain.length > 0){
      sumActivities = parseInt(arrayElevationGain.reduce(addActivities)/.3048,10) //to correct for meter conversion
    }else{
-      console.log("no activities found for arrayElevationGain");
+      //do nothing
   }
   
   return Number(sumActivities);
