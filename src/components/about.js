@@ -20,6 +20,9 @@ class About extends Component {
               The opening screen compares this year's vs last year's data.
               <br />
               <br />
+              NOTE: the app only looks at your public activities.  If you mark files as private, they won't be included in the calculations.
+              <br />
+              <br />
               Everything should be self-explanatory.  If it's not I probably need to adjust the UI. If that's the case, send me an email.
             </p>
               <h3>Comment, constructive feedback or feature request?</h3>

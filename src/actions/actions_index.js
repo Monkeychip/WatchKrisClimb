@@ -256,11 +256,17 @@ export function cleanStore(){
 }
 
 export function fetchCode(){
-  //let code = new URL(window.location.href).searchParams.get('code') || store.getState().code;
-  let code = new URL(window.location.href).searchParams.get('code') || 'no code';
+  let code = new URL(window.location.href).searchParams.get('code') || store.getState().code || 'no code';
 
   return {
     type: FETCH_CODE,
     payload: code
   }
 }
+
+/*
+* 2c5fda037ef2db1cd4b3efe234de726ed94dcd03 //bad
+* ?state=&code=5e3fdd1b5cdea1fef7ae9feb39f578811b256ae7&scope= //bad
+* ?state=&code=c48af7f91f44b011b688ccbb41fd2d37c6b849dd   &scope= //good
+
+* */
