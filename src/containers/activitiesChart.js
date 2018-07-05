@@ -6,7 +6,7 @@ import { Line } from 'react-chartjs-2';
 import moment from 'moment';
 
 import Goal from './goal';
-import { fetchActivities, fetchActivitiesWithCode, fetchThisYear, fetchActivitiesWithCodeThisYear} from '../actions/actions_index'; //importing activities axios data
+import { fetchActivities, fetchActivitiesWithCode, fetchThisYear, fetchActivitiesWithCodeThisYear, fetchCode } from '../actions/actions_index'; //importing activities axios data
 import { sumElevationHelper , EndOfDecLastYear} from '../helperFunctions';
 import {store} from '../reduxStore';
 
@@ -44,15 +44,16 @@ class ActivitiesChart extends Component {
   }
 
   getData() {
-    let code = store.getState().code;
+    let code = this.props.fetchCode();
     let thisYearsActivities = store.getState().thisYearsActivities;
     let lastYearsActivites = store.getState().activities;
-    if(code) {
+
+    if(code.payload !== 'no code') {
       //if no activities for either last or this year, then run the fetch, otherwise, do nothing
       !thisYearsActivities ? this.props.fetchActivitiesWithCodeThisYear() : "";
       !lastYearsActivites ? this.props.fetchActivitiesWithCode() : "" ;
     } else {
-      !thisYearsActivities ? this.props.fetchThisYear() : "";
+      !thisYearsActivities ? this.props.fetchThisYear() : "" ;
       !lastYearsActivites ? this.props.fetchActivities() : "" ;
     }
   }
@@ -340,11 +341,12 @@ function mapStateToProps(state){
     activitiesArray: state.activities, 
     form: state.form,
     thisYear: state.thisYearsActivities,
+    code: state.code
   } //adding form here connects the form props to this components state
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({fetchActivities, fetchActivitiesWithCode, fetchThisYear, fetchActivitiesWithCodeThisYear}, dispatch);
+  return bindActionCreators({fetchActivities, fetchActivitiesWithCode, fetchThisYear, fetchActivitiesWithCodeThisYear,fetchCode}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ActivitiesChart);

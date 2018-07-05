@@ -17,13 +17,16 @@ import { store } from '../reduxStore';
 const activitiesUrl = `https://www.strava.com/api/v3/athlete/activities?access_token=${ACCESS_TOKEN}`; //TODO: replace with lamda function or dummy data
 
 export function logIn(){
-  //TODO: Make this a lambda call to hide the client ID
-  let logInNow = () => { window.location.href = `https://www.strava.com/oauth/authorize?client_id=21992&response_type=code&redirect_uri=http://${CALLBACK_URI}` };
+  //TODO: encrypt the clientID
 
-  return {
-    type: LOG_IN,
-    payload: logInNow()
+  let logInNow = () => {
+    window.location.href = `https://www.strava.com/oauth/authorize?client_id=21992&response_type=code&redirect_uri=http://${CALLBACK_URI}`
+  };
+  logInNow();
+  return{
+    type: LOG_IN
   }
+
 }
 
 export function fetchGoal(){
@@ -93,7 +96,7 @@ function fetchAuthorizationToken() {
       }),
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       withCredentials: true,
       crossDomain: true
@@ -246,7 +249,6 @@ export function fetchActivitiesWithCodeThisYear(){
 }
 
 export function cleanStore(){
-  console.log("clean store");
   localStorage.clear();
   return {
     type: LOG_OUT
@@ -254,7 +256,9 @@ export function cleanStore(){
 }
 
 export function fetchCode(){
-  let code = new URL(window.location.href).searchParams.get('code') || store.getState().code;
+  //let code = new URL(window.location.href).searchParams.get('code') || store.getState().code;
+  let code = new URL(window.location.href).searchParams.get('code') || 'no code';
+
   return {
     type: FETCH_CODE,
     payload: code

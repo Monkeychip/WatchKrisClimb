@@ -2,7 +2,7 @@ import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { cleanStore, fetchCode, logIn } from '../actions/actions_index';
+import { cleanStore, logIn } from '../actions/actions_index';
 import { Link } from 'react-router'; //shows up as anchor tag
 
 import { CALLBACK_URI } from '../actions/types';
@@ -15,15 +15,13 @@ class Menu extends Component {
 		this.state = {
 			aboutPath: '/about',
 			homePath: '/'
-		}; //initial state to not logged in
+		};
 		this.handleLogIn = this.handleLogIn.bind(this);
     this.handleLogOut = this.handleLogOut.bind(this);
 	}
 
 	handleLogIn() {
-		//TODO: should eventually make this an action creator
     this.props.logIn();
-		//window.location.href = `https://www.strava.com/oauth/authorize?client_id=21992&response_type=code&redirect_uri=http://${CALLBACK_URI}`;
 	}
 
 	handleLogOut() {
@@ -32,13 +30,10 @@ class Menu extends Component {
 	}
 
   render() {
-		if(!store.getState().code) {
-			this.props.fetchCode();
-		}
-
+	  let code = store.getState().code;
 		let button = null;
 
-		if(this.props.code) {
+		if(this.props.code !== 'no code') {
 			button = <div
 				className="ui button"
 				id="buttonLogOut"
@@ -74,7 +69,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({cleanStore, fetchCode, logIn}, dispatch);
+  return bindActionCreators({cleanStore, logIn}, dispatch);
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(Menu);
