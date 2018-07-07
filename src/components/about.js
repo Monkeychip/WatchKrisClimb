@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Mailto from 'react-mailto';
+//import Mailto from 'react-mailto';
 
 import '../App.css';
 import MenuNoLogIn from '../components/menuNoLogIn';
@@ -28,9 +28,7 @@ class About extends Component {
               <h3>Comment, constructive feedback or feature request?</h3>
                  <div className="sixteen wide column">
                     <div className="field">
-                      <Mailto email="argarbarino@gmail.com" obfuscate={false} id="submit-button" className="ui inverted blue button ">
-                        Email me!
-                      </Mailto>
+
                     </div>
                   </div>
           </div>
@@ -43,5 +41,10 @@ export default About;
 
 
 
+/*<Mailto email="argarbarino@gmail.com" obfuscate={false} id="submit-button" className="ui inverted blue button ">
+  Email me!
+</Mailto>
+BROKEN WITH REACT16 upgrade
 
+*/
 
