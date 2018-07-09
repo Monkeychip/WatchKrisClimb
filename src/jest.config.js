@@ -15,7 +15,7 @@ module.exports = {
   moduleNameMapper: {
     '\\.module\\.css$': 'identity-obj-proxy',
     '\\.css$': require.resolve('./test/style-mock.js'),
-    '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$': 'identity-obj-proxy'
+    '\\.(png|jpg|gif|ttf|eot|svg)$': '<rootDir>/./test/style-mock'
   },
   coverageThreshold: {
     global: {
@@ -29,3 +29,5 @@ module.exports = {
     'node_modules/(?!(redux-persist)/)'
   ]
 }
+
+//'.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$': 'identity-obj-proxy',
