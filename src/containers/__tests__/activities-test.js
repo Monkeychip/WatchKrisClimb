@@ -1,9 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import Activities from '../activities';
+import renderer from 'react-test-renderer'
+import { Activities } from "../activities";
 
-test('activities test that it mounts', () => {
-  const div = document.createElement('div');
-
+test("activities renders correctly", () => {
+  const component = renderer.create(<Activities />)
+  //const tree = component.toJSON();
+  expect(component).toMatchSnapshot();
 });
 
+/*
+* test is globablly avaliable from jest
+* */

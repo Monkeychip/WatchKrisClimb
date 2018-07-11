@@ -27,7 +27,8 @@ module.exports = {
   },
   transformIgnorePatterns: [
     'node_modules/(?!(redux-persist)/)'
-  ]
+  ],
+  snapshotSerializers: ['enzyme-to-json/serializer']
 }
 
 //'.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$': 'identity-obj-proxy',

@@ -1,0 +1,130 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`activities renders correctly 1`] = `
+<div
+  className="ui centered grid container"
+  id="about-holder"
+>
+  <MenuNoLogIn />
+  <div
+    className="ui centered grid container"
+    id="metrics_table"
+  >
+    <h3>
+      Breakdown By Week
+    </h3>
+    <table
+      className="ui basic padded celled table"
+      width="100%"
+    >
+      <tbody>
+        <tr>
+          <td>
+            <h4
+              className="ui header"
+              id="goal-emoji"
+            >
+               
+              Total Elevation Gained per week relative to Goal?
+            </h4>
+            <p
+              className="ag-below-header"
+            >
+              In Ft.
+            </p>
+          </td>
+          <td
+            className="center aligned"
+          >
+            <Connect(BarChartGoal) />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h4
+              className="ui header"
+              id="time-climbing"
+            >
+               
+              Elevation gained from Skiing?
+            </h4>
+            <p
+              className="ag-below-header"
+            >
+              In Ft.
+            </p>
+          </td>
+          <td
+            className="center aligned"
+          >
+            <Connect(BarChartSki) />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h4
+              className="ui header"
+              id="bike-emoji"
+            >
+               
+              Elevation gained from biking?
+            </h4>
+            <p
+              className="ag-below-header"
+            >
+              In Ft.
+            </p>
+          </td>
+          <td
+            className="center aligned"
+          >
+            <Connect(BarChartBike) />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h4
+              className="ui header"
+              id="run-emoji"
+            >
+               
+              Elevation gained from running?
+            </h4>
+            <p
+              className="ag-below-header"
+            >
+              In Ft.
+            </p>
+          </td>
+          <td
+            className="center aligned"
+          >
+            <Connect(BarChartRun) />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h4
+              className="ui header"
+              id="most-vertical"
+            >
+               
+              Elevation gained from everything else?
+            </h4>
+            <p
+              className="ag-below-header"
+            >
+              In Ft.
+            </p>
+          </td>
+          <td
+            className="center aligned"
+          >
+            <Connect(BarChartElse) />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+`;
