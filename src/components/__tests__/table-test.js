@@ -6,7 +6,7 @@ import { Table } from '../table';
 
 Enzyme.configure({adapter: new Adapter()});
 
-test("activities renders correctly", () => {
+test("table renders correctly", () => {
   const component = shallow(<Table />)
   expect(component).toMatchSnapshot();
 });

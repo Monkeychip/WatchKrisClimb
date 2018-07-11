@@ -26,7 +26,6 @@ export class Activities extends Component {
     if (!this.props.thisYear) {
       return <div>Loading Activities ...</div>;
     }
-
     return (
       <div id="activities_header">
         {`Total Climbed this Year:`}

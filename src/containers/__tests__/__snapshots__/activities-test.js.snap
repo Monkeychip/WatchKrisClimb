@@ -1,7 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`activities renders correctly 1`] = `
-<div>
-  Loading Activities ...
+exports[`Activities can process and return input 1`] = `
+<div
+  id="activities_header"
+>
+  Total Climbed this Year:
+  <span
+    id="elevation_total"
+  >
+    <br />
+    3,280 ft
+  </span>
 </div>
 `;
