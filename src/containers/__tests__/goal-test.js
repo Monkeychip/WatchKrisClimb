@@ -1,13 +1,27 @@
 import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import renderer from 'react-test-renderer';
+import { reduxForm } from 'redux-form';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 
 import { Goal } from "../goal";
 
-Enzyme.configure({adapter: new Adapter()});
+const spy = jest.fn();
+const store = createStore(() => ({}));
 
-test("goal renders correctly", () => {
-  const component = shallow(<Goal />)
-  expect(component).toMatchSnapshot();
+const Decorated = reduxForm({ form: 'testForm' })(Goal);
+describe('Testing that the redux-form matches snapshot', () => {
+  it('should render the snapshot', () => {
+    const tree = renderer.create(
+      <Provider store={store}>
+        <Decorated
+          handleSubmit={spy}
+          submitting={false}
+          submit={spy}
+        />
+      </Provider>
+    ).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });
 

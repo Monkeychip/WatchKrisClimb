@@ -1,5 +1,78 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Products Component snapshot should render the snapshot 1`] = `
+<form
+  onSubmit={[MockFunction]}
+  size="large"
+>
+  <div
+    className="field"
+  >
+    <div
+      id="elevation-label"
+    >
+      <label>
+        Enter Elevation Goal for the Year:
+      </label>
+    </div>
+    <div
+      className="ui right labeled input"
+    >
+      <div
+        className="ui right labeled input"
+      >
+        <input
+          className="two wide field"
+          max={2000000}
+          name="number"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onDragStart={[Function]}
+          onDrop={[Function]}
+          onFocus={[Function]}
+          placeholder="50,000 ft"
+          type="number"
+          value=""
+        />
+      </div>
+      <div
+        className="ui basic label"
+        id="fix-ft-label"
+      >
+        ft
+      </div>
+    </div>
+  </div>
+  <button
+    className="ui inverted blue button "
+    id="submit-button"
+    type="submit"
+  >
+    Show Goal
+  </button>
+</form>
+`;
+
+exports[`goal component renders correctly 1`] = `
+<Connect(Form(Goal))
+  destroyOnUnmount={true}
+  enableReinitialize={false}
+  forceUnregisterOnUnmount={false}
+  form="goal"
+  getFormState={[Function]}
+  keepDirtyOnReinitialize={false}
+  persistentSubmitErrors={false}
+  pure={true}
+  shouldAsyncValidate={[Function]}
+  shouldError={[Function]}
+  shouldValidate={[Function]}
+  shouldWarn={[Function]}
+  touchOnBlur={true}
+  touchOnChange={false}
+  updateUnregisteredFields={false}
+/>
+`;
+
 exports[`goal renders correctly 1`] = `
 <Connect(Form(Goal))
   destroyOnUnmount={true}
