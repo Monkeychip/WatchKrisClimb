@@ -8,8 +8,7 @@ import {
   FETCH_CODE,
   FETCH_GOAL,
   LOG_OUT,
-  LOG_IN,
-  CALLBACK_URI
+  LOG_IN
 } from "./types";
 import { janFirstLastYear, janFirstThisYear } from "../helperFunctions";
 import { store } from "../reduxStore";
@@ -17,10 +16,9 @@ import { store } from "../reduxStore";
 const activitiesUrl = `https://www.strava.com/api/v3/athlete/activities?access_token=${ACCESS_TOKEN}`; //TODO: replace with lamda function or dummy data
 
 export function logIn() {
-  //TODO: encrypt the clientID
-
   let logInNow = () => {
-    window.location.href = `https://www.strava.com/oauth/authorize?client_id=21992&response_type=code&redirect_uri=http://${CALLBACK_URI}`;
+    //window.location.href = `https://www.strava.com/oauth/authorize?client_id=21992&response_type=code&redirect_uri=http://${CALLBACK_URI}`;
+    window.location.href = `https://www.strava.com/oauth/authorize?client_id=22047&response_type=code&redirect_uri=http://winteredition.io`;
   };
   logInNow();
   return {
@@ -94,15 +92,14 @@ function fetchAuthorizationToken() {
   ];
   let codeInUrl = new URL(window.location.href).searchParams.get("code");
   let codeInState = store.getState().code;
-  let code = codeInUrl ? codeInUrl : codeInState;
+  let codeToUse = codeInUrl ? codeInUrl : codeInState; //TODO might be able to replace with fetchCode
 
-  try {
-    return fetch(GATEWAY_URL, {
+  try { return fetch(GATEWAY_URL, {
       //lambda function
       method: "POST",
       mode: "cors",
       body: JSON.stringify({
-        code: code
+        code: codeToUse
       }),
       headers: {
         Accept: "application/json",
@@ -285,7 +282,6 @@ export function fetchActivitiesWithCodeThisYear() {
     }
   };
 }
-
 export function cleanStore() {
   localStorage.clear();
   return {
@@ -294,14 +290,19 @@ export function cleanStore() {
 }
 
 export function fetchCode() {
+
   let code =
     new URL(window.location.href).searchParams.get("code") ||
     store.getState().code ||
     "no code";
-
   return {
     type: FETCH_CODE,
     payload: code
   };
 }
 
+/*
+*
+* curl -d '{"client_id":26984, "client_secret":"b865007db91e96ab678868f0d6b05cbc2bd9987b ","code":"288dfe8859a72e22bcbbd1204362d351c4b9eff8"}' -H "Content-Type: application/json" -X POST https://www.strava.com/oauth/token
+*
+* */
