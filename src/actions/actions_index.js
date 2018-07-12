@@ -17,8 +17,8 @@ const activitiesUrl = `https://www.strava.com/api/v3/athlete/activities?access_t
 
 export function logIn() {
   let logInNow = () => {
-    //window.location.href = `https://www.strava.com/oauth/authorize?client_id=21992&response_type=code&redirect_uri=http://${CALLBACK_URI}`;
-    window.location.href = `https://www.strava.com/oauth/authorize?client_id=22047&response_type=code&redirect_uri=http://winteredition.io`;
+    window.location.href = `https://www.strava.com/oauth/authorize?client_id=22047&response_type=code&redirect_uri=http://winteredition.io&approval_prompt=force`;
+
   };
   logInNow();
   return {
@@ -92,7 +92,7 @@ function fetchAuthorizationToken() {
   ];
   let codeInUrl = new URL(window.location.href).searchParams.get("code");
   let codeInState = store.getState().code;
-  let codeToUse = codeInUrl ? codeInUrl : codeInState; //TODO might be able to replace with fetchCode
+  let codeToUse = codeInUrl ? codeInUrl : codeInState;
 
   try { return fetch(GATEWAY_URL, {
       //lambda function
@@ -109,12 +109,15 @@ function fetchAuthorizationToken() {
       crossDomain: true
     })
       .then(response => {
+        console.log(response,"meep");
         return response.json(); //puts into json object
       })
       .then(json => {
+        console.log(json,"jsondone")
         return json.done.json;
       })
       .then(data => {
+        
         return { type: FETCH_AUTHORIZATION_TOKEN, payload: data };
       });
   } catch (e) {
@@ -125,14 +128,9 @@ function fetchAuthorizationToken() {
 export function fetchActivitiesWithCode() {
   //LAST YEAR FETCH_ACTIVITIES
   return (dispatch, getState) => {
-    if (!getState().authorizationToken) {
-      //TO DO: Put this in a if/else, but having issues with dispatch and promises defining a variable.  Revisit later.
-
-      fetchAuthorizationToken()
-        .then(() => {
-          return dispatch(fetchAuthorizationToken());
-        })
-        .then(() => {
+     //TO DO: Put this in a if/else, but having issues with dispatch and promises defining a variable.  Revisit later.
+      dispatch(fetchAuthorizationToken())
+      .then(() => {
           let authorizationToken = getState().authorizationToken;
           let pageOne = axios.get(
             `https://www.strava.com/api/v3/athlete/activities?access_token=${authorizationToken}`,
@@ -166,122 +164,47 @@ export function fetchActivitiesWithCode() {
         .then(object => {
           return dispatch(fetchActivitiesPayload(object));
         });
-    } else {
-      (() => {
-        let authorizationToken = getState().authorizationToken;
-        let pageOne = axios.get(
-          `https://www.strava.com/api/v3/athlete/activities?access_token=${authorizationToken}`,
-          {
-            params: {
-              after: janFirstLastYear,
-              before: janFirstThisYear,
-              page: 1,
-              per_page: 100
-            }
-          }
-        );
-        let pageTwo = axios.get(
-          `https://www.strava.com/api/v3/athlete/activities?access_token=${authorizationToken}`,
-          {
-            params: {
-              after: janFirstLastYear,
-              before: janFirstThisYear,
-              page: 2,
-              per_page: 100
-            }
-          }
-        );
-        return Promise.all([pageOne, pageTwo]);
-      })
-        .then(object => {
-          let pageOne = object[0].data;
-          let pageTwo = object[1].data;
-          return pageOne.concat(pageTwo);
-        })
-        .then(object => {
-          return dispatch(fetchActivitiesPayload(object));
-        });
     }
-  };
 }
 
-export function fetchActivitiesWithCodeThisYear() {
-  return (dispatch, getState) => {
-    if (!getState().authorizationToken) {
-      //TO DO: Put this in a if/else, but having issues with dispatch and promises defining a variable.  Revisit later.
-
-      fetchAuthorizationToken()
-        .then(() => {
-          return dispatch(fetchAuthorizationToken());
-        })
-        .then(() => {
-          let authorizationToken = getState().authorizationToken;
-          let pageOne = axios.get(
-            `https://www.strava.com/api/v3/athlete/activities?access_token=${authorizationToken}`,
-            {
-              params: {
-                after: janFirstThisYear,
-                page: 1,
-                per_page: 200
-              }
-            }
-          );
-          let pageTwo = axios.get(
-            `https://www.strava.com/api/v3/athlete/activities?access_token=${authorizationToken}`,
-            {
-              params: {
-                after: janFirstThisYear,
-                page: 2,
-                per_page: 200
-              }
-            }
-          );
-          return Promise.all([pageOne, pageTwo]);
-        })
-        .then(object => {
-          let pageOne = object[0].data;
-          let pageTwo = object[1].data;
-          return pageOne.concat(pageTwo);
-        })
-        .then(object => {
-          return dispatch(fetchActivitiesPayloadThisYear(object));
-        });
-    } else {
-      (() => {
-        let authorizationToken = getState().authorizationToken;
-        let pageOne = axios.get(
-          `https://www.strava.com/api/v3/athlete/activities?access_token=${authorizationToken}`,
-          {
-            params: {
-              after: janFirstThisYear,
-              page: 1,
-              per_page: 200
-            }
+/*export function fetchActivitiesWithCodeThisYear(authorizationToken) {
+  return (dispatch) => {
+    console.log(authorizationToken, "authorizationToken");
+    (() => {
+      let pageOne = axios.get(
+        `https://www.strava.com/api/v3/athlete/activities?access_token=${authorizationToken}`,
+        {
+          params: {
+            after: janFirstThisYear,
+            page: 1,
+            per_page: 200
           }
-        );
-        let pageTwo = axios.get(
-          `https://www.strava.com/api/v3/athlete/activities?access_token=${authorizationToken}`,
-          {
-            params: {
-              after: janFirstThisYear,
-              page: 2,
-              per_page: 200
-            }
+        }
+      );
+      let pageTwo = axios.get(
+        `https://www.strava.com/api/v3/athlete/activities?access_token=${authorizationToken}`,
+        {
+          params: {
+            after: janFirstThisYear,
+            page: 2,
+            per_page: 200
           }
-        );
-        return Promise.all([pageOne, pageTwo]);
+        }
+      );
+      return Promise.all([pageOne, pageTwo]);
+    })
+      .then(object => {
+        let pageOne = object[0].data;
+        let pageTwo = object[1].data;
+        return pageOne.concat(pageTwo);
       })
-        .then(object => {
-          let pageOne = object[0].data;
-          let pageTwo = object[1].data;
-          return pageOne.concat(pageTwo);
-        })
-        .then(object => {
-          return dispatch(fetchActivitiesPayloadThisYear(object));
-        });
-    }
-  };
-}
+      .then(object => {
+        return dispatch(fetchActivitiesPayloadThisYear(object));
+      });
+  }
+
+}*/
+
 export function cleanStore() {
   localStorage.clear();
   return {
@@ -302,7 +225,6 @@ export function fetchCode() {
 }
 
 /*
-*
-* curl -d '{"client_id":26984, "client_secret":"b865007db91e96ab678868f0d6b05cbc2bd9987b ","code":"288dfe8859a72e22bcbbd1204362d351c4b9eff8"}' -H "Content-Type: application/json" -X POST https://www.strava.com/oauth/token
+* curl -d '{"client_id":22047, "client_secret":"eed6dc78a0306beec5a310fd49351837578b831e","code":"df88787be1ad56bf1978a9c4107250c498aa360b"}' -H "Content-Type: application/json" -X POST https://www.strava.com/oauth/token
 *
 * */

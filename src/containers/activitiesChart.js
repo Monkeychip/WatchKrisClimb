@@ -54,7 +54,7 @@ class ActivitiesChart extends Component {
 
     if (code.payload !== "no code") {
       //if no activities for either last or this year, then run the fetch, otherwise, do nothing
-      !thisYearsActivities ? this.props.fetchActivitiesWithCodeThisYear() : "";
+      //!thisYearsActivities ? this.props.fetchActivitiesWithCodeThisYear() : "";
       //!thisYearsActivities ? "" : "";
       !lastYearsActivites ? this.props.fetchActivitiesWithCode() : "";
     } else {
@@ -390,7 +390,7 @@ function mapDispatchToProps(dispatch) {
       fetchActivities,
       fetchActivitiesWithCode,
       fetchThisYear,
-      fetchActivitiesWithCodeThisYear,
+      //fetchActivitiesWithCodeThisYear,
       fetchCode
     },
     dispatch
