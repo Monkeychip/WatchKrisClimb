@@ -4,7 +4,7 @@ import {
   FETCH_ACTIVITIES,
   FETCH_AUTHORIZATION_TOKEN,
   FETCH_THIS_YEAR,
-  ACCESS_TOKEN,
+  ACCESS_TOKEN_MINE,
   FETCH_CODE,
   FETCH_GOAL,
   LOG_OUT,
@@ -13,12 +13,12 @@ import {
 import { janFirstLastYear, janFirstThisYear } from "../helperFunctions";
 import { store } from "../reduxStore";
 
-const activitiesUrl = `https://www.strava.com/api/v3/athlete/activities?access_token=${ACCESS_TOKEN}`; //TODO: replace with lamda function or dummy data
+const activitiesUrl = `https://www.strava.com/api/v3/athlete/activities?access_token=${ACCESS_TOKEN_MINE}`; //TODO: replace with lamda function or dummy data
 
 export function logIn() {
   let logInNow = () => {
     //window.location.href = `https://www.strava.com/oauth/authorize?client_id=21992&response_type=code&redirect_uri=http://${CALLBACK_URI}`;
-    window.location.href = `https://www.strava.com/oauth/authorize?client_id=22047&response_type=code&redirect_uri=http://winteredition.io`;
+    window.location.href = `https://www.strava.com/oauth/authorize?client_id=21992&response_type=code&redirect_uri=http://winteredition.io`;
   };
   logInNow();
   return {
@@ -94,20 +94,30 @@ function fetchAuthorizationToken() {
   let codeInState = store.getState().code;
   let codeToUse = codeInUrl ? codeInUrl : codeInState; //TODO might be able to replace with fetchCode
 
-  try { return fetch(GATEWAY_URL, {
+  return (dispatch, getState) => {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve();
+      }, 10);
+    }).then(() => {
+      return dispatch(cleanStore())
+    })
+    .then(() => {
+      return fetch(GATEWAY_URL, {
       //lambda function
       method: "POST",
       mode: "cors",
       body: JSON.stringify({
-        code: codeToUse
-      }),
+      code: codeToUse
+    }),
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      withCredentials: true,
-      crossDomain: true
-    })
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        withCredentials: true,
+        crossDomain: true
+      })
+      })
       .then(response => {
         return response.json(); //puts into json object
       })
@@ -115,11 +125,12 @@ function fetchAuthorizationToken() {
         return json.done.json;
       })
       .then(data => {
-        return { type: FETCH_AUTHORIZATION_TOKEN, payload: data };
+        console.log("response", data)
+        return {type: FETCH_AUTHORIZATION_TOKEN, payload: data};
       });
-  } catch (e) {
-    return e;
-  }
+    }
+
+    /*ALMOST THERE JUST NEED TO NEED TO FIRE THIS OFF FETCH AS PAYLOAD.*/
 }
 
 export function fetchActivitiesWithCode() {
@@ -127,11 +138,7 @@ export function fetchActivitiesWithCode() {
   return (dispatch, getState) => {
     if (!getState().authorizationToken) {
       //TO DO: Put this in a if/else, but having issues with dispatch and promises defining a variable.  Revisit later.
-
-      fetchAuthorizationToken()
-        .then(() => {
-          return dispatch(fetchAuthorizationToken());
-        })
+      dispatch(fetchAuthorizationToken())
         .then(() => {
           let authorizationToken = getState().authorizationToken;
           let pageOne = axios.get(
@@ -210,11 +217,8 @@ export function fetchActivitiesWithCodeThisYear() {
     if (!getState().authorizationToken) {
       //TO DO: Put this in a if/else, but having issues with dispatch and promises defining a variable.  Revisit later.
 
-      fetchAuthorizationToken()
-        .then(() => {
-          return dispatch(fetchAuthorizationToken());
-        })
-        .then(() => {
+      dispatch(fetchAuthorizationToken())
+       .then(() => {
           let authorizationToken = getState().authorizationToken;
           let pageOne = axios.get(
             `https://www.strava.com/api/v3/athlete/activities?access_token=${authorizationToken}`,
