@@ -94,7 +94,37 @@ function fetchAuthorizationToken() {
   let codeInState = store.getState().code;
   let codeToUse = codeInUrl ? codeInUrl : codeInState; //TODO might be able to replace with fetchCode
 
-  return (dispatch, getState) => {
+  try { return fetch(GATEWAY_URL, {
+    //lambda function
+    method: "POST",
+    mode: "cors",
+    body: JSON.stringify({
+      code: codeToUse
+    }),
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    withCredentials: true,
+    crossDomain: true
+  })
+    .then(response => {
+      console.log(response,"meep");
+      return response.json(); //puts into json object
+    })
+    .then(json => {
+      console.log(json,"jsondone")
+      return json.done.json;
+    })
+    .then(data => {
+
+      return { type: FETCH_AUTHORIZATION_TOKEN, payload: data };
+    });
+  } catch (e) {
+    return e;
+  }
+
+  /*return (dispatch, getState) => {
     return new Promise(resolve => {
       setTimeout(() => {
         resolve();
@@ -128,7 +158,7 @@ function fetchAuthorizationToken() {
         console.log("response", data)
         return {type: FETCH_AUTHORIZATION_TOKEN, payload: data};
       });
-    }
+    }*/
 
     /*ALMOST THERE JUST NEED TO NEED TO FIRE THIS OFF FETCH AS PAYLOAD.*/
 }

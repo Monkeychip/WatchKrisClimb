@@ -67,7 +67,7 @@ class Menu extends Component {
           More <br /> Stats
         </Link>
         <div className="item">
-          <div>{button}</div>
+          <div>{ button }</div>
         </div>
       </div>
     );
