@@ -12,7 +12,7 @@ import {
   fetchThisYear,
   fetchActivitiesWithCodeThisYear,
   fetchCode
-} from "../actions/actions_index"; //importing activities axios data
+} from "../actions/actions_index";
 import { sumElevationHelper, EndOfDecLastYear } from "../helperFunctions";
 import { store } from "../reduxStore";
 
@@ -27,7 +27,7 @@ function monthElevation(monthData, timestamp) {
 class ActivitiesChart extends Component {
   constructor(props) {
     super(props);
-    this.getData = this.getData.bind(this); //only place in app I'm calling the data.
+    this.getData = this.getData.bind(this);
     this.submit = this.submit.bind(this);
     this.state = {
       goal: 0
@@ -54,9 +54,8 @@ class ActivitiesChart extends Component {
 
     if (code.payload !== "no code") {
       //if no activities for either last or this year, then run the fetch, otherwise, do nothing
-      //!thisYearsActivities ? this.props.fetchActivitiesWithCodeThisYear() : "";
-      //!thisYearsActivities ? "" : "";
-      !lastYearsActivites ? this.props.fetchActivitiesWithCode() : "";
+      !thisYearsActivities ? this.props.fetchActivitiesWithCodeThisYear() : "";
+      !lastYearsActivites ? this.props.fetchActivitiesWithCode() : "" ;
     } else {
       !thisYearsActivities ? this.props.fetchThisYear() : "";
       !lastYearsActivites ? this.props.fetchActivities() : "";
@@ -390,7 +389,7 @@ function mapDispatchToProps(dispatch) {
       fetchActivities,
       fetchActivitiesWithCode,
       fetchThisYear,
-      //fetchActivitiesWithCodeThisYear,
+      fetchActivitiesWithCodeThisYear,
       fetchCode
     },
     dispatch

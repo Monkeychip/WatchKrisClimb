@@ -3,10 +3,9 @@ import { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { cleanStore, logIn } from "../actions/actions_index";
-import { Link } from "react-router"; //shows up as anchor tag
+import { Link } from "react-router";
 
 import logo_124_124 from "../../build/assets/images/logo_124_124.png";
-import { store } from "../reduxStore";
 
 class Menu extends Component {
   constructor(props) {

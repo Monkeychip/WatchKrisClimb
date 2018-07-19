@@ -8,8 +8,6 @@ import About from './components/about';
 import Table from './components/table';
 import { store, persistor } from './reduxStore';
 
-
-
 class Dashboard extends Component {
 
 	render() {
