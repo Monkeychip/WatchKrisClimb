@@ -47,3 +47,7 @@ const FormikApp = withFormik({
 })(GoalPersist);
 
 export default FormikApp;
+
+/*
+* Currently not using, this was a test to play around with Formik.  Not applicable for my app as I need the goal to go into redux's store.
+* */

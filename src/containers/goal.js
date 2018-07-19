@@ -14,10 +14,9 @@ const renderField = ({ input, type }) => (
   </div>
 );
 
-//add additional export here for Jest unit testing component not connected to store
 export class Goal extends Component {
   render() {
-    const { handleSubmit } = this.props; // pass in action creator, so that whenever it's submitted, it saves to local storage via action creator.
+    const { handleSubmit } = this.props;
     return (
       <form onSubmit={handleSubmit} size="large" key="large">
         <div className="field">

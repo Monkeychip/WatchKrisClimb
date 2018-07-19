@@ -195,7 +195,7 @@ class ActivitiesChart extends Component {
             pointHitRadius: 10,
             data: [
               { x: xaxisLabels[0], y: 0 }, //dec 31
-              { x: xaxisLabels[1], y: dataArray[0] }, //
+              { x: xaxisLabels[1], y: dataArray[0] },
               { x: xaxisLabels[2], y: dataArray[1] }, //pushing today
               { x: xaxisLabels[3], y: dataArray[2] },
               { x: xaxisLabels[4], y: dataArray[3] },

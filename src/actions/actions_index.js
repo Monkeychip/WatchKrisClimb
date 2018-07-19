@@ -17,7 +17,6 @@ import { store } from '../reduxStore';
 const activitiesUrl = `https://www.strava.com/api/v3/athlete/activities?access_token=${ACCESS_TOKEN}`; //TODO: replace with lamda function or dummy data
 
 export function logIn(){
-  //TODO: encrypt the clientID
 
   let logInNow = () => {
     window.location.href = `https://www.strava.com/oauth/authorize?client_id=21992&response_type=code&redirect_uri=http://${CALLBACK_URI}`
@@ -115,7 +114,7 @@ function fetchAuthorizationToken() {
 export function fetchActivitiesWithCode(){ //LAST YEAR FETCH_ACTIVITIES
   return (dispatch, getState) => {
 
-    if(!getState().authorizationToken){ //TO DO: Put this in a if/else, but having issues with dispatch and promises defining a variable.  Revisit later.
+    if(!getState().authorizationToken){
 
       fetchAuthorizationToken()
         .then(() => {
@@ -186,7 +185,7 @@ export function fetchActivitiesWithCode(){ //LAST YEAR FETCH_ACTIVITIES
 export function fetchActivitiesWithCodeThisYear(){
   return (dispatch, getState) => {
 
-    if(!getState().authorizationToken){ //TO DO: Put this in a if/else, but having issues with dispatch and promises defining a variable.  Revisit later.
+    if(!getState().authorizationToken){
 
       fetchAuthorizationToken()
         .then(() => {

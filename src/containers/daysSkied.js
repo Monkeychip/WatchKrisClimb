@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
 
-import { fetchActivities } from "../actions/actions_index"; //importing activities axios data
+import { fetchActivities } from "../actions/actions_index";
 
 function createDaysArray(allData, startFilter, endFilter) {
   //TODO put into helper function
@@ -14,7 +14,7 @@ function createDaysArray(allData, startFilter, endFilter) {
     ).valueOf();
     return activityDate > startFilter && activityDate < endFilter;
   });
-  //TO DOnow to filter and return count might be easier way with object.keys
+  //TODO filter and return count might be easier way with object.keys
   let dataObject = {
     daysSkied: 0,
     daysRun: 0,
@@ -66,12 +66,10 @@ class DaysSkied extends Component {
   }
 }
 
-//export default Table;
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ fetchActivities }, dispatch);
 }
 
-/* CONNNECTING TO APPLICATION STATE*/
 function mapStateToProps(state) {
   return {
     activitiesArray: state.activities
@@ -82,3 +80,7 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(DaysSkied);
+
+/*
+* Currently not using component as I want feedback from users on if this if valuable
+* */

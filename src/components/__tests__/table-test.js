@@ -11,6 +11,3 @@ test("table renders correctly", () => {
   expect(component).toMatchSnapshot();
 });
 
-/*
-* test is globablly avaliable from jest
-* */
