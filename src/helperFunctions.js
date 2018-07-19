@@ -2,9 +2,9 @@ import moment from 'moment';
 import { Chart } from 'react-chartjs-2'; 
 
 
-export const janFirstLastYear = (moment().startOf('year').subtract(1,'year').valueOf())/1000; //jan 1 2017
-export const EndOfDecLastYear = moment().startOf('year').subtract(1,'day').valueOf(); //dec 31 2017
-export const janFirstThisYear = (moment().startOf('year').valueOf())/1000; //Jan 1 2018
+export const janFirstLastYear = (moment().startOf('year').subtract(1,'year').valueOf())/1000;
+export const EndOfDecLastYear = moment().startOf('year').subtract(1,'day').valueOf();
+export const janFirstThisYear = (moment().startOf('year').valueOf())/1000;
 
 
 //Filter activity data based on date
@@ -18,12 +18,15 @@ export function filterElevationDataHelper(allData, filterAfterDate, filteredActi
     )
   	if(typeof filteredActivity === "undefined"){
     		return filteredActivitiesByDate;
-  		//you just want to jump and return filteredActivitiesByDate
   	}else if(filteredActivity === "else"){
   		let allOtherActivitiesFiltered = filteredActivitiesByDate.filter(
     		function(value){
       			let activityType = value.type;
-      			if(('BackcountrySki Run Ride').indexOf(activityType) < 0) {return activityType} else {return }
+      			if(('BackcountrySki Run Ride').indexOf(activityType) < 0){
+      			  return activityType}
+      			else{
+      			  //do nothing
+            }
     		}
   		)
   		return allOtherActivitiesFiltered;
@@ -56,10 +59,9 @@ export function sumElevationHelper(activityArray) {
   return Number(sumActivities);
 }
 
-
 //Horizontal Bar Options
 Chart.Tooltip.positioners.myCustomPosition = function(unused, position) { //TODO: remove unused parameters
-   return { x: 160, y: -10 }; // HARDCODING VALUES
+   return { x: 160, y: -10 };
 }
 let xAxisMax = Number(localStorage.getItem('xAxisMax'));
 export const barOptions = {

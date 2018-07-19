@@ -29,7 +29,6 @@ class Menu extends Component {
   }
 
   render() {
-    let code = store.getState().code;
     let button = null;
 
     if (this.props.code !== "no code") {
