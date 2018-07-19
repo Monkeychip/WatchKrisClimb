@@ -1,11 +1,9 @@
 import moment from 'moment';
 import { Chart } from 'react-chartjs-2'; 
 
-
 export const janFirstLastYear = (moment().startOf('year').subtract(1,'year').valueOf())/1000;
 export const EndOfDecLastYear = moment().startOf('year').subtract(1,'day').valueOf();
 export const janFirstThisYear = (moment().startOf('year').valueOf())/1000;
-
 
 //Filter activity data based on date
 export function filterElevationDataHelper(allData, filterAfterDate, filteredActivity) {
@@ -40,7 +38,6 @@ export function filterElevationDataHelper(allData, filterAfterDate, filteredActi
   		return specificActivityFiltered;
   	}
 }
-
 
 //Summation Function only on value total_elevation_gain
 export function sumElevationHelper(activityArray) {
