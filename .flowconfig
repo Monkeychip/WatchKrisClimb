@@ -1,0 +1,12 @@
+[ignore]
+.*/npm_modules/.*
+
+[include]
+
+[libs]
+
+[lints]
+
+[options]
+
+[strict]

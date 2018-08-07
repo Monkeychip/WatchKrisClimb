@@ -1,6 +1,10 @@
 const isTest = String(process.env.NODE_ENV) === 'test'
 module.exports = {
-  presets: [['env', {modules: isTest ? 'commonjs' : false}], 'react'],
+  presets: [
+    ['env', {modules: isTest ? 'commonjs' : false}],
+    'react',
+    'flow'
+  ],
   plugins: [
     'syntax-dynamic-import',
     'transform-class-properties',
@@ -8,4 +12,3 @@ module.exports = {
     isTest ? 'dynamic-import-node' : null,
   ].filter(Boolean),
 }
-

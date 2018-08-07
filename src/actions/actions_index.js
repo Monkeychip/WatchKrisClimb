@@ -116,10 +116,7 @@ export function fetchActivitiesWithCode(){ //LAST YEAR FETCH_ACTIVITIES
 
     if(!getState().authorizationToken){
 
-      fetchAuthorizationToken()
-        .then(() => {
-          return dispatch(fetchAuthorizationToken());
-        })
+        dispatch(fetchAuthorizationToken())
         .then(() => {
           let authorizationToken = getState().authorizationToken;
           let pageOne = axios.get(`https://www.strava.com/api/v3/athlete/activities?access_token=${authorizationToken}`, {
@@ -127,7 +124,7 @@ export function fetchActivitiesWithCode(){ //LAST YEAR FETCH_ACTIVITIES
               after: janFirstLastYear,
               before: janFirstThisYear,
               page:1,
-              per_page: 100
+              per_page: 200
             }
           })
           let pageTwo = axios.get(`https://www.strava.com/api/v3/athlete/activities?access_token=${authorizationToken}`, {
@@ -135,7 +132,7 @@ export function fetchActivitiesWithCode(){ //LAST YEAR FETCH_ACTIVITIES
               after: janFirstLastYear,
               before: janFirstThisYear,
               page: 2,
-              per_page: 100
+              per_page: 200
             }
           })
           return Promise.all([pageOne,pageTwo])
@@ -187,10 +184,7 @@ export function fetchActivitiesWithCodeThisYear(){
 
     if(!getState().authorizationToken){
 
-      fetchAuthorizationToken()
-        .then(() => {
-          return dispatch(fetchAuthorizationToken());
-        })
+        dispatch(fetchAuthorizationToken())
         .then(() => {
           let authorizationToken = getState().authorizationToken;
           let pageOne = axios.get(`https://www.strava.com/api/v3/athlete/activities?access_token=${authorizationToken}`, {

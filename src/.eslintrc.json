@@ -2,10 +2,12 @@
   "extends": [
     "airbnb",
     "prettier",
-    "prettier/react"
+    "prettier/react",
+    "plugin:flowtype/recommended",
   ],
   "plugins": [
-    "prettier"
+    "prettier",
+    "flowtype"
   ],
   "parserOptions": {
     "ecmaVersion": 2016,
