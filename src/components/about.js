@@ -1,10 +1,16 @@
+// @flow
+
 import React, { Component } from "react";
 //import Mailto from 'react-mailto';
 
 import "../App.css";
 import MenuNoLogIn from "../components/menuNoLogIn";
 
-class About extends Component {
+type Props = {
+  //no props
+}
+
+class About extends Component<Props> {
   render() {
     return (
       <div id="about-holder" className="ui centered grid container ">

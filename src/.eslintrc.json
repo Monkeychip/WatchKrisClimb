@@ -3,12 +3,14 @@
     "airbnb",
     "prettier",
     "prettier/react",
-    "plugin:flowtype/recommended",
+    "plugin:flowtype/recommended"
   ],
   "plugins": [
+    "babel",
     "prettier",
     "flowtype"
   ],
+  "parser": "babel-eslint",
   "parserOptions": {
     "ecmaVersion": 2016,
     "sourceType": "module",
@@ -21,5 +23,10 @@
     "browser": true,
     "node": true,
     "jest": true
+  },
+  "settings": {
+    "flowtype": {
+      "onlyFilesWithFlowAnnotation": true
+    }
   }
 }

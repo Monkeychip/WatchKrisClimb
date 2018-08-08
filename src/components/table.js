@@ -1,3 +1,5 @@
+// @flow
+
 import React from "react";
 import { Component } from "react";
 
@@ -8,7 +10,11 @@ import BarChartBike from "../containers/barChartBike";
 import BarChartRun from "../containers/barChartRun";
 import BarChartElse from "../containers/barChartElse";
 
-export class Table extends Component {
+type Props = {
+  //no props
+}
+
+export class Table extends Component<Props> {
   render() {
     return (
       <div className="ui centered grid container" id="about-holder">
