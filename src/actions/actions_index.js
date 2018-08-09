@@ -1,3 +1,5 @@
+// @flow
+
 import axios from 'axios';
 
 import {
@@ -66,14 +68,14 @@ export function fetchThisYear(){
   }
 }
 
-export function fetchActivitiesPayload(activities){
+export function fetchActivitiesPayload(activities : any){
   return {
     type: FETCH_ACTIVITIES,
     payload: activities
   }
 }
 
-export function fetchActivitiesPayloadThisYear(activitiesThisYear){
+export function fetchActivitiesPayloadThisYear(activitiesThisYear: any){
   return {
     type: FETCH_THIS_YEAR,
     payload: activitiesThisYear
@@ -81,7 +83,7 @@ export function fetchActivitiesPayloadThisYear(activitiesThisYear){
 }
 
 function fetchAuthorizationToken() {
-  let GATEWAY_URL= ['https://pwgoqx1296.execute-api.us-east-1.amazonaws.com/beta/activities'];
+  let GATEWAY_URL= 'https://pwgoqx1296.execute-api.us-east-1.amazonaws.com/beta/activities';
   let codeInUrl = new URL(window.location.href).searchParams.get('code');
   let codeInState = store.getState().code;
   let code = codeInUrl ? codeInUrl : codeInState;
@@ -112,7 +114,7 @@ function fetchAuthorizationToken() {
 }
 
 export function fetchActivitiesWithCode(){ //LAST YEAR FETCH_ACTIVITIES
-  return (dispatch, getState) => {
+  return (dispatch: any, getState: any) => {
 
     if(!getState().authorizationToken){
 
@@ -180,7 +182,7 @@ export function fetchActivitiesWithCode(){ //LAST YEAR FETCH_ACTIVITIES
 }
 
 export function fetchActivitiesWithCodeThisYear(){
-  return (dispatch, getState) => {
+  return (dispatch: any, getState: any) => {
 
     if(!getState().authorizationToken){
 

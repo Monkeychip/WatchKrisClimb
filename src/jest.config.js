@@ -12,11 +12,11 @@ module.exports = {
     '!**/__tests__/**',
     '!**/node_modules/**'
   ],
-  moduleNameMapper: {
+ /* moduleNameMapper: {
     '\\.module\\.css$': 'identity-obj-proxy',
     '\\.css$': require.resolve('./test/style-mock.js'),
     '\\.(png|jpg|gif|ttf|eot|svg)$': '<rootDir>/./test/style-mock'
-  },
+  },*/
   coverageThreshold: {
     global: {
       statements: 0,
@@ -26,8 +26,9 @@ module.exports = {
     }
   },
   transformIgnorePatterns: [
-    'node_modules/(?!(redux-persist)/)'
+    'node_modules/(?!(redux-persist)/)',
   ],
-  snapshotSerializers: ['enzyme-to-json/serializer']
+  snapshotSerializers: ['enzyme-to-json/serializer'],
 }
+
 

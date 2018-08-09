@@ -1,0 +1,26 @@
+{
+  "presets": [
+  "react",
+    "flow",
+  ["env", {
+    "targets": {
+      "browsers": "last 2 versions"
+    },
+    "loose": true,
+    "modules": false
+  }]
+],
+  "env": {
+    "test": {
+      "plugins": [
+        "transform-es2015-modules-commonjs",
+        "react-flow-props-to-prop-types",
+        "transform-class-properties",
+        "transform-object-rest-spread",
+        "transform-react-constant-elements",
+      ]
+    }
+  }
+}
+
+
