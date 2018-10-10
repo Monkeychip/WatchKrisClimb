@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux";
 import { cleanStore, logIn } from "../actions/actions_index";
 import { Link } from "react-router";
 
-import logo_124_124 from "../../build/assets/images/logo_124_124.png";
+import logo_124_124 from "../../public/assets/images/logo_124_124.png";
 
 class Menu extends Component {
   constructor(props) {
@@ -32,21 +32,13 @@ class Menu extends Component {
 
     if (this.props.code !== "no code") {
       button = (
-        <div
-          className="ui button"
-          id="buttonLogOut"
-          onClick={this.handleLogOut}
-        >
+        <div className="ui button" id="buttonLogOut" onClick={this.handleLogOut}>
           Log-out
         </div>
       );
     } else {
       button = (
-        <div
-          className="ui button"
-          ref="buttonTextLogIn"
-          onClick={this.handleLogIn}
-        >
+        <div className="ui button" ref="buttonTextLogIn" onClick={this.handleLogIn}>
           Log-in
         </div>
       );

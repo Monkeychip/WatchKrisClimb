@@ -4,11 +4,11 @@ import React from "react";
 import { Component } from "react";
 import { Link } from "react-router";
 
-import logo from "../../build/assets/images/logo_124_124.png";
+import logo from "../../public/assets/images/logo_124_124.png";
 
 type Props = {
   //no props
-}
+};
 
 class MenuNoLogIn extends Component<Props> {
   render() {
